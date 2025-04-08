@@ -52,7 +52,7 @@ const Login = () => {
 
     return (
         <div className="flex items-center justify-center h-screen w-full">
-            <div className="bg-[#141414] border-2 border-[#4E4E4E] rounded-3xl shadow-xl p-8 flex max-w-4xl w-full">
+            <div className="bg-secondary border-2 border-border rounded-3xl shadow-xl p-8 flex max-w-4xl w-full">
                 {/* Left side with logo */}
                 <div className="w-1/2 flex items-center justify-center p-4">
                     <img src={Logo} alt="EMS Logo" className="max-w-full max-h-64" />
@@ -60,7 +60,7 @@ const Login = () => {
 
                 {/* Right side with login form */}
                 <div className="w-1/2 p-4">
-                    <h1 className="text-3xl font-bold mb-6 text-center text-[#039A00]">Admin Login</h1>
+                    <h1 className="text-3xl font-bold mb-6 text-center text-primary">Admin Login</h1>
 
                     <form onSubmit={handleLogin} className="space-y-4">
                         <div>
@@ -68,7 +68,7 @@ const Login = () => {
                                 type="text"
                                 value={rollNo}
                                 onChange={(e) => setRollNo(e.target.value)}
-                                className="w-full p-2 rounded-[10px] bg-[#282828] text-white border-1 border-[#4E4E4E]"
+                                className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
                                 placeholder="Roll Number"
                                 required
                                 disabled={isLoggingIn}
@@ -79,7 +79,7 @@ const Login = () => {
                             <select
                                 value={clubName}
                                 onChange={(e) => setClubName(e.target.value)}
-                                className="w-full p-2 rounded-[10px] bg-[#282828] text-white border-1 border-[#4E4E4E]"
+                                className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
                                 required
                                 disabled={isLoggingIn}
                             >
@@ -101,7 +101,7 @@ const Login = () => {
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full p-2 rounded-[10px] bg-[#282828] text-white border-1 border-[#4E4E4E]"
+                                className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
                                 placeholder="Password"
                                 required
                                 disabled={isLoggingIn}
@@ -110,7 +110,7 @@ const Login = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-[#039A00] text-white py-2 mt-4 rounded-[10px] hover:bg-[#027a00] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                            className="w-full bg-primary text-white py-2 mt-4 rounded-[10px] hover:bg-[#027a00] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
                             disabled={isLoggingIn}
                         >
                             {isLoggingIn ? (
