@@ -64,8 +64,8 @@ const EventSection = ({sectionType, sectionTitle, eventTitle, type, date, venue,
 
     return(
         <>
-            <div className="w-7/10 rounded-[20px] border-1 border-border bg-secondary flex flex-col gap-[20px] p-[20px] transition-all duration-300 hover:border-primary relative">
-                <h1 className="text-white text-[22px] flex items-center gap-2 mb-[10px]">{icon} {sectionTitle}</h1>
+            <div className="w-7/10 rounded-[20px] border-1 border-border bg-secondary flex flex-col gap-[20px] p-[20px] transition-all duration-300 hover:border-primary relative responsive-container responsive-p-sm">
+                <h1 className="text-white text-[22px] flex items-center gap-2 mb-[10px] responsive-text-md">{icon} {sectionTitle}</h1>
                 <div className="flex flex-row w-full relative">
                     {showLeftArrow && (
                         <button
@@ -82,7 +82,7 @@ const EventSection = ({sectionType, sectionTitle, eventTitle, type, date, venue,
                         className="flex flex-row w-full gap-[20px] overflow-x-scroll scroll-smooth no-scrollbar px-2"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                     >
-                        <div className="flex flex-row flex-nowrap gap-[20px] min-w-max pl-2 pr-2">
+                        <div className="flex flex-row flex-nowrap gap-[20px] min-w-max pl-2 pr-2 responsive-gap-sm">
                             <EventCard sectionType={sectionType} eventTitle={eventTitle} type={type} date={date} venue={venue} description={description}/>
                             <EventCard sectionType={sectionType} eventTitle={eventTitle} type={type} date={date} venue={venue} description={description}/>
                             <EventCard sectionType={sectionType} eventTitle={eventTitle} type={type} date={date} venue={venue} description={description}/>

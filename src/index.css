@@ -104,3 +104,78 @@ button:focus:not(:active)::after {
         opacity: 0;
     }
 }
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+    .responsive-container {
+        width: 90% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .responsive-container {
+        width: 95% !important;
+    }
+
+    .responsive-text-lg {
+        font-size: 1.25rem !important;
+    }
+
+    .responsive-text-md {
+        font-size: 1rem !important;
+    }
+
+    .responsive-text-sm {
+        font-size: 0.875rem !important;
+    }
+
+    .responsive-flex-col {
+        flex-direction: column !important;
+    }
+
+    .responsive-w-full {
+        width: 100% !important;
+    }
+
+    .responsive-gap-sm {
+        gap: 10px !important;
+    }
+
+    .responsive-p-sm {
+        padding: 12px !important;
+    }
+
+    .responsive-mb-sm {
+        margin-bottom: 10px !important;
+    }
+
+    .responsive-h-auto {
+        height: auto !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .responsive-text-lg {
+        font-size: 1.125rem !important;
+    }
+
+    .responsive-text-md {
+        font-size: 0.875rem !important;
+    }
+
+    .responsive-text-sm {
+        font-size: 0.75rem !important;
+    }
+
+    .responsive-p-xs {
+        padding: 8px !important;
+    }
+
+    .responsive-card-width {
+        width: 200px !important;
+    }
+
+    .responsive-hidden-xs {
+        display: none !important;
+    }
+}

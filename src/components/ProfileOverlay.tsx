@@ -14,26 +14,26 @@ const ProfileOverlay = ({name, rollno, clubname}: ProfileOverlayProps)=>{
 
     return(
         <>
-            <div className="w-[280px] bg-secondary border-1 border-border p-[20px] flex flex-col justify-center items-center gap-[15px] rounded-[10px] z-[1000] shadow-lg animate-fadeIn overflow-hidden">
+            <div className="w-[280px] bg-secondary border-1 border-border p-[20px] flex flex-col justify-center items-center gap-[15px] rounded-[10px] z-[1000] shadow-lg animate-fadeIn overflow-hidden responsive-p-sm">
                 <div className="w-[60px] h-[60px] rounded-full bg-tertiary flex items-center justify-center border-2 border-primary mb-2">
                     <User size={30} className="text-primary" />
                 </div>
                 {name &&
                     <div className="flex items-center gap-2 w-full transition-all duration-300 hover:bg-tertiary p-2 rounded-md">
                         <User size={16} className="text-primary" />
-                        <p className='text-[15px] text-white'>{name}</p>
+                        <p className='text-[15px] text-white responsive-text-sm'>{name}</p>
                     </div>
                 }
                 {rollno &&
                     <div className="flex items-center gap-2 w-full transition-all duration-300 hover:bg-tertiary p-2 rounded-md">
                         <BookUser size={16} className="text-primary" />
-                        <p className='text-[15px] text-white'>{rollno}</p>
+                        <p className='text-[15px] text-white responsive-text-sm'>{rollno}</p>
                     </div>
                 }
                 {clubname &&
                     <div className="flex items-center gap-2 w-full transition-all duration-300 hover:bg-tertiary p-2 rounded-md">
                         <Building size={16} className="text-primary" />
-                        <p className='text-[15px] text-white truncate'>{clubname}</p>
+                        <p className='text-[15px] text-white truncate responsive-text-sm'>{clubname}</p>
                     </div>
                 }
                 <button

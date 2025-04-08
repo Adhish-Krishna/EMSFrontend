@@ -51,16 +51,16 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center h-screen w-full">
-            <div className="bg-secondary border-2 border-border rounded-3xl shadow-xl p-8 flex max-w-4xl w-full">
+        <div className="flex items-center justify-center h-screen w-full p-4">
+            <div className="bg-secondary border-2 border-border rounded-3xl shadow-xl p-8 flex max-w-4xl w-full flex-col md:flex-row">
                 {/* Left side with logo */}
-                <div className="w-1/2 flex items-center justify-center p-4">
-                    <img src={Logo} alt="EMS Logo" className="max-w-full max-h-64" />
+                <div className="md:w-1/2 w-full flex items-center justify-center p-4 mb-6 md:mb-0">
+                    <img src={Logo} alt="EMS Logo" className="max-w-full max-h-48 md:max-h-64" />
                 </div>
 
                 {/* Right side with login form */}
-                <div className="w-1/2 p-4">
-                    <h1 className="text-3xl font-bold mb-6 text-center text-primary">Admin Login</h1>
+                <div className="md:w-1/2 w-full p-4">
+                    <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center text-primary">Admin Login</h1>
 
                     <form onSubmit={handleLogin} className="space-y-4">
                         <div>
