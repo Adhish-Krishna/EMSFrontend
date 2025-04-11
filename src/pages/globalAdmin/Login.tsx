@@ -29,7 +29,7 @@ const Login = ()=>{
             console.log(response.status);
             if(response.status === 200){
                 setLoading(false);
-                // navigate('/club/dashboard');
+                navigate('/global/dashboard');
                 console.log("Login successful");
             }
 
