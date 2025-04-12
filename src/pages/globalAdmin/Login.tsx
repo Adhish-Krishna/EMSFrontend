@@ -1,85 +1,94 @@
 import Logo from '../../assets/Logo.png';
 import {useState} from 'react';
-import axios from 'axios';
+import { useGlobalAuth } from '../../contexts/GlobalAuthContext';
 import {useNavigate} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = ()=>{
 
-    const navigate  = useNavigate();
-
-    const API_URL = (import.meta.env.VITE_ENV === 'dev') ? "/api" : import.meta.env.VITE_BASE_API_URL;
+    const navigate = useNavigate();
 
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [loading, setLoading]= useState(false);
+
+    const {login, loading} = useGlobalAuth();
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         try{
-            setLoading(true);
-            const response = await axios.post(`${API_URL}/auth/global/login`,
-                {
-                    username: username,
-                    password: password,
-                },
-                {
-                    withCredentials: true
-                }
-            );
-            console.log(response.status);
-            if(response.status === 200){
-                setLoading(false);
+            const statusCode = await login(username, password);
+            if(statusCode === 200){
                 navigate('/global/dashboard');
-                console.log("Login successful");
             }
-
-        } catch (error) {
-            console.error('Login error:', error);
-            alert('An error occurred during login');
-        } finally {
-            setLoading(false);
+            else{
+                toast.error('Invalid credentials. Please try again.', {
+                    position: "bottom-right",
+                    autoClose: 3000
+                });
+            }
+        }catch(err){
+            toast.error('An error occurred during login', {
+                position: "bottom-right",
+                autoClose: 3000
+            });
         }
     }
 
     return(
         <>
-        <div className="w-screen h-screen flex justify-center items-center">
-            <div className="w-5/10 bg-secondary border-1 border-border p-[20px] rounded-[20px] flex justify-between items-center">
-                <img src={Logo} className='ml-[40px]' alt="Logo" />
-                <form onSubmit={handleLogin} className="w-6/10 flex flex-col p-[10px] justify-center items-center gap-[20px]">
-                    <p className='text-primary text-[22px] font-medium'>Global Admin Login</p>
-                    <input
-                        type="text"
-                        placeholder='Username'
-                        value={username}
-                        onChange={(e)=>setUserName(e.target.value)}
-                        className="w-6/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
-                        required
-                        disabled={loading}
-                    />
-                    <input
-                        type="password"
-                        placeholder='Password'
-                        value={password}
-                        onChange={(e)=>setPassword(e.target.value)}
-                        className="w-6/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
-                        required
-                        disabled={loading}
-                    />
-                    <button
-                        type="submit"
-                        className="w-6/10 bg-primary text-white h-[40px] rounded-[10px] cursor-pointer flex items-center justify-center"
-                        disabled={loading}
-                    >
-                        {loading ? (
-                            <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        ) : (
-                            <p>Login</p>
-                        )}
-                    </button>
-                </form>
+        <div className="flex items-center justify-center h-screen w-full p-4">
+            <div className="bg-secondary border-2 border-border rounded-3xl shadow-xl p-8 flex max-w-4xl w-full flex-col md:flex-row">
+                {/* Left side with logo */}
+                <div className="md:w-1/2 w-full flex items-center justify-center p-4 mb-6 md:mb-0">
+                    <img src={Logo} alt="EMS Logo" className="max-w-full max-h-48 md:max-h-64" />
+                </div>
+
+                {/* Right side with login form */}
+                <div className="md:w-1/2 w-full p-4">
+                    <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center text-primary">Global Admin Login</h1>
+
+                    <form onSubmit={handleLogin} className="space-y-4">
+                        <div>
+                            <input
+                                type="text"
+                                placeholder='Username'
+                                value={username}
+                                onChange={(e)=>setUserName(e.target.value)}
+                                className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                                required
+                                disabled={loading}
+                            />
+                        </div>
+
+                        <div>
+                            <input
+                                type="password"
+                                placeholder='Password'
+                                value={password}
+                                onChange={(e)=>setPassword(e.target.value)}
+                                className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                                required
+                                disabled={loading}
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="w-full bg-primary text-white py-2 mt-4 rounded-[10px] hover:bg-[#027a00] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <div className="animate-spin -ml-1 mr-3 h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+                            ) : (
+                                'Login'
+                            )}
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
+        <ToastContainer theme='dark'/>
         </>
     )
 }

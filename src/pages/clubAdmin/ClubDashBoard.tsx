@@ -20,7 +20,7 @@ const DashBoard = ()=>{
             <div style={{ marginTop: '100px' }} className="content-container w-screen p-[20px] flex flex-col justify-start items-center gap-[20px] responsive-p-sm">
                 <ClubHero clubName={clubname}/>
                 <div className="w-7/10 flex flex-row justify-center items-center h-[170px] gap-[10%] responsive-container responsive-flex-col responsive-h-auto responsive-gap-sm responsive-mb-sm">
-                    <SubHero title="Create Event" link="/event/create" icon={<Calendar className="w-5 h-5" />}/>
+                    <SubHero title="Create Event" link="/club/event/create" icon={<Calendar className="w-5 h-5" />}/>
                     <SubHero title="Add Club Member" link="/addmember" icon={<Users className="w-5 h-5" />}/>
                 </div>
                 <EventSection
