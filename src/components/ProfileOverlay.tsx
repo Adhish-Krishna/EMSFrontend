@@ -1,4 +1,8 @@
 import { LogOut, User, BookUser, Building } from "lucide-react";
+import {useNavigate} from 'react-router-dom';
+import { useClubAuth } from "../contexts/ClubAuthContext";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 type ProfileOverlayProps = {
     name: string;
@@ -7,9 +11,39 @@ type ProfileOverlayProps = {
 }
 
 const ProfileOverlay = ({name, rollno, clubname}: ProfileOverlayProps)=>{
+    const navigate = useNavigate();
+    const {logout} = useClubAuth();
+    const handleLogout = async ()=>{
+        try{
+            const statusCode = await logout();
+            if(statusCode === 200){
+                navigate('/');
+            }
+            else{
+                toast.error("Issue in logout",
+                    {
+                        position: "bottom-right",
+                        autoClose: 3000,
+                        pauseOnHover: true,
+                        draggable: true,
+                        closeOnClick: true,
+                        hideProgressBar: false,
+                    }
+                );
+            }
 
-    const handleLogout = ()=>{
-        //handle the logout logic here (remove cookies 🍪)
+        }catch(err){
+            toast.error("Issue in logout",
+                {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    closeOnClick: true,
+                    hideProgressBar: false,
+                }
+            );
+        }
     }
 
     return(
@@ -44,6 +78,7 @@ const ProfileOverlay = ({name, rollno, clubname}: ProfileOverlayProps)=>{
                     Logout
                 </button>
             </div>
+            <ToastContainer theme="dark"/>
         </>
     )
 }

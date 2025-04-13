@@ -9,32 +9,44 @@ import Home from './pages/home/Home';
 import CreateClub from './pages/globalAdmin/CreateClub';
 import AddClubAdmin from './pages/globalAdmin/AddClubAdmin';
 import { GlobalAuthProvider } from './contexts/GlobalAuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
+import GlobalProtectedRoute from './components/GlobalProtectedRoute';
+import { ClubAuthProvider } from './contexts/ClubAuthContext';
+import ClubProtectedRoute from './components/ClubProtectRoute';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <GlobalAuthProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path='/club/dashboard' element={<DashBoard />} />
-          <Route path='/club/event/create' element={<CreateEvent />} />
-          <Route path="/global/dashboard" element={
-            <ProtectedRoute>
-              <GlobalDashBoard />
-            </ProtectedRoute>
-          } />
-          <Route path='/global/club/create' element={
-            <ProtectedRoute>
-              <CreateClub />
-            </ProtectedRoute>
-          } />
-          <Route path='/global/club/admin/add' element={
-            <ProtectedRoute>
-              <AddClubAdmin />
-            </ProtectedRoute>
-          } />
-        </Routes>
+        <ClubAuthProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path='/club/dashboard' element={
+              <ClubProtectedRoute>
+                <DashBoard />
+              </ClubProtectedRoute>
+              } />
+            <Route path='/club/event/create' element={
+              <ClubProtectedRoute>
+                  <CreateEvent />
+              </ClubProtectedRoute>
+              } />
+            <Route path="/global/dashboard" element={
+              <GlobalProtectedRoute>
+                <GlobalDashBoard />
+              </GlobalProtectedRoute>
+            } />
+            <Route path='/global/club/create' element={
+              <GlobalProtectedRoute>
+                <CreateClub />
+              </GlobalProtectedRoute>
+            } />
+            <Route path='/global/club/admin/add' element={
+              <GlobalProtectedRoute>
+                <AddClubAdmin />
+              </GlobalProtectedRoute>
+            } />
+          </Routes>
+        </ClubAuthProvider>
       </GlobalAuthProvider>
     </BrowserRouter>
   </StrictMode>,
