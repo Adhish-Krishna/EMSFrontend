@@ -3,13 +3,7 @@ import ProfileOverlay from './ProfileOverlay';
 import {useState, useEffect} from 'react';
 import { ChevronDown} from 'lucide-react';
 
-type HeaderProps = {
-    name: string;
-    rollno: string;
-    clubname: string;
-}
-
-const Header = ({name, rollno, clubname}: HeaderProps)=>{
+const Header = ()=>{
     const [ispressed, setIsPressed] = useState(false);
 
     const handleProfileClick = ()=>{
@@ -43,7 +37,7 @@ const Header = ({name, rollno, clubname}: HeaderProps)=>{
             </div>
             {ispressed && (
                 <div className='fixed top-[70px] right-4 z-[1000]'>
-                    <ProfileOverlay name={name} rollno={rollno} clubname={clubname}/>
+                    <ProfileOverlay/>
                 </div>
             )}
         </>

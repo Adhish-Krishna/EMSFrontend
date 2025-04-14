@@ -3,16 +3,19 @@ import {useNavigate} from 'react-router-dom';
 import { useClubAuth } from "../contexts/ClubAuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useAdmin } from "../contexts/AdminContext";
+import {useEffect} from 'react';
 
-type ProfileOverlayProps = {
-    name: string;
-    rollno: string;
-    clubname: string;
-}
-
-const ProfileOverlay = ({name, rollno, clubname}: ProfileOverlayProps)=>{
+const ProfileOverlay = ()=>{
     const navigate = useNavigate();
-    const {logout} = useClubAuth();
+    const {logout, isCAuthenticated} = useClubAuth();
+    const {adminData, fetchProfile} = useAdmin();
+    useEffect(() => {
+        const fetchData = async ()=>{
+            await fetchProfile();
+        }
+        fetchData();
+    }, [isCAuthenticated]);
     const handleLogout = async ()=>{
         try{
             const statusCode = await logout();
@@ -52,22 +55,22 @@ const ProfileOverlay = ({name, rollno, clubname}: ProfileOverlayProps)=>{
                 <div className="w-[60px] h-[60px] rounded-full bg-tertiary flex items-center justify-center border-2 border-primary mb-2">
                     <User size={30} className="text-primary" />
                 </div>
-                {name &&
+                {adminData.name.length>0 &&
                     <div className="flex items-center gap-2 w-full transition-all duration-300 hover:bg-tertiary p-2 rounded-md">
                         <User size={16} className="text-primary" />
-                        <p className='text-[15px] text-white responsive-text-sm'>{name}</p>
+                        <p className='text-[15px] text-white responsive-text-sm'>{adminData.name}</p>
                     </div>
                 }
-                {rollno &&
+                {adminData.rollno.length>0 &&
                     <div className="flex items-center gap-2 w-full transition-all duration-300 hover:bg-tertiary p-2 rounded-md">
                         <BookUser size={16} className="text-primary" />
-                        <p className='text-[15px] text-white responsive-text-sm'>{rollno}</p>
+                        <p className='text-[15px] text-white responsive-text-sm'>{adminData.rollno}</p>
                     </div>
                 }
-                {clubname &&
+                {adminData.name.length>0 &&
                     <div className="flex items-center gap-2 w-full transition-all duration-300 hover:bg-tertiary p-2 rounded-md">
                         <Building size={16} className="text-primary" />
-                        <p className='text-[15px] text-white truncate responsive-text-sm'>{clubname}</p>
+                        <p className='text-[15px] text-white truncate responsive-text-sm'>{adminData.club}</p>
                     </div>
                 }
                 <button

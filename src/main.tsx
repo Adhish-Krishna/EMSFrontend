@@ -12,24 +12,26 @@ import { GlobalAuthProvider } from './contexts/GlobalAuthContext';
 import GlobalProtectedRoute from './components/GlobalProtectedRoute';
 import { ClubAuthProvider } from './contexts/ClubAuthContext';
 import ClubProtectedRoute from './components/ClubProtectRoute';
+import { AdminContextProvider } from './contexts/AdminContext';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <GlobalAuthProvider>
         <ClubAuthProvider>
+          <AdminContextProvider>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path='/club/dashboard' element={
               <ClubProtectedRoute>
                 <DashBoard />
               </ClubProtectedRoute>
-              } />
+            } />
             <Route path='/club/event/create' element={
               <ClubProtectedRoute>
-                  <CreateEvent />
+                <CreateEvent />
               </ClubProtectedRoute>
-              } />
+            } />
             <Route path="/global/dashboard" element={
               <GlobalProtectedRoute>
                 <GlobalDashBoard />
@@ -46,6 +48,7 @@ createRoot(document.getElementById('root')!).render(
               </GlobalProtectedRoute>
             } />
           </Routes>
+          </AdminContextProvider>
         </ClubAuthProvider>
       </GlobalAuthProvider>
     </BrowserRouter>
