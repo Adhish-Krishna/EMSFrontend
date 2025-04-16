@@ -14,7 +14,7 @@ const DashBoard = ()=>{
                 <ClubHero/>
                 <div className="w-7/10 flex flex-row justify-center items-center h-[170px] gap-[10%] responsive-container responsive-flex-col responsive-h-auto responsive-gap-sm responsive-mb-sm">
                     <SubHero title="Create Event" link="/club/event/create" icon={<Calendar className="w-5 h-5" />}/>
-                    <SubHero title="Add Club Member" link="/addmember" icon={<Users className="w-5 h-5" />}/>
+                    <SubHero title="Add Club Member" link="/club/member/add" icon={<Users className="w-5 h-5" />}/>
                 </div>
                 <EventSection
                     sectionType="ongoing"

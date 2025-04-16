@@ -13,6 +13,7 @@ import GlobalProtectedRoute from './components/GlobalProtectedRoute';
 import { ClubAuthProvider } from './contexts/ClubAuthContext';
 import ClubProtectedRoute from './components/ClubProtectRoute';
 import { AdminContextProvider } from './contexts/AdminContext';
+import AddClubMembers from './components/AddClubMember';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -32,6 +33,11 @@ createRoot(document.getElementById('root')!).render(
                 <CreateEvent />
               </ClubProtectedRoute>
             } />
+            <Route path='/club/member/add' element={
+              <ClubProtectedRoute>
+                <AddClubMembers/>
+              </ClubProtectedRoute>
+            }/>
             <Route path="/global/dashboard" element={
               <GlobalProtectedRoute>
                 <GlobalDashBoard />
