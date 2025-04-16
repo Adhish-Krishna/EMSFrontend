@@ -17,7 +17,7 @@ const EventPoster = ({eventDetails, setEventDetails}: EventPosterProps)=>{
 
     return(
         <>
-            <div className="w-7/10 bg-secondary border-1 border-border rounded-[20px] flex justify-center items-center p-[20px] flex-col gap-[10px]">
+            <div className="w-7/10 bg-secondary border-1 border-border rounded-[20px] flex justify-center items-center p-[20px] flex-col gap-[20px]">
                 <p className="text-white font-medium text-[22px]">Add Event Poster</p>
                 <label className="relative w-full max-w-md overflow-hidden cursor-pointer flex flex-col items-center justify-center h-32 rounded-lg border-2 border-dashed border-gray-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg bg-tertiary/60 hover:bg-tertiary/80">
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -39,6 +39,12 @@ const EventPoster = ({eventDetails, setEventDetails}: EventPosterProps)=>{
                         <img src={eventDetails.poster instanceof File ? URL.createObjectURL(eventDetails.poster) : eventDetails.poster as string} alt="Event poster preview" className="max-h-64 object-contain rounded" />
                     </div>
                 )}
+                {
+                    eventDetails.poster && <button className="p-10px bg-red-500 rounded-[10px] text-white text-[16px] h-[40px] w-[150px] cursor-pointer" onClick={()=>setEventDetails({...eventDetails, poster: null})}>
+                    Remove poster
+                    </button>
+                }
+
             </div>
         </>
     )

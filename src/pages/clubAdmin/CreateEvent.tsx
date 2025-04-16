@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import OptionalEventDetails from '../../components/OptionalEventDetails';
 import Convenors from '../../components/Convenors';
 import EventPoster from '../../components/EventPoster';
+import PreviewEvent from '../../components/PreviewEvent'; // Import PreviewEvent
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -55,6 +56,8 @@ const CreateEvent = ()=>{
     }
     const [eventDetails, setEventDetails] = useState(event_details);
     const [loading, setLoading] = useState(false);
+    const [isPreviewOpen, setIsPreviewOpen] = useState(false); // State for modal visibility
+
     const handlePublish = async ()=>{
         try{
             setLoading(true);
@@ -159,7 +162,13 @@ const CreateEvent = ()=>{
             }
         }finally{
             setLoading(false);
+            setIsPreviewOpen(false); // Close modal on success/failure
         }
+    }
+
+    const handlePreview = () => {
+        // Basic validation could be added here if needed before showing preview
+        setIsPreviewOpen(true);
     }
 
     return(
@@ -185,21 +194,18 @@ const CreateEvent = ()=>{
                     eventDetails={eventDetails}
                     setEventDetails={setEventDetails}
                 />
-                <button className="bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer flex justify-center items-center" onClick={handlePublish}>
-                    {
-                        loading ? (
-                            <div className="flex items-center justify-center w-full">
-                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                            </div>
-                        ) : (
-                            'Publish'
-                        )
-                    }
+                <button className="bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer flex justify-center items-center" onClick={handlePreview}>
+                    Preview {/* Changed text from Publish to Preview */}
                 </button>
             </div>
+            {isPreviewOpen && (
+                <PreviewEvent
+                    eventDetails={eventDetails}
+                    onPublish={handlePublish}
+                    onClose={() => setIsPreviewOpen(false)}
+                    loading={loading}
+                />
+            )}
             <ToastContainer theme='dark'/>
         </>
     )
