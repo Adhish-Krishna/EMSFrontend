@@ -11,7 +11,7 @@ const RequiredEventDetails = ({eventDetails, setEventDetails, title}: EventDetai
     return(
         <>
             <div className="w-7/10 border-border border-1 bg-secondary p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[20px]">
-                <p className="text-white text-[22px] mb-[10px]">{title}</p>
+                <p className="text-white text-[22px] mb-[10px] font-medium">{title}</p>
                 <div className='w-8/10 flex flex-row justify-between items-center'>
                     <div className="w-45/100 flex flex-col gap-[20px]">
                         <input
@@ -50,7 +50,7 @@ const RequiredEventDetails = ({eventDetails, setEventDetails, title}: EventDetai
                         />
                         <input
                             type="text"
-                            placeholder='Date'
+                            placeholder='Date (YYYY-MM-DD)'
                             value={eventDetails.date}
                             onChange={(e)=>{setEventDetails({...eventDetails, date: e.target.value})}}
                             className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
@@ -58,18 +58,18 @@ const RequiredEventDetails = ({eventDetails, setEventDetails, title}: EventDetai
                         />
                         <div className="w-full flex flex-row justify-between items-center gap-[20px]">
                             <input
-                                type="text"
+                                type="number"
                                 placeholder='Min Member'
                                 value={eventDetails.min_no_member}
-                                onChange={(e)=>{setEventDetails({...eventDetails, min_no_member: e.target.value})}}
+                                onChange={(e)=>{setEventDetails({...eventDetails, min_no_member: parseInt(e.target.value)})}}
                                 className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
                                 required
                             />
                             <input
-                                type="text"
+                                type="number"
                                 placeholder='Max Member'
                                 value={eventDetails.max_no_member}
-                                onChange={(e)=>{setEventDetails({...eventDetails, max_no_member: e.target.value})}}
+                                onChange={(e)=>{setEventDetails({...eventDetails, max_no_member: parseInt(e.target.value)})}}
                                 className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
                                 required
                             />
