@@ -11,12 +11,7 @@ const EventPoster = ({eventDetails, setEventDetails}: EventPosterProps)=>{
     const handleImageUpload = (files: FileList | null)=>{
         if(files){
             const file = files[0];
-            const reader = new FileReader();
-            reader.onload = ()=>{
-                const base64 = reader.result;
-                setEventDetails({...eventDetails, poster: base64});
-            }
-            reader.readAsDataURL(file);
+            setEventDetails({...eventDetails, poster: file});
         }
     }
 
@@ -41,7 +36,7 @@ const EventPoster = ({eventDetails, setEventDetails}: EventPosterProps)=>{
                 </label>
                 {eventDetails.poster && (
                     <div className="mt-4 p-2 border border-gray-700 rounded-lg">
-                        <img src={eventDetails.poster as string} alt="Event poster preview" className="max-h-64 object-contain rounded" />
+                        <img src={eventDetails.poster instanceof File ? URL.createObjectURL(eventDetails.poster) : eventDetails.poster as string} alt="Event poster preview" className="max-h-64 object-contain rounded" />
                     </div>
                 )}
             </div>

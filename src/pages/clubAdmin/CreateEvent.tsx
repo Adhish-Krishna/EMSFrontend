@@ -18,7 +18,7 @@ export type EventDetails = {
     min_no_member?: number;
     max_no_member?: number;
     chief_guest?: string;
-    poster: string | ArrayBuffer | null;
+    poster: File | null;
     exp_expense?: number;
     tot_amt_allot_su?: number;
     tot_amt_spt_dor?: number;
@@ -58,11 +58,24 @@ const CreateEvent = ()=>{
     const handlePublish = async ()=>{
         try{
             setLoading(true);
+            const formData = new FormData();
+            Object.entries(eventDetails).forEach(([key, value]) => {
+                if (key === 'poster' || key === 'eventConvenors') return;
+                if (value !== undefined && value !== null) {
+                    formData.append(key, value as any);
+                }
+            });
+            formData.append('eventConvenors', JSON.stringify(eventDetails.eventConvenors));
+            if (eventDetails.poster) {
+                formData.append('poster', eventDetails.poster);
+            }
             const response = await axios.post(`${API_URL}/admin/create-event`,
-                eventDetails,
+                formData,
                 {
-                    withCredentials: true
-
+                    withCredentials: true,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
                 }
             );
             if(response.status === 201){
@@ -77,6 +90,19 @@ const CreateEvent = ()=>{
                         hideProgressBar: false,
                     }
                 );
+            }
+            else if(response.status === 207){
+                toast.success(
+                    "Event published successfully but some convenors are not club members",
+                    {
+                        position: "bottom-right",
+                        autoClose: 3000,
+                        pauseOnHover: true,
+                        draggable: true,
+                        closeOnClick: true,
+                        hideProgressBar: false,
+                    }
+                )
             }
         }catch(err: any){
             if(err.response?.status === 400){
@@ -95,6 +121,19 @@ const CreateEvent = ()=>{
             else if(err.response?.status === 409){
                 toast.error(
                     "Event already exists",
+                    {
+                        position: "bottom-right",
+                        autoClose: 3000,
+                        pauseOnHover: true,
+                        draggable: true,
+                        closeOnClick: true,
+                        hideProgressBar: false,
+                    }
+                );
+            }
+            else if(err.response?.status === 422){
+                toast.error(
+                    "Users dont exist in the database",
                     {
                         position: "bottom-right",
                         autoClose: 3000,
@@ -146,17 +185,16 @@ const CreateEvent = ()=>{
                     eventDetails={eventDetails}
                     setEventDetails={setEventDetails}
                 />
-                <button className="bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer" onClick={handlePublish}>
+                <button className="bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer flex justify-center items-center" onClick={handlePublish}>
                     {
-                        loading?(
-                            <>
-                                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        loading ? (
+                            <div className="flex items-center justify-center w-full">
+                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
-                            </>
-
-                        ):(
+                            </div>
+                        ) : (
                             'Publish'
                         )
                     }
