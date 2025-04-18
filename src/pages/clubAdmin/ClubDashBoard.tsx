@@ -19,31 +19,16 @@ const DashBoard = ()=>{
                 <EventSection
                     sectionType="ongoing"
                     sectionTitle="On going Events"
-                    eventTitle="Codopoly"
-                    date="09-03-2025"
-                    venue="E-Block Third Floor"
-                    type="Coding"
-                    description="Codopoly is an exciting coding event ..."
                     icon={<Activity className="text-primary w-5 h-5" />}
                 />
                 <EventSection
                     sectionType="upcoming"
                     sectionTitle="Upcoming Events"
-                    eventTitle="Codopoly"
-                    date="09-03-2025"
-                    venue="E-Block Third Floor"
-                    type="Coding"
-                    description="Codopoly is an exciting coding event ..."
                     icon={<Calendar className="text-primary w-5 h-5" />}
                 />
                 <EventSection
                     sectionType="past"
                     sectionTitle="Past Events"
-                    eventTitle="Code Wars"
-                    date="15-04-2025"
-                    venue="CS Seminar Hall"
-                    type="Competition"
-                    description="Code Wars is a competitive programming challenge..."
                     icon={<Calendar className="text-primary w-5 h-5 opacity-70" />}
                 />
             </div>

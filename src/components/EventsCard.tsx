@@ -1,22 +1,24 @@
 import Edit from '../assets/edit.png';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, MapPin, Tag, Info } from 'lucide-react';
+import { Calendar, MapPin, Tag, Info, Type } from 'lucide-react';
 
 type EventCardProps = {
     sectionType: string;
     eventTitle: string;
     date: string;
     type: string;
+    category: string;
     venue: string;
     description: string;
+    id: number;
 }
 
-const EventCard = ({sectionType, eventTitle, date, type, venue, description}:EventCardProps)=>{
+const EventCard = ({sectionType, eventTitle, date, type, category, venue, description, id}:EventCardProps)=>{
 
     const navigate  = useNavigate();
 
     const handleClick = ()=>{
-        navigate(`/edit/?type=${sectionType}`);
+        navigate(`/edit/?type=${sectionType}&id=${id}`);
     }
 
     return(
@@ -32,8 +34,12 @@ const EventCard = ({sectionType, eventTitle, date, type, venue, description}:Eve
                     </button>
                 </div>
                 <p className="text-primary text-[16px] flex items-center gap-2 responsive-text-sm">
-                    <Tag size={16} className="text-primary" />
+                    <Type size={16} className="text-primary" />
                     <span>{type}</span>
+                </p>
+                <p className="text-primary text-[16px] flex items-center gap-2 responsive-text-sm">
+                    <Tag size={16} className="text-primary" />
+                    <span>{category}</span>
                 </p>
                 <p className="text-primary text-[16px] flex items-center gap-2 responsive-text-sm">
                     <Calendar size={16} className="text-primary" />
