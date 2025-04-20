@@ -18,7 +18,7 @@ const EventCard = ({sectionType, eventTitle, date, type, category, venue, descri
     const navigate  = useNavigate();
 
     const handleClick = ()=>{
-        navigate(`/edit/?type=${sectionType}&id=${id}`);
+        navigate(`/club/event/edit?type=${sectionType}&id=${id}`);
     }
 
     return(

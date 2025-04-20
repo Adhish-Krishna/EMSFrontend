@@ -19,7 +19,7 @@ export type EventDetails = {
     min_no_member?: number;
     max_no_member?: number;
     chief_guest?: string;
-    poster: File | null;
+    poster: File | null | Blob | string;
     exp_expense?: number;
     tot_amt_allot_su?: number;
     tot_amt_spt_dor?: number;
@@ -27,10 +27,6 @@ export type EventDetails = {
     faculty_obs_desig?: string;
     faculty_obs_dept?: string;
     eventConvenors: string[];
-}
-
-export type EventConvenors = {
-    rollno: string;
 }
 
 const CreateEvent = ()=>{

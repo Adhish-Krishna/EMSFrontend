@@ -4,9 +4,10 @@ import { Dispatch, SetStateAction } from "react";
 interface EventPosterProps{
     eventDetails: EventDetails;
     setEventDetails: Dispatch<SetStateAction<EventDetails>>;
+    isLoading?: boolean; // Add optional loading prop
 }
 
-const EventPoster = ({eventDetails, setEventDetails}: EventPosterProps)=>{
+const EventPoster = ({eventDetails, setEventDetails, isLoading = false}: EventPosterProps)=>{
 
     const handleImageUpload = (files: FileList | null)=>{
         if(files){
@@ -34,17 +35,26 @@ const EventPoster = ({eventDetails, setEventDetails}: EventPosterProps)=>{
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     />
                 </label>
-                {eventDetails.poster && (
-                    <div className="mt-4 p-2 border border-gray-700 rounded-lg">
-                        <img src={eventDetails.poster instanceof File ? URL.createObjectURL(eventDetails.poster) : eventDetails.poster as string} alt="Event poster preview" className="max-h-64 object-contain rounded" />
+
+                {isLoading ? (
+                    <div className="mt-4 p-2 border border-gray-700 rounded-lg h-64 w-full max-w-md flex items-center justify-center">
+                        <div className="text-white">Loading poster...</div>
                     </div>
-                )}
+                ) : eventDetails.poster ? (
+                    <div className="mt-4 p-2 border border-gray-700 rounded-lg">
+                        <img src={
+                        eventDetails.poster instanceof File || eventDetails.poster instanceof Blob
+                        ? URL.createObjectURL(eventDetails.poster)
+                        : (typeof eventDetails.poster === "string" ? eventDetails.poster : "")
+                        } alt="Event poster preview" className="max-h-64 object-contain rounded" />
+                    </div>
+                ) : null}
+
                 {
-                    eventDetails.poster && <button className="p-10px bg-red-500 rounded-[10px] text-white text-[16px] h-[40px] w-[150px] cursor-pointer" onClick={()=>setEventDetails({...eventDetails, poster: null})}>
+                    eventDetails.poster && !isLoading && <button className="p-10px bg-red-500 rounded-[10px] text-white text-[16px] h-[40px] w-[150px] cursor-pointer" onClick={()=>setEventDetails({...eventDetails, poster: null})}>
                     Remove poster
                     </button>
                 }
-
             </div>
         </>
     )

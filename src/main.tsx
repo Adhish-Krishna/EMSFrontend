@@ -14,6 +14,7 @@ import { ClubAuthProvider } from './contexts/ClubAuthContext';
 import ClubProtectedRoute from './components/ClubProtectRoute';
 import { AdminContextProvider } from './contexts/AdminContext';
 import AddClubMembers from './components/AddClubMember';
+import EditEvent from './pages/clubAdmin/EditEvent';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -33,6 +34,11 @@ createRoot(document.getElementById('root')!).render(
                 <CreateEvent />
               </ClubProtectedRoute>
             } />
+            <Route  path = "/club/event/edit" element={
+              <ClubProtectedRoute>
+                <EditEvent/>
+              </ClubProtectedRoute>
+            }/>
             <Route path='/club/member/add' element={
               <ClubProtectedRoute>
                 <AddClubMembers/>
