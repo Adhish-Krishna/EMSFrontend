@@ -1,46 +1,11 @@
 import { LogOut } from "lucide-react";
-import {useNavigate} from 'react-router-dom';
-import { useGlobalAuth } from "../contexts/GlobalAuthContext";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const GlobalHeader = ()=>{
 
-    const navigate  = useNavigate();
-
-    const {logout}  = useGlobalAuth();
-
     const handleLogout = async ()=>{
-        try{
-            const statusCode = await logout();
-            if(statusCode === 200){
-                navigate('/');
-            }
-            else{
-                toast.error("Issue in logout",
-                    {
-                        position: "bottom-right",
-                        autoClose: 3000,
-                        pauseOnHover: true,
-                        draggable: true,
-                        closeOnClick: true,
-                        hideProgressBar: false,
-                    }
-                );
-            }
-
-        }catch(err){
-            toast.error("Issue in logout",
-                {
-                    position: "bottom-right",
-                    autoClose: 3000,
-                    pauseOnHover: true,
-                    draggable: true,
-                    closeOnClick: true,
-                    hideProgressBar: false,
-                }
-            );
-        }
+        
     }
 
     return(

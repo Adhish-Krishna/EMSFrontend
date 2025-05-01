@@ -4,7 +4,7 @@ import Convenors from "../../components/Convenors";
 import { EventDetails} from "./CreateEvent";
 import {useState, useEffect} from 'react';
 import { useSearchParams } from "react-router-dom";
-import Header from "../../components/Header";
+import Header from "../../components/ClubHeader";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';

@@ -5,6 +5,7 @@
     --color-secondary: #141414;
     --color-tertiary: #282828;
     --color-border: #4E4E4E;
+    --color-sidebar-primary:#18181B;
 }
 
 html, body{
@@ -179,3 +180,40 @@ button:focus:not(:active)::after {
         display: none !important;
     }
 }
+
+
+@layer utilities {
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes loading-bar {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }

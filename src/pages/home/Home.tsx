@@ -1,30 +1,11 @@
 import ClubAdminLogin from '../clubAdmin/Login';
 import GlobalAdminLogin from '../globalAdmin/Login';
-import { useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
-import { useGlobalAuth } from '../../contexts/GlobalAuthContext';
-import { useClubAuth } from '../../contexts/ClubAuthContext';
+import { useState} from 'react';
+
 
 const Home = () => {
     const [selectedSection, setSelectedSection] = useState<'global' | 'club'>('global');
 
-    const navigate = useNavigate();
-
-    const {isAuthenticated} = useGlobalAuth();
-
-    const {isCAuthenticated} = useClubAuth();
-
-    useEffect(()=>{
-        if(isAuthenticated && isCAuthenticated){
-            navigate('/global/dashboard');
-        }
-        else if(isAuthenticated){
-            navigate('/global/dashboard');
-        }
-        else if(isCAuthenticated){
-            navigate('/club/dashboard');
-        }
-    },[isAuthenticated, isCAuthenticated ,navigate]);
 
     return (
         <div className="w-screen h-screen flex flex-col items-center bg-black">

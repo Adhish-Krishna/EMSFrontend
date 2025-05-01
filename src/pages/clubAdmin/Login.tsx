@@ -1,89 +1,31 @@
 import { useState, useEffect } from 'react';
 import Logo from '../../assets/Logo.png';
-import { ClubData, ClubResponse } from '../globalAdmin/AddClubAdmin';
-import { AxiosResponse } from 'axios';
-import { ToastContainer, toast } from "react-toastify";
+import { ClubData } from '../globalAdmin/AddClubAdmin';
+import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
-import { useClubAuth } from '../../contexts/ClubAuthContext';
-import {useNavigate} from 'react-router-dom';
+
+import { useClubs } from '../../hooks/useClub.js';
+import { useAuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
-    const navigate = useNavigate();
-    const API_URL = (import.meta.env.VITE_ENV === 'dev') ? "/api" : import.meta.env.VITE_BASE_API_URL;
-    const club_data: ClubData[] = [];
-    const [clubData, setClubData] = useState(club_data);
+    const [clubData, setClubData] = useState<ClubData[]>([]);
+
+    const {isAuthPending,clubAdminLogin} = useAuthContext() 
+
     const [rollno, setRollNo] = useState('');
-    const [clubid, setClubId] = useState(0);
+    const [club_id, setClubId] = useState(0);
     const [password, setPassword] = useState('');
-    const [loadclub, setLoadClub] = useState(false);
-    const {loading, login}  = useClubAuth();
+    const {data,isLoading} = useClubs()
 
     useEffect(() => {
-        async function getClubDetails(){
-            try{
-                setLoadClub(true);
-                const response: AxiosResponse<ClubResponse> = await axios.get(`${API_URL}/club/getclubs`,{withCredentials:true});
-                const club_details: ClubData[] = response.data.data;
-                if(response.status === 200){
-                    setClubData(club_details);
-                }
-            } catch(err: any) {
-                if(err.response?.status === 301){
-                    toast.error(
-                        "No club found!",
-                        {
-                            position: "bottom-right",
-                            autoClose: 3000,
-                            pauseOnHover: true,
-                            draggable: true,
-                            closeOnClick: true,
-                            hideProgressBar: false,
-                        }
-                    );
-                }
-                else if(err.response?.status === 500){
-                    toast.error(
-                        "Issue in fetchng the clubs",
-                        {
-                            position: "bottom-right",
-                            autoClose: 3000,
-                            pauseOnHover: true,
-                            draggable: true,
-                            closeOnClick: true,
-                            hideProgressBar: false,
-                        }
-                    );
-                }
-            }
-            finally{
-                setLoadClub(false);
-            }
+        if (data !== undefined) {
+          setClubData(data);
         }
-
-        getClubDetails();
-    }, []);
+      }, [data]);
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        try{
-            const statusCode = await login(rollno, clubid, password);
-            if(statusCode === 200){
-                navigate('/club/dashboard');
-            }
-            else{
-                toast.error('Invalid credentials. Please try again.', {
-                    position: "bottom-right",
-                    autoClose: 3000
-                });
-            }
-        }catch(err){
-            toast.error('An error occurred during login', {
-                position: "bottom-right",
-                autoClose: 3000
-            });
-        }
-
+        clubAdminLogin({rollno,club_id,password})
     };
 
     return (
@@ -108,21 +50,21 @@ const Login = () => {
                                 className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
                                 placeholder="Roll Number"
                                 required
-                                disabled={loading}
+                                disabled={isAuthPending}
                             />
                         </div>
 
                         <div>
                             <select
-                                value={clubid}
+                                value={club_id}
                                 className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
                                 required
-                                disabled = {loading}
+                                disabled = {isAuthPending}
                                 onChange={(e)=>setClubId(parseInt(e.target.value))}
                             >
                                 <option value=''>Select a club</option>
-                                {loadclub?(
-                                    <option disabled = {loading} >Loading Clubs</option>
+                                {isLoading?(
+                                    <option disabled = {isAuthPending} >Loading Clubs</option>
                                 ):(
                                     clubData.map((data, index)=>{
                                         return(
@@ -141,16 +83,16 @@ const Login = () => {
                                 className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
                                 placeholder="Password"
                                 required
-                                disabled={loading}
+                                disabled={isAuthPending}
                             />
                         </div>
 
                         <button
                             type="submit"
                             className="w-full bg-primary text-white py-2 mt-4 rounded-[10px] hover:bg-[#027a00] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
-                            disabled={loading}
+                            disabled={isAuthPending}
                         >
-                            {loading ? (
+                            {isAuthPending ? (
                                 <>
                                     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

@@ -1,38 +1,22 @@
 import Logo from '../../assets/Logo.png';
 import {useState} from 'react';
-import { useGlobalAuth } from '../../contexts/GlobalAuthContext';
-import {useNavigate} from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuthContext } from '../../contexts/AuthProvider';
+import { ToastContainer } from 'react-toastify';
 
 const Login = ()=>{
-
-    const navigate = useNavigate();
-
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [loading,setLoading] = useState<boolean>(false)
 
-    const {login, loading} = useGlobalAuth();
+    const {globalAdminLogin:login} = useAuthContext()
+
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        try{
-            const statusCode = await login(username, password);
-            if(statusCode === 200){
-                navigate('/global/dashboard');
-            }
-            else{
-                toast.error('Invalid credentials. Please try again.', {
-                    position: "bottom-right",
-                    autoClose: 3000
-                });
-            }
-        }catch(err){
-            toast.error('An error occurred during login', {
-                position: "bottom-right",
-                autoClose: 3000
-            });
-        }
+        setLoading(true)
+        login({username,password})
+        setLoading(false)
     }
 
     return(
@@ -87,8 +71,8 @@ const Login = ()=>{
                     </form>
                 </div>
             </div>
+            <ToastContainer theme='dark'/>
         </div>
-        <ToastContainer theme='dark'/>
         </>
     )
 }

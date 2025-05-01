@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import axios from 'axios';
-import GlobalHeader from '../../components/GlobalHeader';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -57,7 +56,6 @@ const CreateClub = ()=>{
 
     return(
         <>
-            <GlobalHeader/>
             <div className='w-screen flex pt-[80px] pb-[30px] justify-center items-center'>
                 <form onSubmit={handleSubmit} className="w-7/10 flex flex-col bg-secondary border-1 border-border rounded-[20px] justify-center items-center p-[40px] gap-[20px]">
                     <p className="text-white font-medium text-[22px]">Create a Club</p>
