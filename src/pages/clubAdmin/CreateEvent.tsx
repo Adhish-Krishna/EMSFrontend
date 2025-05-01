@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import RequiredEventDetails from '../../components/RequiredEventDetails';
-import Header from '../../components/Header';
+import Header from '../../components/ClubHeader';
 import OptionalEventDetails from '../../components/OptionalEventDetails';
 import Convenors from '../../components/Convenors';
 import EventPoster from '../../components/EventPoster';

@@ -2,7 +2,6 @@ import {useState} from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Header from './Header';
 
 interface ClubMember{
     rollno: string;
@@ -118,9 +117,8 @@ const AddClubMembers = ()=>{
     }
     return(
         <>
-            <Header/>
-            <div className="w-screen bg-black pt-[100px] pb-[20px] flex justify-center items-center flex-col gap-[20px]">
-                <div className="w-7/10 bg-secondary border-1 border-border rounded-[20px] p-[20px] flex flex-col justify-center items-center gap-[20px]">
+            <div className="w-screen  pt-[100px] pb-[20px] flex justify-center items-center flex-col gap-[20px]">
+                <div className="w-7/10  border-1 border-border rounded-[20px] p-[20px] flex flex-col justify-center items-center gap-[20px]">
                     <p className="text-white font-medium text-[22px]">
                         Add Club Members
                     </p>

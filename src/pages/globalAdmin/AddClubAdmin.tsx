@@ -1,9 +1,8 @@
-import GlobalHeader from "../../components/GlobalHeader";
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import type {AxiosResponse } from 'axios';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useClubs } from "../../hooks/useClub.js";
 
 export type ClubData = {
     id: number;
@@ -18,13 +17,11 @@ export interface ClubResponse{
 const AddClubAdmin = ()=>{
 
     const API_URL = (import.meta.env.VITE_ENV === 'dev') ? "/api" : import.meta.env.VITE_BASE_API_URL;
-    const club_data: ClubData[] = [];
-    const [clubData, setClubData] = useState(club_data);
+    const [clubData, setClubData] = useState<ClubData[]>([]);
     const [rollno, setRollNo] = useState('');
     const [clubid, setClubId] = useState(0);
     const [role, setRole] = useState('');
     const [loading, setLoading] = useState(false);
-    const [loadclub, setLoadClub] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent)=>{
         e.preventDefault();
@@ -115,54 +112,15 @@ const AddClubAdmin = ()=>{
         }
     }
 
+    const {data,isLoading} = useClubs()
     useEffect(() => {
-        async function getClubDetails(){
-            try{
-                setLoadClub(true);
-                const response: AxiosResponse<ClubResponse> = await axios.get(`${API_URL}/club/getclubs`,{withCredentials:true});
-                const club_details: ClubData[] = response.data.data;
-                if(response.status === 200){
-                    setClubData(club_details);
-                }
-            } catch(err: any) {
-                if(err.response?.status === 301){
-                    toast.error(
-                        "No club found!",
-                        {
-                            position: "bottom-right",
-                            autoClose: 3000,
-                            pauseOnHover: true,
-                            draggable: true,
-                            closeOnClick: true,
-                            hideProgressBar: false,
-                        }
-                    );
-                }
-                else if(err.response?.status === 500){
-                    toast.error(
-                        "Issue in fetchng the clubs",
-                        {
-                            position: "bottom-right",
-                            autoClose: 3000,
-                            pauseOnHover: true,
-                            draggable: true,
-                            closeOnClick: true,
-                            hideProgressBar: false,
-                        }
-                    );
-                }
-            }
-            finally{
-                setLoadClub(false);
-            }
+        if (data !== undefined) {
+            setClubData(data);
         }
-
-        getClubDetails();
-    }, []);
+    }, [data]);
 
     return(
         <>
-            <GlobalHeader/>
             <div className="w-screen pt-[80px] flex justify-center items-center bg-black">
                 <form onSubmit={handleSubmit} className="w-7/10 flex flex-col bg-secondary border-1 border-border justify-center items-center pb-[20px] rounded-[20px] p-[20px] gap-[20px]">
                     <p className="text-white font-medium text-[22px]" >Add Club Admin</p>
@@ -182,7 +140,7 @@ const AddClubAdmin = ()=>{
                         onChange={(e)=>setClubId(parseInt(e.target.value))}
                     >
                         <option value=''>Select a club</option>
-                        {loadclub?(
+                        {isLoading?(
                             <option disabled = {loading} >Loading Clubs</option>
                         ):(
                             clubData.map((data, index)=>{

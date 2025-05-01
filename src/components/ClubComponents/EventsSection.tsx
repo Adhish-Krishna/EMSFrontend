@@ -1,4 +1,4 @@
-import EventCard from "./EventsCard";
+import EventCard from "../EventsCard";
 import { useEffect, useState, ReactNode, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import axios from "axios";
@@ -101,7 +101,7 @@ const EventSection = ({sectionType, sectionTitle, icon}:EventsProps)=>{
 
         }
         fetchEventDetails();
-    },[])
+    },[API_URL,sectionType])
 
     return(
         <>
@@ -141,7 +141,7 @@ const EventSection = ({sectionType, sectionTitle, icon}:EventsProps)=>{
                                     {
                                         eventCardDetails.map((event)=>{
                                             return(
-                                                <EventCard sectionType={sectionType} eventTitle={event.name} description={event.about} type={event.event_type} category={event.event_category} date={event.date.slice(0,10)} venue={event.venue} id={event.id}/>
+                                                <EventCard key={event.id} sectionType={sectionType} eventTitle={event.name} description={event.about} type={event.event_type} category={event.event_category} date={event.date.slice(0,10)} venue={event.venue} id={event.id}/>
                                             )
                                         })
                                     }
