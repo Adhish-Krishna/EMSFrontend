@@ -9,7 +9,7 @@ const postData = async(url:string,formData:any) =>{
             'Content-Type': 'application/json',
         },
         body:JSON.stringify(formData),
-        credentials:"include"
+        credentials: 'include'
     })
     const data = await response.json()
     if(response.ok === false){
@@ -29,7 +29,6 @@ const getDatawithRefreshToken = async<T> (role:"admin" | "global") : Promise< (u
             const RefreshTokenresponse = await fetch(`${API_URL}/auth/${role}/getnewaccesstoken`,{
                 credentials: 'include', 
             })
-            console.log(RefreshTokenresponse)
 
             if(RefreshTokenresponse.status === 200){
                 response = await fetch(`${API_URL}/${url}`, {

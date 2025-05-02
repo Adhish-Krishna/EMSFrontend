@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../contexts/AuthProvider';
 import ClubAdminLogin from '../clubAdmin/Login';
 import GlobalAdminLogin from '../globalAdmin/Login';
 import { useState} from 'react';
@@ -6,6 +8,19 @@ import { useState} from 'react';
 const Home = () => {
     const [selectedSection, setSelectedSection] = useState<'global' | 'club'>('global');
 
+    const {role} = useAuthContext()
+    const navigate = useNavigate();
+
+    if(role  === 'club' ) navigate('/club/dashboard')
+    if(role === 'global') navigate('/global/dashboard')
+    
+    if(role === undefined){
+        return (
+        <div className="flex justify-center items-center h-screen w-screen bg-black">
+            <div className="animate-spin h-12 w-12 border-4 border-primary border-t-transparent rounded-full"></div>
+        </div>
+        )
+    }
 
     return (
         <div className="w-screen h-screen flex flex-col items-center bg-black">

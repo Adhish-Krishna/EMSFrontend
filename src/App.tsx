@@ -18,6 +18,7 @@ import EditEvent from './pages/clubAdmin/EditEvent'
 import EventsPage from './pages/clubAdmin/EventsPage'
 import EventDetail from './pages/clubAdmin/EventDetail'
 import AddClubMembers from './components/ClubComponents/AddClubMember'
+import ClubAdminProfile from './pages/clubAdmin/ClubAdminProfile'
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<MainLayout/>}>
@@ -35,6 +36,7 @@ const router = createBrowserRouter(createRoutesFromElements(
             <Route path='events' element={<EventsPage/>}/>
             <Route path='events/:eventId' element={<EventDetail/>}/>
             <Route path='members' />
+            <Route path='profile' element = {<ClubAdminProfile/>}/>
         </Route>
     </Route>
 ))
