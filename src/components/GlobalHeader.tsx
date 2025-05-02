@@ -1,11 +1,13 @@
 import { LogOut } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuthContext } from "../contexts/AuthProvider";
 
 const GlobalHeader = ()=>{
+    const {logoutGlobalUser} = useAuthContext()
 
     const handleLogout = async ()=>{
-        
+        logoutGlobalUser()
     }
 
     return(

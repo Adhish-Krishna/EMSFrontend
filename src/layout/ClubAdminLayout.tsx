@@ -8,7 +8,7 @@ import { useAuthContext } from '../contexts/AuthProvider';
 import { getDatawithRefreshToken } from '../utils/customFetch';
 
 
-interface clubProfile {
+export interface clubProfile {
   name:string;
   rollno:string;
   club:string;
