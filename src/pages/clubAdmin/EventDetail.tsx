@@ -114,7 +114,7 @@ const EventDetail = () => {
       
       case 'registrations':
         return (
-          <EventRegistration event_id={eventId} event_type={event_type}/>
+          <EventRegistration event_id={eventId} event_type={event_type ?? undefined}/>
         );
       
       case 'attendance':
