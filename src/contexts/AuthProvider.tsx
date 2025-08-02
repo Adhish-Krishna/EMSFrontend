@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 interface AuthContextType {
     role:"global" | "club" | null | undefined;
     isAuthPending : boolean;
-    setRole : (role:"global" | "club") => void 
+    setRole : (role:"global" | "club" | null)  => void 
     globalAdminLogin:UseMutateFunction<ResponseBody, Error, GlobalLoginCrentials, unknown>
     clubAdminLogin:UseMutateFunction<ResponseBody, Error, clubLoginCrentials, unknown>,
     logoutGlobalUser:UseMutateFunction<ResponseBody, Error, void, unknown>,
@@ -56,15 +56,25 @@ const logoutClubAdmin = async()  : Promise<ResponseBody> => {
 
 const cacheRole = async (role: "global" | "club" | null) => {
     const cache = await caches.open('auth-cache');
-    await cache.put('/auth/role', new Response(JSON.stringify({ role })));
+    if (role === null) {
+        // Clear the cache entry when logging out
+        await cache.delete('/auth/role');
+    } else {
+        await cache.put('/auth/role', new Response(JSON.stringify({ role })));
+    }
 };
 
 const getCachedRole = async (): Promise<"global" | "club" | null> => {
-    const cache = await caches.open('auth-cache');
-    const response = await cache.match('/auth/role');
-    if (!response) return null;
-    const data = await response.json();
-    return data.role as "global" | "club" | null;
+    try {
+        const cache = await caches.open('auth-cache');
+        const response = await cache.match('/auth/role');
+        if (!response) return null;
+        const data = await response.json();
+        return data.role as "global" | "club" | null;
+    } catch (error) {
+        console.error('Failed to get cached role:', error);
+        return null;
+    }
 };
 
 
@@ -72,16 +82,14 @@ export default function AuthProvider({children}:PropsWithChildren) {
   const [role,setRoleState] = useState<"global" | "club" | null>();
   const navigate = useNavigate()
 
-  const setRole = (newRole: "global" | "club") => {
+const setRole = (newRole: "global" | "club" | null) => {
     setRoleState(newRole);
     cacheRole(newRole);
-  };
+};
 
   useEffect(() => {
     getCachedRole().then(cached => {
-      if (cached) {
         setRoleState(cached);
-      }
     });
   }, []);
 
@@ -117,12 +125,12 @@ export default function AuthProvider({children}:PropsWithChildren) {
     mutationFn:logoutGlobalAdmin,
     onSuccess:(data)=>{
       toast.success(data.message || "Logged Out successfully")
-      setRoleState(null)
+      setRole(null)
       navigate("/")
     },
     onError:(error) => {
       toast.success(error?.message || "Logged Out failed")
-      setRoleState(null)
+      setRole(null)
       navigate("/")
     },
   })
@@ -131,12 +139,12 @@ export default function AuthProvider({children}:PropsWithChildren) {
     mutationFn:logoutClubAdmin,
     onSuccess:(data)=>{
       toast.success(data.message || "Logged Out successfully")
-      setRoleState(null)
+      setRole(null)
       navigate("/")
     },
     onError:(error) => {
       toast.success(error?.message || "Logged Out failed")
-      setRoleState(null)
+      setRole(null)
       navigate("/")
     },
   })

@@ -49,10 +49,14 @@ const RequiredEventDetails = ({eventDetails, setEventDetails, title}: EventDetai
                             required
                         />
                         <input
-                            type="text"
-                            placeholder='Date (YYYY-MM-DD)'
+                            type="date"
                             value={eventDetails.date}
-                            onChange={(e)=>{setEventDetails({...eventDetails, date: e.target.value})}}
+                            onChange={(e) => {
+                                setEventDetails({
+                                    ...eventDetails, 
+                                    date: e.target.value // This automatically gives you YYYY-MM-DD format as string
+                                })
+                            }}
                             className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
                             required
                         />

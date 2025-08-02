@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthProvider';
 import ClubAdminLogin from '../clubAdmin/Login';
 import GlobalAdminLogin from '../globalAdmin/Login';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 const Home = () => {
@@ -11,9 +11,14 @@ const Home = () => {
     const {role} = useAuthContext()
     const navigate = useNavigate();
 
-    if(role  === 'club' ) navigate('/club/dashboard')
-    if(role === 'global') navigate('/global/dashboard')
-    
+    useEffect(() => {
+        // Navigate based on role - the AuthProvider already handles authentication state
+        if (role === 'club') {
+            navigate('/club/dashboard');
+        } else if (role === 'global') {
+            navigate('/global/dashboard');
+        }
+    }, [role, navigate]);
 
     return (
         <div className="min-h-screen w-full bg-gradient-to-br from-black via-gray-900 to-black flex flex-col items-center relative overflow-hidden">
