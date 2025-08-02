@@ -12,9 +12,9 @@ const GlobalHeader = ()=>{
 
     return(
         <>
-            <div className="w-screen p-[20px] h-70px flex flex-row justify-between items-center border-b-1 border-border">
-                <p className="text-primary font-medium text-[22px]">Global Admin Portal</p>
-                <button  onClick={handleLogout} className="bg-primary text-white w-[120px] h-[40px] rounded-[10px] flex justify-center items-center gap-[10px]">
+            <div className="w-screen px-6 py-4 h-[70px] glass-morphism flex flex-row justify-between items-center border-b border-border/30">
+                <h1 className="text-2xl font-bold text-gradient">Global Admin Portal</h1>
+                <button onClick={handleLogout} className="btn-primary text-white flex justify-center items-center gap-2">
                     <LogOut/>
                     Logout
                 </button>

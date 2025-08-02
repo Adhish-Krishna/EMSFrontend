@@ -21,37 +21,46 @@ const Login = ()=>{
 
     return(
         <>
-        <div className="flex items-center justify-center h-screen w-full p-4">
-            <div className="bg-secondary border-2 border-border rounded-3xl shadow-xl p-8 flex max-w-4xl w-full flex-col md:flex-row">
+        <div className="flex items-center justify-center min-h-screen w-full p-6">
+            <div className="card max-w-4xl w-full flex flex-col md:flex-row overflow-hidden animate-scale-in">
                 {/* Left side with logo */}
-                <div className="md:w-1/2 w-full flex items-center justify-center p-4 mb-6 md:mb-0">
-                    <img src={Logo} alt="EMS Logo" className="max-w-full max-h-48 md:max-h-64" />
+                <div className="md:w-1/2 w-full flex items-center justify-center p-8 mb-6 md:mb-0 bg-gradient-to-br from-primary/10 to-accent/5">
+                    <div className="text-center">
+                        <img src={Logo} alt="EMS Logo" className="max-w-full max-h-48 md:max-h-64 mx-auto mb-4" />
+                        <h2 className="text-2xl font-bold text-gradient">Event Management System</h2>
+                        <p className="text-gray-400 mt-2">Global Administration Portal</p>
+                    </div>
                 </div>
 
                 {/* Right side with login form */}
-                <div className="md:w-1/2 w-full p-4">
-                    <h1 className="text-2xl md:text-3xl font-bold mb-6 text-center text-primary">Global Admin Login</h1>
+                <div className="md:w-1/2 w-full p-8">
+                    <div className="mb-8 text-center">
+                        <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gradient">Welcome Back</h1>
+                        <p className="text-gray-400">Sign in to your global admin account</p>
+                    </div>
 
                     <form onSubmit={handleLogin} className="space-y-4">
                         <div>
+                            <label className="block text-sm font-medium text-gray-300 mb-2">Username</label>
                             <input
                                 type="text"
                                 placeholder='Username'
                                 value={username}
                                 onChange={(e)=>setUserName(e.target.value)}
-                                className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                                className="input-field w-full text-white"
                                 required
                                 disabled={loading}
                             />
                         </div>
 
                         <div>
+                            <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
                             <input
                                 type="password"
                                 placeholder='Password'
                                 value={password}
                                 onChange={(e)=>setPassword(e.target.value)}
-                                className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                                className="input-field w-full text-white"
                                 required
                                 disabled={loading}
                             />
@@ -59,13 +68,16 @@ const Login = ()=>{
 
                         <button
                             type="submit"
-                            className="w-full bg-primary text-white py-2 mt-4 rounded-[10px] hover:bg-[#027a00] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                            className="btn-primary w-full text-white py-4 mt-6 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center font-semibold"
                             disabled={loading}
                         >
                             {loading ? (
-                                <div className="animate-spin -ml-1 mr-3 h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
+                                <>
+                                    <div className="animate-spin -ml-1 mr-3 h-6 w-6 border-2 border-white border-t-transparent rounded-full"></div>
+                                    Signing In...
+                                </>
                             ) : (
-                                'Login'
+                                'Sign In'
                             )}
                         </button>
                     </form>
