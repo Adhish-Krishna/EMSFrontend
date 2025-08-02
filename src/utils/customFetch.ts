@@ -24,9 +24,9 @@ const getDatawithRefreshToken = async<T> (role:"admin" | "global") : Promise< (u
             credentials: 'include', 
         });
         
-        //console.log("Fetching data from:", `${API_URL}/${url}`);
+        console.log("Fetching data from:", `${API_URL}/${url}`);
         let data = await response.json();
-        //console.log("Response data:", data,response);
+        console.log("Response data:", data,response,response.status);
         if(response.status === 401){
             const RefreshTokenresponse = await fetch(`${API_URL}/auth/${role}/getnewaccesstoken`,{
                 credentials: 'include', 

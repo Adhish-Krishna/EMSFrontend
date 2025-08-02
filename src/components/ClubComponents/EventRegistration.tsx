@@ -8,7 +8,7 @@ export default function EventRegistration({event_id,event_type}:
     {event_id:string | undefined,event_type : string | undefined}) 
 {
 
-  const { data: registrations } = useGetRegistrations({ event_id });
+  const { data: registrations, isLoading, error } = useGetRegistrations({ event_id });
   const [selectedMembers, setSelectedMembers] = useState<TeamMember[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalMinimized, setIsModalMinimized] = useState(false);
@@ -82,13 +82,21 @@ export default function EventRegistration({event_id,event_type}:
     PutAttendance();
   };
 
-  if(registrations === undefined) {
+if(isLoading) {
     return (
         <div className="flex justify-center items-center h-screen w-screen bg-black">
             <div className="animate-spin h-12 w-12 border-4 border-primary border-t-transparent rounded-full"></div>
         </div>
-        )
-    }
+    )
+}
+
+if(error) {
+    return (
+        <div className="flex justify-center items-center h-screen w-screen bg-black text-red-400">
+            Error loading registrations: {error.message}
+        </div>
+    )
+}
   return (
     <div className="space-y-8 relative px-4 sm:px-6 lg:px-8">
     {isModalMinimized && (

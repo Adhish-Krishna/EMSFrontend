@@ -110,6 +110,10 @@ const fetchRegistrations = (event_id:string) => {
     return async () => {
         const getData = await getDatawithRefreshToken<RegistatationResponse>("admin")
         const data = await getData(`event/allregistration/${event_id}`)
+        if(!data.data) {
+            return []
+        }
+        console.log("log inside fetch Registration ",data)
         return data.data
     }
 }
