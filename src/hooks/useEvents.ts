@@ -109,7 +109,7 @@ const fetchFeedback = (event_id:string) => {
 const fetchRegistrations = (event_id:string) => {
     return async () => {
         const getData = await getDatawithRefreshToken<RegistatationResponse>("admin")
-        const data = await getData(`event/allregistration?id=${event_id}`)
+        const data = await getData(`event/allregistration/${event_id}`)
         return data.data
     }
 }

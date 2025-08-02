@@ -35,7 +35,6 @@ const AddWinnerModal = ({
   const occupiedPositions = existingWinners.map(w => w.position);
 
   const allPositions = [1, 2, 3, 4, 5, 6];
-  
   const availablePositions = allPositions.filter(
     position => !occupiedPositions.includes(position)
   );
@@ -75,7 +74,8 @@ const AddWinnerModal = ({
                 const isAlreadyWinner = existingWinners.some(winner => 
                   winner.teams.id === team.team_id
                 );
-                const matchesSearch = team.team_name.toLowerCase().includes(searchQuery.toLowerCase());
+                // Add null check for team_name before calling toLowerCase()
+                const matchesSearch = team.team_name?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false;
                 
                 return !isAlreadyWinner && matchesSearch;
             })
@@ -89,7 +89,7 @@ const AddWinnerModal = ({
                     : 'bg-neutral-800/40 hover:bg-neutral-700/30'
                 }`}
               >
-                <p className="text-white font-medium">{team.team_name}</p>
+                <p className="text-white font-medium">{team.team_name || 'Unnamed Team'}</p>
                 <p className="text-sm text-emerald-400/80">
                   {team.members.length} members
                 </p>
