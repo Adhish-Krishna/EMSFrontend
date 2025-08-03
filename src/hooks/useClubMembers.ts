@@ -27,7 +27,7 @@ const fetchClubMembers = async (): Promise<ClubMember[]> => {
 };
 
 const removeMember = async (rollno: string): Promise<void> => {
-  await postData<RemoveMemberRequest, any>('admin/remove-member', { rollno });
+  await postData('admin/remove-member', { rollno });
 };
 
 export const useClubMembers = () => {

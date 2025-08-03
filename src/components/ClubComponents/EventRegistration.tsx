@@ -209,7 +209,7 @@ if(error) {
           </div>
         </div>
     )}
-    {registrations.length > 0 ? (
+    {registrations && registrations.length > 0 ? (
         registrations.map(({ team_id, team_name, members }: Team) => (
           <div
             key={team_id}

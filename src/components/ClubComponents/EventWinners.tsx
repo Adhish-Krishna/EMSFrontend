@@ -25,7 +25,7 @@ import { toast, ToastContainer } from "react-toastify";
 export default function EventWinners({ event_id }: { event_id: string | undefined }) {
   const { data: winners } = useGetWinners({ event_id });
   const [activeWinner, setActiveWinner] = useState<WinnerData | null>(null);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>({} as HTMLDivElement);
   const id = useId();
 
   useOutsideClick(ref, () => setActiveWinner(null));
