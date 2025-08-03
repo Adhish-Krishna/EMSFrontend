@@ -30,7 +30,10 @@ const EditEvent = () => {
         faculty_obs_dept: undefined,
         eventConvenors: [],
     });
-
+// Add these states after line 35, with other state declarations
+    const [posterFile, setPosterFile] = useState<File | null>(null);
+    const [isUpdatingPoster, setIsUpdatingPoster] = useState(false);
+    const [showPosterUpload, setShowPosterUpload] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [editingField, setEditingField] = useState<string | null>(null);
     const [tempValue, setTempValue] = useState<any>("");
@@ -183,6 +186,82 @@ const EditEvent = () => {
         }
     };
 
+    const handlePosterUpdate = async () => {
+        if (!posterFile) {
+            toast.error("Please select a poster file", {
+                position: "bottom-right",
+                autoClose: 2000,
+                theme: "dark"
+            });
+            return;
+        }
+
+        try {
+            setIsUpdatingPoster(true);
+            const formData = new FormData();
+            formData.append('poster', posterFile);
+
+            const response = await axios.post(`${API_URL}/admin/update-poster/${id}`, formData, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            if (response.status === 200) {
+                // Refresh the poster by fetching it again
+                try {
+                    const posterResponse = await axios.get(`${API_URL}/event/eventposter?id=${id}`, {
+                        withCredentials: true,
+                        responseType: "blob"
+                    });
+
+                    if (posterResponse.status === 200) {
+                        const blob = posterResponse.data;
+                        const reader = new FileReader();
+                        reader.readAsDataURL(blob);
+                        reader.onloadend = () => {
+                            const base64String = reader.result as string;
+                            setEventDetails(prev => ({
+                                ...prev,
+                                poster: base64String
+                            }));
+                        };
+                    }
+                } catch (posterErr) {
+                    console.error("Error fetching updated poster:", posterErr);
+                }
+
+                setPosterFile(null);
+                setShowPosterUpload(false);
+                toast.success("Poster updated successfully!", {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                    theme: "dark"
+                });
+            }
+        } catch (error: any) {
+            toast.error("Failed to update poster", {
+                position: "bottom-right",
+                autoClose: 3000,
+                theme: "dark"
+            });
+            console.error("Error updating poster:", error);
+        } finally {
+            setIsUpdatingPoster(false);
+        }
+    };
+
+    const handlePosterFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setPosterFile(e.target.files[0]);
+        }
+    };
+
+    const cancelPosterUpload = () => {
+        setPosterFile(null);
+        setShowPosterUpload(false);
+    };
     // Remove convenor
     const handleRemoveConvenor = async (rollToRemove: string) => {
         try {
@@ -353,10 +432,25 @@ const EditEvent = () => {
                     </div>
                 </div>
 
-                {/* Event Poster */}
-                {eventDetails.poster && (
-                    <div className="w-7/10 bg-secondary border-1 border-border rounded-[20px] flex justify-center items-center p-[20px] flex-col gap-[20px]">
+                {/* Event Poster - Replace the existing poster section */}
+                <div className="w-7/10 bg-secondary border-1 border-border rounded-[20px] flex justify-center items-center p-[20px] flex-col gap-[20px]">
+                    <div className="flex justify-between items-center w-full">
                         <p className="text-white font-medium text-[22px]">Event Poster</p>
+                        {eventDetails.poster && !showPosterUpload && (
+                            <button
+                                onClick={() => setShowPosterUpload(true)}
+                                className="text-blue-400 hover:text-blue-300 p-2 bg-blue-500/10 rounded-lg transition-colors"
+                                title="Update Poster"
+                            >
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                            </button>
+                        )}
+                    </div>
+
+                    {/* Current Poster Display */}
+                    {eventDetails.poster && !showPosterUpload && (
                         <div className="mt-4 p-2 border border-gray-700 rounded-lg">
                             <img 
                                 src={getPosterUrl(eventDetails.poster)} 
@@ -364,8 +458,71 @@ const EditEvent = () => {
                                 className="max-h-64 object-contain rounded" 
                             />
                         </div>
-                    </div>
-                )}
+                    )}
+
+                    {/* No Poster State */}
+                    {!eventDetails.poster && !showPosterUpload && (
+                        <div className="flex flex-col items-center gap-4">
+                            <div className="text-gray-400 text-center">
+                                <p>No poster available for this event</p>
+                            </div>
+                            <button
+                                onClick={() => setShowPosterUpload(true)}
+                                className="bg-primary text-white px-6 py-2 rounded-[10px] hover:bg-opacity-80 transition-colors"
+                            >
+                                Add Poster
+                            </button>
+                        </div>
+                    )}
+
+                    {/* Poster Upload Section */}
+                    {showPosterUpload && (
+                        <div className="w-full flex flex-col gap-4">
+                            <div className="flex flex-col gap-3">
+                                <label className="text-white font-medium">
+                                    {eventDetails.poster ? "Replace Poster" : "Upload Poster"}
+                                </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handlePosterFileChange}
+                                    className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-opacity-80"
+                                    disabled={isUpdatingPoster}
+                                />
+                            </div>
+
+                            {/* Preview selected file */}
+                            {posterFile && (
+                                <div className="mt-4 p-2 border border-gray-700 rounded-lg">
+                                    <p className="text-white text-sm mb-2">Preview:</p>
+                                    <img 
+                                        src={URL.createObjectURL(posterFile)} 
+                                        alt="Poster preview" 
+                                        className="max-h-64 object-contain rounded" 
+                                    />
+                                </div>
+                            )}
+
+                            {/* Action Buttons */}
+                            <div className="flex gap-3 justify-center">
+                                <button
+                                    onClick={handlePosterUpdate}
+                                    disabled={!posterFile || isUpdatingPoster}
+                                    className="bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white px-6 py-2 rounded-[10px] transition-colors"
+                                >
+                                    {isUpdatingPoster ? "Updating..." : "Update Poster"}
+                                </button>
+                                <button
+                                    onClick={cancelPosterUpload}
+                                    disabled={isUpdatingPoster}
+                                    className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-[10px] transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
 
                 {/* Event Convenors */}
                 <div className="w-7/10 border-border border-1 bg-secondary p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[20px]">
