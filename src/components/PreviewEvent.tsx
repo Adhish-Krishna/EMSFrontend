@@ -9,7 +9,9 @@ interface PreviewEventProps {
 }
 
 const PreviewEvent: React.FC<PreviewEventProps> = ({ eventDetails, onPublish, onClose, loading }) => {
-    const posterUrl = eventDetails.poster ? URL.createObjectURL(eventDetails.poster) : null;
+    const posterUrl = eventDetails.poster && typeof eventDetails.poster !== 'string' 
+        ? URL.createObjectURL(eventDetails.poster) 
+        : null;
 
     const renderOptionalDetail = (label: string, value: string | number | undefined) => {
         if (value !== undefined && value !== null && value !== '') {
