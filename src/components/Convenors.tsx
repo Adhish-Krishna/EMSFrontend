@@ -21,20 +21,20 @@ const Convenors = ({eventDetails, setEventDetails}:EventConvenorProps)=>{
 
     return(
         <>
-            <div className="w-7/10 border-border border-1 bg-secondary p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[20px]">
-                <p className="text-white text-[22px] mb-[10px] font-medium">Add Event Convenors</p>
+            <div className="w-7/10 border-slate-200 border-1 bg-white p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[20px]">
+                <p className="text-slate-800 text-[22px] mb-[10px] font-medium">Add Event Convenors</p>
                 <div className="w-8/10 flex flex-col justify-center items-center">
                     <input
                         type="text"
                         placeholder = 'Roll No'
                         value={rollNo}
                         onChange={(e)=> setRollNo(e.target.value)}
-                        className="w-45/100 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                        className="w-45/100 p-2 rounded-[10px] bg-slate-50 text-slate-800 border-1 border-slate-200"
                         required
                     />
                     <button
                         onClick={handleAddConvenor}
-                        className="mt-4 bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer"
+                        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer"
                     >
                         Add Convenor
                     </button>
@@ -42,12 +42,12 @@ const Convenors = ({eventDetails, setEventDetails}:EventConvenorProps)=>{
 
                 {eventDetails.eventConvenors.length > 0 && (
                     <div className="w-7/10 mt-4 flex flex-col">
-                        <h3 className="text-white text-[18px]">Added Convenors:</h3>
+                        <h3 className="text-slate-800 text-[18px]">Added Convenors:</h3>
                         <div className="mt-2">
                             {eventDetails.eventConvenors.map((rollno, index) => (
-                                <div key={index} className="flex justify-between items-center p-[10px] border-1 border-border bg-tertiary rounded-[10px] mb-[10px]">
+                                <div key={index} className="flex justify-between items-center p-[10px] border-1 border-slate-200 bg-slate-50 rounded-[10px] mb-[10px]">
                                     <div>
-                                        <span className="text-white">Roll No: {rollno}</span>
+                                        <span className="text-slate-800">Roll No: {rollno}</span>
                                     </div>
                                     <button
                                         className="text-red-500 hover:text-red-300 cursor-pointer"

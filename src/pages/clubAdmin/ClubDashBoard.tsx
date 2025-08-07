@@ -17,17 +17,17 @@ const ClubDashBoard = ()=>{
                 <EventSection
                     sectionType="ongoing"
                     sectionTitle="On going Events"
-                    icon={<Activity className="text-primary w-5 h-5" />}
+                    icon={<Activity className="text-blue-600 w-5 h-5" />}
                 />
                 <EventSection
                     sectionType="upcoming"
                     sectionTitle="Upcoming Events"
-                    icon={<Calendar className="text-primary w-5 h-5" />}
+                    icon={<Calendar className="text-blue-600 w-5 h-5" />}
                 />
                 <EventSection
                     sectionType="past"
                     sectionTitle="Past Events"
-                    icon={<Calendar className="text-primary w-5 h-5 opacity-70" />}
+                    icon={<Calendar className="text-blue-600 w-5 h-5 opacity-70" />}
                 />
             </div>
         </div>

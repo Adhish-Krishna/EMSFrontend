@@ -28,7 +28,7 @@ const Login = ()=>{
                     <div className="text-center">
                         <img src={Logo} alt="EMS Logo" className="max-w-full max-h-48 md:max-h-64 mx-auto mb-4" />
                         <h2 className="text-2xl font-bold text-gradient">Event Management System</h2>
-                        <p className="text-gray-400 mt-2">Global Administration Portal</p>
+                        <p className="text-slate-600 mt-2">Global Administration Portal</p>
                     </div>
                 </div>
 
@@ -36,31 +36,31 @@ const Login = ()=>{
                 <div className="md:w-1/2 w-full p-8">
                     <div className="mb-8 text-center">
                         <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gradient">Welcome Back</h1>
-                        <p className="text-gray-400">Sign in to your global admin account</p>
+                        <p className="text-slate-600">Sign in to your global admin account</p>
                     </div>
 
                     <form onSubmit={handleLogin} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                            <label className="block text-sm font-medium text-slate-700 mb-2">Username</label>
                             <input
                                 type="text"
                                 placeholder='Username'
                                 value={username}
                                 onChange={(e)=>setUserName(e.target.value)}
-                                className="input-field w-full text-white"
+                                className="input-field w-full text-slate-800"
                                 required
                                 disabled={loading}
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                            <label className="block text-sm font-medium text-slate-700 mb-2">Password</label>
                             <input
                                 type="password"
                                 placeholder='Password'
                                 value={password}
                                 onChange={(e)=>setPassword(e.target.value)}
-                                className="input-field w-full text-white"
+                                className="input-field w-full text-slate-800"
                                 required
                                 disabled={loading}
                             />

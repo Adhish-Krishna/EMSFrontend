@@ -86,10 +86,10 @@ export const DesktopSidebar = ({
 }: React.ComponentProps<typeof motion.div>) => {
   const { open, setOpen, animate } = useSidebar();
   return (
-    <div className="h-screen flex items-center ml-5 overflow-hidden rounded-2xl">
+    <div className="h-screen flex items-center ml-5 overflow-hidden">
       <motion.div
         className={cn(
-          "h-[90%] px-3 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 shrink-0 rounded-2xl",
+          "h-full px-4 py-6 hidden md:flex md:flex-col bg-white border-r border-slate-200 shrink-0 shadow-lg",
           className
         )}
         animate={{
@@ -115,13 +115,13 @@ export const MobileSidebar = ({
     <>
       <div
         className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full"
+          "h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-white border-b border-slate-200 w-full"
         )}
         {...props}
       >
         <div className="flex justify-start z-20 w-full">
           <Menu
-            className="text-neutral-800 dark:text-neutral-200"
+            className="text-slate-700"
             onClick={() => setOpen(!open)}
           />
         </div>
@@ -133,12 +133,12 @@ export const MobileSidebar = ({
               exit={{ x: "-100%", opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className={cn(
-                "fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between",
+                "fixed h-full w-full inset-0 bg-white p-10 z-[100] flex flex-col justify-between shadow-2xl",
                 className
               )}
             >
               <div
-                className="absolute right-10 top-10 z-50 text-neutral-800 dark:text-neutral-200"
+                className="absolute right-10 top-10 z-50 text-slate-700"
                 onClick={() => setOpen(!open)}
               >
                 <X />
@@ -171,10 +171,10 @@ export const SidebarLink = ({
     <a
       href={link.href}
       className={cn(
-        `flex items-center gap-3 text-balance px-3 py-4 rounded-xl transition-all duration-200 relative group
+        `flex items-center gap-3 text-balance px-4 py-3 rounded-lg transition-all duration-200 relative group font-medium
         ${isActive
-          ? "bg-primary/10 text-primary border-l-4 border-primary font-semibold"
-          : "text-gray-600 hover:bg-secondary/10 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-800"}
+          ? "bg-blue-50 text-blue-600 border-r-3 border-blue-600 shadow-sm"
+          : "text-slate-600 hover:bg-slate-50 hover:text-blue-600"}
         `,
         open ? "justify-start" : "justify-center",
         className
@@ -182,12 +182,12 @@ export const SidebarLink = ({
       title={!open ? link.label : undefined}
       {...props}
     >
-      <div className="flex items-center justify-center duration-300 min-w-10">
+      <div className="flex items-center justify-center duration-300 min-w-6">
         <div className="flex items-center">
           {link.icon}
           {/* Small dot indicator for minimized sidebar */}
           {!open && isActive && (
-            <span className="absolute top-1/2 -right-1 w-2 h-2 bg-primary rounded-full transform -translate-y-1/2" />
+            <span className="absolute top-1/2 -right-1 w-2 h-2 bg-blue-600 rounded-full transform -translate-y-1/2" />
           )}
         </div>
       </div>
@@ -196,7 +196,7 @@ export const SidebarLink = ({
           opacity: animate ? (open ? 1 : 0) : 1,
           width: animate ? (open ? "auto" : "0px") : "auto",
         }}
-        className="overflow-hidden whitespace-nowrap transition-all duration-300 text-xl"
+        className="overflow-hidden whitespace-nowrap transition-all duration-300 text-base"
       >
         {link.label}
         {/* Underline animation if expanded */}

@@ -117,9 +117,9 @@ const AddClubMembers = ()=>{
     }
     return(
         <>
-            <div className="w-screen  pt-[100px] pb-[20px] flex justify-center items-center flex-col gap-[20px]">
-                <div className="w-7/10  border-1 border-border rounded-[20px] p-[20px] flex flex-col justify-center items-center gap-[20px]">
-                    <p className="text-white font-medium text-[22px]">
+            <div className="w-screen pt-[100px] pb-[20px] flex justify-center items-center flex-col gap-[20px] bg-slate-50">
+                <div className="w-7/10 border-1 border-slate-200 rounded-[20px] p-[20px] flex flex-col justify-center items-center gap-[20px] bg-white">
+                    <p className="text-slate-800 font-medium text-[22px]">
                         Add Club Members
                     </p>
                     <div className="w-7/10 flex flex-row justify-between items-center">
@@ -128,7 +128,7 @@ const AddClubMembers = ()=>{
                             placeholder='Roll No'
                             value={rollno}
                             onChange={(e)=>setRollNo(e.target.value)}
-                            className="w-4/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                            className="w-4/10 p-2 rounded-[10px] bg-slate-50 text-slate-800 border-1 border-slate-200"
                             required
                         />
                         <input
@@ -136,21 +136,21 @@ const AddClubMembers = ()=>{
                             placeholder='Role (optional)'
                             value={role || ''}
                             onChange={(e)=>setRole(e.target.value)}
-                            className="w-4/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                            className="w-4/10 p-2 rounded-[10px] bg-slate-50 text-slate-800 border-1 border-slate-200"
                         />
                     </div>
-                    <button className="bg-primary h-[40px] rounded-[10px] text-white cursor-pointer pl-[20px] pr-[20px]" onClick={handleAddMember}>
+                    <button className="bg-blue-600 h-[40px] rounded-[10px] text-white cursor-pointer pl-[20px] pr-[20px]" onClick={handleAddMember}>
                         Add Member
                     </button>
                     {
                         clubMembers.length>0 && (
                             <>
-                                <p className="text-white font-medium text-[22px]">Added Club Members</p>
+                                <p className="text-slate-800 font-medium text-[22px]">Added Club Members</p>
                                 {
                                     clubMembers.map((member, index)=>{
                                         return (
-                                            <div key={index} className='bg-tertiary border-1 w-7/10 p-[20px] flex flex-row justify-between items-center rounded-[20px]'>
-                                                <div className="p-[10px] flex flex-col gap-[5px] text-white">
+                                            <div key={index} className='bg-slate-50 border-1 w-7/10 p-[20px] flex flex-row justify-between items-center rounded-[20px] border-slate-200'>
+                                                <div className="p-[10px] flex flex-col gap-[5px] text-slate-800">
                                                     <p>Roll No: {member.rollno}</p>
                                                     {member.role && (
                                                         <p>Role: {member.role}</p>
@@ -171,7 +171,7 @@ const AddClubMembers = ()=>{
                     }
 
                 </div>
-                <button  className="bg-primary w-[100px] h-[40px] rounded-[10px] text-white cursor-pointer" onClick={handleSave}>
+                <button className="bg-blue-600 w-[100px] h-[40px] rounded-[10px] text-white cursor-pointer" onClick={handleSave}>
                     {loading ? (
                                 <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

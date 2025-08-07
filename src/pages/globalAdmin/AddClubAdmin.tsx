@@ -121,20 +121,20 @@ const AddClubAdmin = ()=>{
 
     return(
         <>
-            <div className="w-screen pt-[80px] flex justify-center items-center bg-black">
-                <form onSubmit={handleSubmit} className="w-7/10 flex flex-col bg-secondary border-1 border-border justify-center items-center pb-[20px] rounded-[20px] p-[20px] gap-[20px]">
-                    <p className="text-white font-medium text-[22px]" >Add Club Admin</p>
+            <div className="w-screen pt-[80px] flex justify-center items-center bg-slate-50">
+                <form onSubmit={handleSubmit} className="w-7/10 flex flex-col bg-white border-1 border-slate-200 justify-center items-center pb-[20px] rounded-[20px] p-[20px] gap-[20px]">
+                    <p className="text-slate-800 font-medium text-[22px]" >Add Club Admin</p>
                     <input
                         type="text"
                         placeholder="Roll No"
                         value= {rollno}
                         onChange={(e)=>setRollNo(e.target.value)}
                         required
-                        className="w-4/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                        className="w-4/10 p-2 rounded-[10px] bg-slate-50 text-slate-800 border-1 border-slate-200"
                     />
                     <select
                         value={clubid}
-                        className="w-4/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                        className="w-4/10 p-2 rounded-[10px] bg-slate-50 text-slate-800 border-1 border-slate-200"
                         required
                         disabled = {loading}
                         onChange={(e)=>setClubId(parseInt(e.target.value))}
@@ -155,11 +155,11 @@ const AddClubAdmin = ()=>{
                         placeholder="Role"
                         value= {role}
                         onChange={(e)=>setRole(e.target.value)}
-                        className="w-4/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                        className="w-4/10 p-2 rounded-[10px] bg-slate-50 text-slate-800 border-1 border-slate-200"
                     />
                     <button
                         type="submit"
-                        className="w-[200px] bg-primary text-white py-2 rounded-[10px] hover:bg-[#027a00] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                        className="w-[200px] bg-blue-600 text-white py-2 rounded-[10px] hover:bg-blue-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
                         disabled={loading}
                         >
                             {loading ? (

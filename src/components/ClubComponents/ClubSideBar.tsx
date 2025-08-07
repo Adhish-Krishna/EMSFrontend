@@ -34,13 +34,13 @@ export default function ClubSideBar({open,setOpen}:ClubSideBarProps) {
  
   return (
     <Sidebar open={open} setOpen={setOpen}>
-      <SidebarBody className="bg-sidebar-primary mt-15 dark:bg-neutral-800 shadow-xl">
+      <SidebarBody className="bg-white mt-15 shadow-xl border-r border-slate-200">
         {/* Top Logo/Header */}
-        <div className="border-b border-club_dark-700 py-6 px-4 flex items-center justify-center">
+        <div className="border-b border-slate-200 py-6 px-4 flex items-center justify-center">
           <div className={`flex items-center ${open ? "justify-start" : "justify-center"}`}>
-            <Calendar className="h-10 w-10 text-primary" />
+            <Calendar className="h-10 w-10 text-blue-600" />
             {open === true && (
-              <h1 className="ml-2 text-xl font-bold text-white whitespace-nowrap transition-all duration-200">
+              <h1 className="ml-2 text-xl font-bold text-slate-800 whitespace-nowrap transition-all duration-200">
                 Club Admin
               </h1>
             )}
@@ -65,8 +65,8 @@ export default function ClubSideBar({open,setOpen}:ClubSideBarProps) {
         <div className="px-4 mt-auto pb-6">
           <button
             className={cn(
-              `flex items-center gap-3 px-3 py-4 rounded-xl transition-all duration-200 relative group
-                text-gray-600 hover:bg-secondary/10 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-800 w-full
+              `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 relative group font-medium
+                text-slate-600 hover:bg-slate-50 hover:text-red-600 w-full
               `,
               open ? "justify-start" : "justify-around"
             )}
@@ -77,7 +77,7 @@ export default function ClubSideBar({open,setOpen}:ClubSideBarProps) {
             </div>
 
             {open  === true && (
-              <span className="text-lg transition-opacity duration-200">
+              <span className="text-base transition-opacity duration-200">
                 Logout
               </span>
             )}

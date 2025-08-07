@@ -19,8 +19,8 @@ const SubHero = ({title, link, icon}: SubHeroProps)=>{
 
     return(
         <>
-            <div className="w-45/100 h-[160px] card bg-gradient-to-br from-primary/10 via-black/50 to-accent/5 flex flex-col justify-center items-center gap-6 group cursor-pointer responsive-w-full responsive-h-auto responsive-p-sm">
-                <p className="text-white text-2xl font-bold flex items-center gap-3 text-center responsive-text-md group-hover:text-gradient transition-all duration-300">
+            <div className="w-45/100 h-[160px] card bg-gradient-to-br from-blue-50 via-white to-blue-25 flex flex-col justify-center items-center gap-6 group cursor-pointer responsive-w-full responsive-h-auto responsive-p-sm">
+                <p className="text-slate-800 text-2xl font-bold flex items-center gap-3 text-center responsive-text-md group-hover:text-gradient transition-all duration-300">
                     {icon}
                     {title}
                 </p>

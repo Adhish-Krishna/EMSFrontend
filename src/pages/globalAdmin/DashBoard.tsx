@@ -4,7 +4,7 @@ const DashBoard = ()=>{
 
     return(
         <>
-            <div className="w-screen pt-[80px] bg-black flex flex-col pb-[30px] justify-center items-center gap-[20px]">
+            <div className="w-screen pt-[80px] bg-slate-50 flex flex-col pb-[30px] justify-center items-center gap-[20px]">
                 <ClubSubHero
                     title="Create Clubs"
                     link="/global/club/create"
