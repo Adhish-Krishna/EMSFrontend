@@ -21,30 +21,28 @@ const Home = () => {
     }, [role, navigate]);
 
     return (
-        <div className="min-h-screen w-full bg-gradient-to-br from-slate-50 via-blue-50 to-white flex flex-col items-center relative overflow-hidden">
+        <div className="max-h-screen w-full bg-slate-50 flex flex-col items-center relative overflow-hidden">
             {/* Background decoration */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-100/30 via-transparent to-blue-100/30"></div>
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl"></div>
+            {/* Decorative backgrounds removed for consistency */}
             
             {/* Section Selector */}
-            <div className="w-full max-w-md mt-16 mb-12 flex justify-center relative z-10">
+            <div className="w-full max-w-md mt-8 flex justify-center relative z-10">
                 <div className="glass-morphism rounded-2xl p-2 flex w-full max-w-xs animate-slide-up">
                     <button
-                        className={`flex-1 py-3 px-6 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                        className={`flex-1 py-3 px-6 rounded-[10px] font-semibold text-sm transition-all duration-300 ${
                             selectedSection === 'global'
-                                ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg'
-                                : 'text-slate-600 hover:text-slate-800 hover:bg-white/50'
+                                ? 'bg-blue-600 text-white' 
+                                : 'text-black hover:text-slate-800 hover:bg-white/50'
                         }`}
                         onClick={() => setSelectedSection('global')}
                     >
                         Global Admin
                     </button>
                     <button
-                        className={`flex-1 py-3 px-6 rounded-xl font-semibold text-sm transition-all duration-300 ${
+                        className={`flex-1 py-3 px-6 rounded-[10px] font-semibold text-sm transition-all duration-300 ${
                             selectedSection === 'club'
-                                ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg'
-                                : 'text-slate-600 hover:text-slate-800 hover:bg-white/50'
+                                ? 'bg-blue-600 text-white' 
+                                : 'text-black hover:text-slate-800 hover:bg-white/50'
                         }`}
                         onClick={() => setSelectedSection('club')}
                     >

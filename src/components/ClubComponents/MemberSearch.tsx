@@ -23,7 +23,7 @@ const MembersSearch: React.FC<MembersSearchProps> = ({
   availableYears
 }) => {
   return (
-    <div className="bg-gradient-to-br from-black/40 to-neutral-900/50 p-6 rounded-2xl shadow-2xl border border-emerald-900/30 mb-6">
+    <div className="bg-white p-6 rounded-2xl shadow-2xl border border-blue mb-6">
       <div className="flex flex-col lg:flex-row gap-4">
         {/* Search Input */}
         <div className="flex-1 relative">
@@ -33,7 +33,7 @@ const MembersSearch: React.FC<MembersSearchProps> = ({
             placeholder="Search by name, roll number, or department..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-neutral-800 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 border border-neutral-700"
+            className="w-full pl-10 pr-4 py-3 bg-white rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue border border-neutral-700"
           />
         </div>
 
@@ -43,7 +43,7 @@ const MembersSearch: React.FC<MembersSearchProps> = ({
           <select
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
-            className="pl-10 pr-8 py-3 bg-neutral-800 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 border border-neutral-700 appearance-none cursor-pointer"
+            className="pl-10 pr-8 py-3 bg-neutral-800 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue border border-neutral-700 appearance-none cursor-pointer"
           >
             <option value="">All Roles</option>
             {availableRoles.map(role => (
@@ -58,7 +58,7 @@ const MembersSearch: React.FC<MembersSearchProps> = ({
           <select
             value={yearFilter}
             onChange={(e) => setYearFilter(e.target.value)}
-            className="pl-10 pr-8 py-3 bg-neutral-800 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 border border-neutral-700 appearance-none cursor-pointer"
+            className="pl-10 pr-8 py-3 bg-neutral-800 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue border border-neutral-700 appearance-none cursor-pointer"
           >
             <option value="">All Years</option>
             {availableYears.map(year => (

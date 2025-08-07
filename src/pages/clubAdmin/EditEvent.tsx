@@ -384,12 +384,11 @@ const EditEvent = () => {
     return (
         <>
             <Header />
-            <div className="w-screen bg-black pt-[100px] pb-10 flex flex-col justify-center items-center gap-[20px]">
-                <h1 className="text-white text-[32px] font-bold mb-8">Edit Event Details</h1>
-                
+            <div className="w-screen min-h-screen bg-slate-50 pt-[100px] pb-10 flex flex-col justify-center items-center gap-[20px] text-black">
+                <h1 className="text-[32px] font-bold mb-8 text-blue-600">Edit Event Details</h1>
                 {/* Required Details */}
-                <div className="w-7/10 border-border border-1 bg-secondary p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[20px]">
-                    <p className="text-white text-[22px] mb-[10px] font-medium">Required Details</p>
+                <div className="w-7/10 border border-gray-200 bg-white p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[10px] shadow">
+                    <p className="text-blue-600 text-[22px] mb-[10px] font-medium">Required Details</p>
                     <div className='w-8/10 flex flex-row justify-between items-center'>
                         <div className="w-45/100 flex flex-col gap-[20px]">
                             {renderField("Event Name", "name")}
@@ -415,8 +414,8 @@ const EditEvent = () => {
                 </div>
 
                 {/* Optional Details */}
-                <div className="w-7/10 border-border border-1 bg-secondary p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[20px]">
-                    <p className="text-white text-[22px] mb-[10px] font-medium">Optional Details</p>
+                <div className="w-7/10 border border-gray-200 bg-white p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[10px] shadow">
+                    <p className="text-blue-600 text-[22px] mb-[10px] font-medium">Optional Details</p>
                     <div className='w-8/10 flex flex-row justify-between items-start'>
                         <div className="w-45/100 flex flex-col gap-[20px]">
                             {renderField("Chief Guest (with address)", "chief_guest")}
@@ -433,13 +432,13 @@ const EditEvent = () => {
                 </div>
 
                 {/* Event Poster - Replace the existing poster section */}
-                <div className="w-7/10 bg-secondary border-1 border-border rounded-[20px] flex justify-center items-center p-[20px] flex-col gap-[20px]">
+                <div className="w-7/10 bg-white border border-gray-200 rounded-[10px] flex justify-center items-center p-[20px] flex-col gap-[20px] shadow">
                     <div className="flex justify-between items-center w-full">
-                        <p className="text-white font-medium text-[22px]">Event Poster</p>
+                        <p className="text-blue-600 font-medium text-[22px]">Event Poster</p>
                         {eventDetails.poster && !showPosterUpload && (
                             <button
                                 onClick={() => setShowPosterUpload(true)}
-                                className="text-blue-400 hover:text-blue-300 p-2 bg-blue-500/10 rounded-lg transition-colors"
+                                className="text-blue-600 hover:text-blue-400 p-2 bg-blue-100 rounded-lg transition-colors"
                                 title="Update Poster"
                             >
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -451,7 +450,7 @@ const EditEvent = () => {
 
                     {/* Current Poster Display */}
                     {eventDetails.poster && !showPosterUpload && (
-                        <div className="mt-4 p-2 border border-gray-700 rounded-lg">
+                        <div className="mt-4 p-2 border border-gray-200 rounded-lg">
                             <img 
                                 src={getPosterUrl(eventDetails.poster)} 
                                 alt="Event poster preview" 
@@ -468,7 +467,7 @@ const EditEvent = () => {
                             </div>
                             <button
                                 onClick={() => setShowPosterUpload(true)}
-                                className="bg-primary text-white px-6 py-2 rounded-[10px] hover:bg-opacity-80 transition-colors"
+                                className="bg-blue-600 text-white px-6 py-2 rounded-[10px] hover:bg-opacity-80 transition-colors"
                             >
                                 Add Poster
                             </button>
@@ -479,22 +478,22 @@ const EditEvent = () => {
                     {showPosterUpload && (
                         <div className="w-full flex flex-col gap-4">
                             <div className="flex flex-col gap-3">
-                                <label className="text-white font-medium">
+                                <label className="text-blue-600 font-medium">
                                     {eventDetails.poster ? "Replace Poster" : "Upload Poster"}
                                 </label>
                                 <input
                                     type="file"
                                     accept="image/*"
                                     onChange={handlePosterFileChange}
-                                    className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-opacity-80"
+                                    className="w-full p-2 rounded-[10px] bg-blue-50 text-black border border-gray-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-opacity-80"
                                     disabled={isUpdatingPoster}
                                 />
                             </div>
 
                             {/* Preview selected file */}
                             {posterFile && (
-                                <div className="mt-4 p-2 border border-gray-700 rounded-lg">
-                                    <p className="text-white text-sm mb-2">Preview:</p>
+                                <div className="mt-4 p-2 border border-gray-200 rounded-lg">
+                                    <p className="text-black text-sm mb-2">Preview:</p>
                                     <img 
                                         src={URL.createObjectURL(posterFile)} 
                                         alt="Poster preview" 
@@ -525,9 +524,8 @@ const EditEvent = () => {
                 </div>
 
                 {/* Event Convenors */}
-                <div className="w-7/10 border-border border-1 bg-secondary p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[20px]">
-                    <p className="text-white text-[22px] mb-[10px] font-medium">Event Convenors</p>
-                    
+                <div className="w-7/10 border border-gray-200 bg-white p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[10px] shadow">
+                    <p className="text-blue-600 text-[22px] mb-[10px] font-medium">Event Convenors</p>
                     {/* Add new convenor section */}
                     <div className="w-8/10 flex flex-col justify-center items-center">
                         <input
@@ -535,13 +533,13 @@ const EditEvent = () => {
                             placeholder="Roll No"
                             value={newConvenorRoll}
                             onChange={(e) => setNewConvenorRoll(e.target.value)}
-                            className="w-45/100 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                            className="w-45/100 p-2 rounded-[10px] bg-blue-50 text-black border border-gray-200"
                             disabled={isAddingConvenor}
                         />
                         <button
                             onClick={handleAddConvenor}
                             disabled={isAddingConvenor}
-                            className="mt-4 bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer disabled:bg-gray-600"
+                            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer disabled:bg-gray-600"
                         >
                             {isAddingConvenor ? "Adding..." : "Add Convenor"}
                         </button>
@@ -550,15 +548,15 @@ const EditEvent = () => {
                     {/* Display existing convenors */}
                     {eventDetails.eventConvenors && eventDetails.eventConvenors.length > 0 && (
                         <div className="w-7/10 mt-4 flex flex-col">
-                            <h3 className="text-white text-[18px] mb-2">Added Convenors:</h3>
+                            <h3 className="text-blue-600 text-[18px] mb-2">Added Convenors:</h3>
                             <div className="mt-2">
                                 {eventDetails.eventConvenors.map((rollno, index) => (
-                                    <div key={index} className="flex justify-between items-center p-[10px] border-1 border-border bg-tertiary rounded-[10px] mb-[10px]">
+                                    <div key={index} className="flex justify-between items-center p-[10px] border border-gray-200 bg-blue-50 rounded-[10px] mb-[10px]">
                                         <div>
-                                            <span className="text-white">Roll No: {rollno}</span>
+                                            <span className="text-black">Roll No: {rollno}</span>
                                         </div>
                                         <button
-                                            className="text-red-500 hover:text-red-300 cursor-pointer"
+                                            className="text-red-600 hover:text-red-400 cursor-pointer"
                                             onClick={() => handleRemoveConvenor(rollno)}
                                         >
                                             Remove

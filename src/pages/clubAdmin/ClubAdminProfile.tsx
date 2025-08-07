@@ -105,39 +105,38 @@ export default function ClubAdminProfile() {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="px-4 sm:px-6 lg:px-8 py-8 space-y-8 mt-10"
+      className="px-4 sm:px-6 lg:px-8 py-8 space-y-8 mt-10 min-h-screen bg-slate-50 text-black"
     >
       {/* Profile Header */}
-      <motion.div variants={itemVariants} className="bg-gradient-to-br from-black/40 to-neutral-900/50 p-8 rounded-2xl shadow-2xl border border-emerald-900/30">
+      <motion.div variants={itemVariants} className="bg-white p-8 rounded-[10px] shadow border border-gray-200">
         <div className="flex flex-col md:flex-row justify-between items-start gap-6">
           <div>
-            <h1 className="text-4xl font-bold text-emerald-300 mb-1">
+            <h1 className="text-4xl font-bold text-blue-600 mb-1">
               {clubProfile?.club || 'Club Name'}
             </h1>
-            <p className="text-gray-300">
-              <span className="text-emerald-400">Admin:</span> {clubProfile?.name}
+            <p className="text-gray-600">
+              <span className="text-blue-600 font-semibold">Admin:</span> {clubProfile?.name}
             </p>
-            <p className="text-gray-300 text-sm mt-2">
+            <p className="text-gray-500 text-sm mt-2">
               Roll No: {clubProfile?.rollno}
             </p>
           </div>
         <div className="flex items-center gap-4">
-            <div className="p-4 bg-emerald-900/20 rounded-xl">
-                <FiCalendar className="w-8 h-8 text-emerald-400" />
+            <div className="p-4 bg-blue-100 rounded-xl">
+                <FiCalendar className="w-8 h-8 text-blue-600" />
             </div>
             <div>
-                <p className="text-2xl font-bold text-white"> {pastEvents.length} </p>
-                <p className="text-emerald-400 text-sm">Total Events</p>
+                <p className="text-2xl font-bold text-black"> {pastEvents.length} </p>
+                <p className="text-blue-600 text-sm">Total Events</p>
             </div>
         </div>
-
         </div>
       </motion.div>
 
       {/* Statistics Charts */}
       <motion.div variants={containerVariants} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <motion.div variants={itemVariants} className="bg-neutral-800/40 p-6 rounded-xl border border-emerald-900/30">
-          <h3 className="text-lg font-semibold text-emerald-300 mb-4">Participation Trends</h3>
+        <motion.div variants={itemVariants} className="bg-white p-6 rounded-[10px] border border-gray-200 shadow">
+          <h3 className="text-lg font-semibold text-blue-600 mb-4">Participation Trends</h3>
           <div className="h-64">
             <Line 
               data={participationData}
@@ -152,8 +151,8 @@ export default function ClubAdminProfile() {
           </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="bg-neutral-800/40 p-6 rounded-xl border border-emerald-900/30">
-          <h3 className="text-lg font-semibold text-emerald-300 mb-4">Event Ratings</h3>
+        <motion.div variants={itemVariants} className="bg-white p-6 rounded-[10px] border border-gray-200 shadow">
+          <h3 className="text-lg font-semibold text-blue-600 mb-4">Event Ratings</h3>
           <div className="h-64">
             <Bar
               data={ratingsData}
@@ -168,8 +167,8 @@ export default function ClubAdminProfile() {
           </div>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="bg-neutral-800/40 p-6 rounded-xl border border-emerald-900/30">
-          <h3 className="text-lg font-semibold text-emerald-300 mb-4">Event Categories</h3>
+        <motion.div variants={itemVariants} className="bg-white p-6 rounded-[10px] border border-gray-200 shadow">
+          <h3 className="text-lg font-semibold text-blue-600 mb-4">Event Categories</h3>
           <div className="h-64">
             <Pie
               data={categoryData}
@@ -187,8 +186,7 @@ export default function ClubAdminProfile() {
 
       {/* Events  */}
       <motion.div variants={itemVariants} className="space-y-6">
-        <h2 className="text-2xl font-bold text-emerald-300">Events Conducted</h2>
-        
+        <h2 className="text-2xl font-bold text-blue-600">Events Conducted</h2>
         <div className="space-y-4">
           {pastEvents.map((event, index) => (
             <motion.div
@@ -196,18 +194,18 @@ export default function ClubAdminProfile() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-gradient-to-br from-black/30 to-neutral-900/40 p-6 rounded-xl border border-emerald-900/30 hover:border-emerald-900/50 transition-all cursor-pointer"
+              className="bg-white p-6 rounded-[10px] border border-gray-200 shadow hover:shadow-lg transition-all cursor-pointer"
               onClick={() => setExpandedEvent(expandedEvent === event.name ? null : event.name)}
             >
               <div className="flex justify-between items-start">
                 <div>
-                  <h3 className="text-xl font-semibold text-white">{event.name}</h3>
-                  <div className="flex items-center gap-2 mt-2 text-sm text-gray-300">
-                    <FiCalendar className="flex-shrink-0" />
+                  <h3 className="text-xl font-semibold text-black">{event.name}</h3>
+                  <div className="flex items-center gap-2 mt-2 text-sm text-gray-500">
+                    <FiCalendar className="flex-shrink-0 text-blue-600" />
                     <span>{new Date(event.date).toLocaleDateString()}</span>
                   </div>
                 </div>
-                <button className="text-emerald-400">
+                <button className="text-blue-600">
                   {expandedEvent === event.name ? <FiChevronUp /> : <FiChevronDown />}
                 </button>
               </div>
@@ -218,38 +216,38 @@ export default function ClubAdminProfile() {
                   animate={{ opacity: 1, height: 'auto' }}
                   className="mt-4 space-y-4"
                 >
-                  <p className="text-gray-400 text-sm">{event.about}</p>
+                  <p className="text-gray-600 text-sm">{event.about}</p>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <p className="text-emerald-400 text-sm font-medium">Convenors</p>
+                      <p className="text-blue-600 text-sm font-medium">Convenors</p>
                       {event.eventConvenors.map((convenor, i) => (
                         <div key={i} className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                          <p className="text-white text-sm">{convenor.name}</p>
+                          <div className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                          <p className="text-black text-sm">{convenor.name}</p>
                         </div>
                       ))}
                     </div>
 
                     <div className="space-y-2">
-                      <p className="text-emerald-400 text-sm font-medium">Winners</p>
+                      <p className="text-blue-600 text-sm font-medium">Winners</p>
                       {event.eventWinners.map((winner, i) => (
                         <div key={i} className="flex items-center gap-2">
-                          <span className="text-emerald-400">
+                          <span className="text-blue-600">
                             {i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}
                           </span>
-                          <p className="text-white text-sm">{winner.team_name}</p>
+                          <p className="text-black text-sm">{winner.team_name}</p>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-emerald-900/30">
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                       <FiStar className="text-amber-400" />
-                      <span className="text-white">{event.average_rating}/5</span>
+                      <span className="text-black">{event.average_rating}/5</span>
                     </div>
-                    <div className="text-sm text-gray-400">
+                    <div className="text-sm text-gray-500">
                       {event.total_registered_teams} teams registered
                     </div>
                   </div>
