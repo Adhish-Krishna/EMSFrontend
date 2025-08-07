@@ -30,8 +30,8 @@ const Header = ()=>{
                         className="flex items-center gap-2 cursor-pointer transition-all duration-300 hover:bg-white/10 p-3 rounded-xl glass-morphism-light"
                         onClick={handleProfileClick}
                     >
-                        <img src={Avatar} alt="Profile" className="h-8 w-8 rounded-full border-2 border-transparent hover:border-primary transition-all duration-300" />
-                        <ChevronDown className={`text-white w-4 h-4 transition-transform duration-300 ${ispressed ? 'rotate-180' : ''} responsive-hidden-xs`} />
+                        <img src={Avatar} alt="Profile" className="h-8 w-8 rounded-full border-2 border-transparent hover:border-blue-600 transition-all duration-300" />
+                        <ChevronDown className={`text-slate-700 w-4 h-4 transition-transform duration-300 ${ispressed ? 'rotate-180' : ''} responsive-hidden-xs`} />
                     </button>
                 </div>
             </div>

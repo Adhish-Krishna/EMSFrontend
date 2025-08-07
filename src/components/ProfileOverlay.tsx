@@ -23,22 +23,22 @@ const ProfileOverlay = () => {
 
                 {clubprofile && clubprofile.name?.length > 0 && (
                     <div className="flex items-center gap-3 w-full transition-all duration-300 hover:bg-white/10 p-3 rounded-xl">
-                        <User size={16} className="text-primary" />
-                        <p className='text-sm font-medium text-white responsive-text-sm'>{clubprofile.name}</p>
+                        <User size={16} className="text-blue-600" />
+                        <p className='text-sm font-medium text-slate-800 responsive-text-sm'>{clubprofile.name}</p>
                     </div>
                 )}
 
                 {clubprofile && clubprofile.rollno?.length > 0 && (
                     <div className="flex items-center gap-3 w-full transition-all duration-300 hover:bg-white/10 p-3 rounded-xl">
-                        <BookUser size={16} className="text-primary" />
-                        <p className='text-sm font-medium text-white responsive-text-sm'>{clubprofile.rollno}</p>
+                        <BookUser size={16} className="text-blue-600" />
+                        <p className='text-sm font-medium text-slate-800 responsive-text-sm'>{clubprofile.rollno}</p>
                     </div>
                 )}
                 
                 {clubprofile && clubprofile.club?.length > 0 && (
                     <div className="flex items-center gap-3 w-full transition-all duration-300 hover:bg-white/10 p-3 rounded-xl">
-                        <Building size={16} className="text-primary" />
-                        <p className='text-sm font-medium text-white truncate responsive-text-sm'>{clubprofile.club}</p>
+                        <Building size={16} className="text-blue-600" />
+                        <p className='text-sm font-medium text-slate-800 truncate responsive-text-sm'>{clubprofile.club}</p>
                     </div>
                 )}
                 

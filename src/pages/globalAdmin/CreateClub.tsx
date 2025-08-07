@@ -56,27 +56,27 @@ const CreateClub = ()=>{
 
     return(
         <>
-            <div className='w-screen flex pt-[80px] pb-[30px] justify-center items-center'>
-                <form onSubmit={handleSubmit} className="w-7/10 flex flex-col bg-secondary border-1 border-border rounded-[20px] justify-center items-center p-[40px] gap-[20px]">
-                    <p className="text-white font-medium text-[22px]">Create a Club</p>
+            <div className='w-screen flex pt-[80px] pb-[30px] justify-center items-center bg-slate-50'>
+                <form onSubmit={handleSubmit} className="w-7/10 flex flex-col bg-white border-1 border-slate-200 rounded-[20px] justify-center items-center p-[40px] gap-[20px]">
+                    <p className="text-slate-800 font-medium text-[22px]">Create a Club</p>
                     <input
                         type="text"
                         placeholder='Club Name'
                         value={name}
                         onChange={(e)=>setName(e.target.value)}
-                        className="w-7/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                        className="w-7/10 p-2 rounded-[10px] bg-slate-50 text-slate-800 border-1 border-slate-200"
                         required
                     />
                     <textarea
                         placeholder='About the club'
                         value={about}
                         onChange={(e)=>setAbout(e.target.value)}
-                        className="w-7/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border min-h-[100px] resize-y"
+                        className="w-7/10 p-2 rounded-[10px] bg-slate-50 text-slate-800 border-1 border-slate-200 min-h-[100px] resize-y"
                         required
                     />
                     <button
                         type="submit"
-                        className="w-[200px] bg-primary text-white py-2 rounded-[10px] hover:bg-[#027a00] transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
+                        className="w-[200px] bg-blue-600 text-white py-2 rounded-[10px] hover:bg-blue-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
                         disabled={loading}
                         >
                             {loading ? (

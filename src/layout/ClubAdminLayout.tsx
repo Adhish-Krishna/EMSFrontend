@@ -46,8 +46,8 @@ const MainLayout = () => {
   const navigate = useNavigate()
   if(role === undefined){
     return (
-      <div className="flex justify-center items-center h-screen w-screen bg-black">
-          <div className="animate-spin h-12 w-12 border-4 border-primary border-t-transparent rounded-full"></div>
+      <div className="flex justify-center items-center h-screen w-screen bg-slate-50">
+          <div className="animate-spin h-12 w-12 border-4 border-blue-600 border-t-transparent rounded-full"></div>
       </div>
     )
   }
@@ -59,7 +59,7 @@ const MainLayout = () => {
     
   return (
     <ClubContext.Provider value={{clubprofile}}>
-    <div className="flex h-screen bg-neutral-50 dark:bg-neutral-900"> 
+    <div className="flex h-screen bg-slate-50"> 
         <Header/>
         <ClubSideBar open={open} setOpen = {setOpen}/>
         <main className="flex-1 overflow-y-auto p-6">
