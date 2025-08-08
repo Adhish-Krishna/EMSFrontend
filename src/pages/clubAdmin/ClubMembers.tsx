@@ -63,21 +63,21 @@ const ClubMembers: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen w-full bg-black">
-        <div className="animate-spin h-12 w-12 border-4 border-emerald-400 border-t-transparent rounded-full"></div>
+      <div className="flex justify-center items-center h-screen w-full bg-slate-50">
+        <div className="animate-spin h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full"></div>
       </div>
     );
   }
 
   if (isError) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen w-full bg-black text-center">
-        <AlertCircle className="w-16 h-16 text-red-400 mb-4" />
-        <h2 className="text-2xl font-bold text-white mb-2">Failed to load members</h2>
-        <p className="text-gray-400 mb-4">There was an error loading the club members.</p>
+      <div className="flex flex-col items-center justify-center h-screen w-full bg-slate-50 text-center">
+        <AlertCircle className="w-16 h-16 text-red-500 mb-4" />
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">Failed to load members</h2>
+        <p className="text-gray-600 mb-4">There was an error loading the club members.</p>
         <button 
           onClick={() => window.location.reload()}
-          className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition-colors"
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-[10px] transition-colors"
         >
           Try Again
         </button>
@@ -91,14 +91,14 @@ const ClubMembers: React.FC = () => {
       animate="visible"
       variants={containerVariants}
       style={{ marginTop: '100px' }}
-      className="min-h-screen bg-black text-white px-4 sm:px-6 lg:px-8 py-8"
+      className="min-h-screen bg-slate-50 text-black px-4 sm:px-6 lg:px-8 py-8"
     >
       {/* Header Section */}
       <motion.div variants={itemVariants} className="text-center mb-8">
-        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-transparent bg-clip-text">
+        <h1 className="text-4xl font-bold mb-2 text-black">
           {clubProfile?.club || 'Club'} Members
         </h1>
-        <p className="text-gray-400 max-w-2xl mx-auto">
+        <p className="text-gray-500 max-w-2xl mx-auto">
           Manage your club members. You can view all members, search through them, and remove members when needed.
         </p>
       </motion.div>
@@ -106,27 +106,25 @@ const ClubMembers: React.FC = () => {
       {/* Stats and Add Member Button */}
       <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-3 bg-gradient-to-br from-black/40 to-neutral-900/50 px-6 py-3 rounded-2xl border border-emerald-900/30">
-            <Users className="w-6 h-6 text-emerald-400" />
+          <div className="flex items-center gap-3 bg-white px-6 py-3 rounded-[10px] border border-gray-200">
+            <Users className="w-6 h-6 text-blue-600" />
             <div>
-              <p className="text-2xl font-bold text-white">{members?.length || 0}</p>
-              <p className="text-emerald-400 text-sm">Total Members</p>
+              <p className="text-2xl text-black font-bold">{members?.length || 0}</p>
+              <p className="text-blue-600 text-sm">Total Members</p>
             </div>
           </div>
-          
           {filteredMembers.length !== members?.length && (
-            <div className="flex items-center gap-3 bg-gradient-to-br from-black/40 to-neutral-900/50 px-6 py-3 rounded-2xl border border-emerald-900/30">
+            <div className="flex items-center gap-3 bg-white px-6 py-3 rounded-[10px] border border-gray-200">
               <div>
-                <p className="text-2xl font-bold text-white">{filteredMembers.length}</p>
-                <p className="text-emerald-400 text-sm">Filtered Results</p>
+                <p className="text-2xl font-bold text-black">{filteredMembers.length}</p>
+                <p className="text-blue-600 text-sm">Filtered Results</p>
               </div>
             </div>
           )}
         </div>
-
         <button
           onClick={() => navigate('/club/member/add')}
-          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-medium rounded-xl shadow-lg hover:shadow-emerald-900/40 hover:scale-105 active:scale-95 transition-all duration-300"
+          className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-[10px] hover:bg-opacity-80 cursor-pointer"
         >
           <UserPlus className="w-5 h-5" />
           Add Member
@@ -150,9 +148,9 @@ const ClubMembers: React.FC = () => {
       {/* Members Grid */}
       <motion.div variants={itemVariants}>
         {filteredMembers.length === 0 ? (
-          <div className="text-center py-12">
-            <Users className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-400 mb-2">
+          <div className="text-center py-12 bg-white rounded-[10px] border border-gray-200">
+            <Users className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-600 mb-2">
               {searchTerm || roleFilter || yearFilter ? 'No members found' : 'No members yet'}
             </h3>
             <p className="text-gray-500 mb-6">
@@ -164,7 +162,7 @@ const ClubMembers: React.FC = () => {
             {!searchTerm && !roleFilter && !yearFilter && (
               <button
                 onClick={() => navigate('/club/member/add')}
-                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition-colors"
+                className="px-6 py-3 bg-blue-600 hover:bg-opacity-80 text-white rounded-[10px] cursor-pointer"
               >
                 Add First Member
               </button>

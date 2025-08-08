@@ -40,41 +40,38 @@ const MemberCard: React.FC<MemberCardProps> = ({ member, index }) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.05 }}
-        className="group bg-gradient-to-br from-black/40 to-neutral-900/50 p-6 rounded-2xl shadow-2xl border border-emerald-900/30 hover:border-emerald-900/50 transition-all duration-300"
+        className="group bg-white p-6 rounded-[10px] shadow border border-gray-200 hover:shadow-lg transition-all duration-300"
       >
         <div className="flex justify-between items-start mb-4">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center">
-                <User className="w-6 h-6 text-emerald-400" />
+              <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
+                <User className="w-6 h-6 text-blue-600" />
               </div>
               <div>
-                <h3 className="text-white font-semibold text-lg">{member.name}</h3>
-                <p className="text-emerald-400/80 font-mono text-sm">{member.rollno}</p>
+                <h3 className="text-black font-semibold text-lg">{member.name}</h3>
+                <p className="text-blue-600/80 font-mono text-sm">{member.rollno}</p>
               </div>
             </div>
-            
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-gray-300">
-                <Building className="w-4 h-4 text-emerald-400" />
+              <div className="flex items-center gap-2 text-gray-600">
+                <Building className="w-4 h-4 text-blue-600" />
                 <span className="text-sm">{member.department}</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-300">
-                <GraduationCap className="w-4 h-4 text-emerald-400" />
+              <div className="flex items-center gap-2 text-gray-600">
+                <GraduationCap className="w-4 h-4 text-blue-600" />
                 <span className="text-sm">Year {member.yearofstudy}</span>
               </div>
             </div>
           </div>
-          
           <div className="flex flex-col items-end gap-3">
-            <span className={`px-3 py-1 rounded-full text-xs border ${getRoleColor(member.role)}`}>
+            <span className="px-3 py-1 rounded-full text-xs border bg-blue-50 text-blue-600 border-blue-200">
               {member.role}
             </span>
-            
             <button
               onClick={() => setShowConfirmDialog(true)}
               disabled={removeMemberMutation.isPending}
-              className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-2 rounded-lg bg-red-900/30 hover:bg-red-900/50 text-red-400 hover:text-red-300 disabled:opacity-50"
+              className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-2 rounded-lg bg-red-100 hover:bg-red-200 text-red-600 hover:text-red-700 disabled:opacity-50"
               title="Remove member"
             >
               <UserX className="w-4 h-4" />
@@ -85,37 +82,35 @@ const MemberCard: React.FC<MemberCardProps> = ({ member, index }) => {
 
       {/* Confirmation Dialog */}
       {showConfirmDialog && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-gradient-to-br from-neutral-900 to-black rounded-2xl p-6 w-full max-w-md mx-4 border border-red-900/40"
+            className="bg-white rounded-[10px] p-6 w-full max-w-md mx-4 border border-red-200 shadow-lg"
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full bg-red-900/30 flex items-center justify-center">
-                <AlertTriangle className="w-6 h-6 text-red-400" />
+              <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+                <AlertTriangle className="w-6 h-6 text-red-600" />
               </div>
               <div>
-                <h3 className="text-white font-semibold">Remove Member</h3>
-                <p className="text-gray-400 text-sm">This action cannot be undone</p>
+                <h3 className="text-black font-semibold">Remove Member</h3>
+                <p className="text-gray-500 text-sm">This action cannot be undone</p>
               </div>
             </div>
-            
-            <p className="text-gray-300 mb-6">
-              Are you sure you want to remove <span className="text-white font-medium">{member.name}</span> ({member.rollno}) from the club?
+            <p className="text-gray-700 mb-6">
+              Are you sure you want to remove <span className="text-black font-medium">{member.name}</span> ({member.rollno}) from the club?
             </p>
-            
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setShowConfirmDialog(false)}
-                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-xl transition-colors"
+                className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-black rounded-[10px] transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleRemoveMember}
                 disabled={removeMemberMutation.isPending}
-                className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-xl transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-[10px] transition-colors disabled:opacity-50 flex items-center gap-2"
               >
                 {removeMemberMutation.isPending ? (
                   <>
