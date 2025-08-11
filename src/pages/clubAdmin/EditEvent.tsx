@@ -30,7 +30,7 @@ const EditEvent = () => {
         faculty_obs_dept: undefined,
         eventConvenors: [],
     });
-// Add these states after line 35, with other state declarations
+
     const [posterFile, setPosterFile] = useState<File | null>(null);
     const [isUpdatingPoster, setIsUpdatingPoster] = useState(false);
     const [showPosterUpload, setShowPosterUpload] = useState(false);
@@ -38,7 +38,7 @@ const EditEvent = () => {
     const [editingField, setEditingField] = useState<string | null>(null);
     const [tempValue, setTempValue] = useState<any>("");
     const [updatingField, setUpdatingField] = useState<string | null>(null);
-    
+
     // New states for convenor management
     const [newConvenorRoll, setNewConvenorRoll] = useState("");
     const [isAddingConvenor, setIsAddingConvenor] = useState(false);
@@ -50,7 +50,7 @@ const EditEvent = () => {
                 const response = await axios.get(`${API_URL}/event/eventdetails?id=${id}`, {
                     withCredentials: true
                 });
-                
+
                 if (response.status === 200) {
                     const eventData: EventDetails = response.data.data;
                     eventData.date = eventData.date.slice(0, 10);
@@ -101,9 +101,7 @@ const EditEvent = () => {
         try {
             setUpdatingField(fieldName);
             const updateData = { [fieldName]: tempValue };
-            
-            console.log(`Updating field ${fieldName}:`, JSON.stringify(updateData, null, 2));
-            
+
             const response = await axios.put(`${API_URL}/event/${id}`, updateData, {
                 withCredentials: true,
                 headers: { 'Content-Type': 'application/json' }
@@ -157,9 +155,9 @@ const EditEvent = () => {
         try {
             setIsAddingConvenor(true);
             const updatedConvenors = [...eventDetails.eventConvenors, newConvenorRoll.toLowerCase()];
-            
-            const response = await axios.put(`${API_URL}/event/${id}`, 
-                { eventConvenors: updatedConvenors }, 
+
+            const response = await axios.put(`${API_URL}/event/${id}`,
+                { eventConvenors: updatedConvenors },
                 {
                     withCredentials: true,
                     headers: { 'Content-Type': 'application/json' }
@@ -246,7 +244,6 @@ const EditEvent = () => {
                 autoClose: 3000,
                 theme: "dark"
             });
-            console.error("Error updating poster:", error);
         } finally {
             setIsUpdatingPoster(false);
         }
@@ -262,13 +259,14 @@ const EditEvent = () => {
         setPosterFile(null);
         setShowPosterUpload(false);
     };
+
     // Remove convenor
     const handleRemoveConvenor = async (rollToRemove: string) => {
         try {
             const updatedConvenors = eventDetails.eventConvenors.filter(roll => roll !== rollToRemove);
-            
-            const response = await axios.put(`${API_URL}/event/${id}`, 
-                { eventConvenors: updatedConvenors }, 
+
+            const response = await axios.put(`${API_URL}/event/${id}`,
+                { eventConvenors: updatedConvenors },
                 {
                     withCredentials: true,
                     headers: { 'Content-Type': 'application/json' }
@@ -300,11 +298,11 @@ const EditEvent = () => {
         return (
             <div className={isFullWidth ? "w-full" : ""}>
                 <div className="flex justify-between items-center mb-2">
-                    <label className="text-white font-medium">{label}</label>
+                    <label className="text-blue-700 font-medium">{label}</label>
                     {!isEditing && (
                         <button
                             onClick={() => handleEditClick(fieldName, value)}
-                            className="text-blue-400 hover:text-blue-300 p-1"
+                            className="text-blue-500 hover:text-blue-700 p-1"
                             title="Edit"
                         >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -313,14 +311,14 @@ const EditEvent = () => {
                         </button>
                     )}
                 </div>
-                
+
                 {isEditing ? (
                     <div className="space-y-3">
                         {type === "textarea" ? (
                             <textarea
                                 value={tempValue}
                                 onChange={(e) => setTempValue(e.target.value)}
-                                className="w-full p-3 rounded-[10px] bg-tertiary text-white border-1 border-border min-h-[100px] resize-y"
+                                className="w-full p-3 rounded-[10px] bg-blue-50 text-blue-900 border border-blue-200 min-h-[100px] resize-y"
                                 disabled={isUpdating}
                             />
                         ) : (
@@ -328,7 +326,7 @@ const EditEvent = () => {
                                 type={type}
                                 value={tempValue}
                                 onChange={(e) => setTempValue(type === "number" ? Number(e.target.value) : e.target.value)}
-                                className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                                className="w-full p-2 rounded-[10px] bg-blue-50 text-blue-900 border border-blue-200"
                                 disabled={isUpdating}
                             />
                         )}
@@ -336,24 +334,24 @@ const EditEvent = () => {
                             <button
                                 onClick={() => handleSaveField(fieldName)}
                                 disabled={isUpdating}
-                                className="bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white px-4 py-2 rounded-[10px] text-sm"
+                                className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white px-4 py-2 rounded-[10px] text-sm"
                             >
                                 {isUpdating ? "Saving..." : "Save"}
                             </button>
                             <button
                                 onClick={handleCancelEdit}
                                 disabled={isUpdating}
-                                className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-[10px] text-sm"
+                                className="bg-blue-200 hover:bg-blue-300 text-blue-900 px-4 py-2 rounded-[10px] text-sm"
                             >
                                 Cancel
                             </button>
                         </div>
                     </div>
                 ) : (
-                    <div className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border min-h-[40px] flex items-center">
-                        {type === "date" ? 
-                            (typeof value === "string" && value ? value : "Not set") :
-                            (typeof value === "string" || typeof value === "number"
+                    <div className="w-full p-2 rounded-[10px] bg-blue-50 text-blue-900 border border-blue-200 min-h-[40px] flex items-center">
+                        {type === "date"
+                            ? (typeof value === "string" && value ? value : "Not set")
+                            : (typeof value === "string" || typeof value === "number"
                                 ? (value || "Not set")
                                 : "Not set")
                         }
@@ -374,8 +372,8 @@ const EditEvent = () => {
         return (
             <>
                 <Header />
-                <div className="w-screen h-screen bg-black pt-[100px] flex flex-col justify-center items-center">
-                    <div className="text-white text-2xl">Loading event details...</div>
+                <div className="w-screen h-screen bg-white pt-[100px] flex flex-col justify-center items-center">
+                    <div className="text-blue-600 text-2xl">Loading event details...</div>
                 </div>
             </>
         );
@@ -384,11 +382,11 @@ const EditEvent = () => {
     return (
         <>
             <Header />
-            <div className="w-screen min-h-screen bg-slate-50 pt-[100px] pb-10 flex flex-col justify-center items-center gap-[20px] text-black">
-                <h1 className="text-[32px] font-bold mb-8 text-blue-600">Edit Event Details</h1>
+            <div className="w-screen min-h-screen bg-slate-50 pt-[100px] pb-10 flex flex-col justify-center items-center gap-[20px] text-blue-900">
+                <h1 className="text-[32px] font-bold mb-8 text-blue-700">Edit Event Details</h1>
                 {/* Required Details */}
-                <div className="w-7/10 border border-gray-200 bg-white p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[10px] shadow">
-                    <p className="text-blue-600 text-[22px] mb-[10px] font-medium">Required Details</p>
+                <div className="w-7/10 border border-blue-200 bg-white p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[10px] shadow">
+                    <p className="text-blue-700 text-[22px] mb-[10px] font-medium">Required Details</p>
                     <div className='w-8/10 flex flex-row justify-between items-center'>
                         <div className="w-45/100 flex flex-col gap-[20px]">
                             {renderField("Event Name", "name")}
@@ -414,8 +412,8 @@ const EditEvent = () => {
                 </div>
 
                 {/* Optional Details */}
-                <div className="w-7/10 border border-gray-200 bg-white p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[10px] shadow">
-                    <p className="text-blue-600 text-[22px] mb-[10px] font-medium">Optional Details</p>
+                <div className="w-7/10 border border-blue-200 bg-white p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[10px] shadow">
+                    <p className="text-blue-700 text-[22px] mb-[10px] font-medium">Optional Details</p>
                     <div className='w-8/10 flex flex-row justify-between items-start'>
                         <div className="w-45/100 flex flex-col gap-[20px]">
                             {renderField("Chief Guest (with address)", "chief_guest")}
@@ -431,10 +429,10 @@ const EditEvent = () => {
                     </div>
                 </div>
 
-                {/* Event Poster - Replace the existing poster section */}
-                <div className="w-7/10 bg-white border border-gray-200 rounded-[10px] flex justify-center items-center p-[20px] flex-col gap-[20px] shadow">
+                {/* Event Poster */}
+                <div className="w-7/10 bg-white border border-blue-200 rounded-[10px] flex justify-center items-center p-[20px] flex-col gap-[20px] shadow">
                     <div className="flex justify-between items-center w-full">
-                        <p className="text-blue-600 font-medium text-[22px]">Event Poster</p>
+                        <p className="text-blue-700 font-medium text-[22px]">Event Poster</p>
                         {eventDetails.poster && !showPosterUpload && (
                             <button
                                 onClick={() => setShowPosterUpload(true)}
@@ -450,11 +448,11 @@ const EditEvent = () => {
 
                     {/* Current Poster Display */}
                     {eventDetails.poster && !showPosterUpload && (
-                        <div className="mt-4 p-2 border border-gray-200 rounded-lg">
-                            <img 
-                                src={getPosterUrl(eventDetails.poster)} 
-                                alt="Event poster preview" 
-                                className="max-h-64 object-contain rounded" 
+                        <div className="mt-4 p-2 border border-blue-200 rounded-lg">
+                            <img
+                                src={getPosterUrl(eventDetails.poster)}
+                                alt="Event poster preview"
+                                className="max-h-64 object-contain rounded"
                             />
                         </div>
                     )}
@@ -462,7 +460,7 @@ const EditEvent = () => {
                     {/* No Poster State */}
                     {!eventDetails.poster && !showPosterUpload && (
                         <div className="flex flex-col items-center gap-4">
-                            <div className="text-gray-400 text-center">
+                            <div className="text-blue-400 text-center">
                                 <p>No poster available for this event</p>
                             </div>
                             <button
@@ -478,26 +476,26 @@ const EditEvent = () => {
                     {showPosterUpload && (
                         <div className="w-full flex flex-col gap-4">
                             <div className="flex flex-col gap-3">
-                                <label className="text-blue-600 font-medium">
+                                <label className="text-blue-700 font-medium">
                                     {eventDetails.poster ? "Replace Poster" : "Upload Poster"}
                                 </label>
                                 <input
                                     type="file"
                                     accept="image/*"
                                     onChange={handlePosterFileChange}
-                                    className="w-full p-2 rounded-[10px] bg-blue-50 text-black border border-gray-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-opacity-80"
+                                    className="w-full p-2 rounded-[10px] bg-blue-50 text-blue-900 border border-blue-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-opacity-80"
                                     disabled={isUpdatingPoster}
                                 />
                             </div>
 
                             {/* Preview selected file */}
                             {posterFile && (
-                                <div className="mt-4 p-2 border border-gray-200 rounded-lg">
-                                    <p className="text-black text-sm mb-2">Preview:</p>
-                                    <img 
-                                        src={URL.createObjectURL(posterFile)} 
-                                        alt="Poster preview" 
-                                        className="max-h-64 object-contain rounded" 
+                                <div className="mt-4 p-2 border border-blue-200 rounded-lg">
+                                    <p className="text-blue-900 text-sm mb-2">Preview:</p>
+                                    <img
+                                        src={URL.createObjectURL(posterFile)}
+                                        alt="Poster preview"
+                                        className="max-h-64 object-contain rounded"
                                     />
                                 </div>
                             )}
@@ -507,14 +505,14 @@ const EditEvent = () => {
                                 <button
                                     onClick={handlePosterUpdate}
                                     disabled={!posterFile || isUpdatingPoster}
-                                    className="bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white px-6 py-2 rounded-[10px] transition-colors"
+                                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white px-6 py-2 rounded-[10px] transition-colors"
                                 >
                                     {isUpdatingPoster ? "Updating..." : "Update Poster"}
                                 </button>
                                 <button
                                     onClick={cancelPosterUpload}
                                     disabled={isUpdatingPoster}
-                                    className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-[10px] transition-colors"
+                                    className="bg-blue-200 hover:bg-blue-300 text-blue-900 px-6 py-2 rounded-[10px] transition-colors"
                                 >
                                     Cancel
                                 </button>
@@ -524,8 +522,8 @@ const EditEvent = () => {
                 </div>
 
                 {/* Event Convenors */}
-                <div className="w-7/10 border border-gray-200 bg-white p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[10px] shadow">
-                    <p className="text-blue-600 text-[22px] mb-[10px] font-medium">Event Convenors</p>
+                <div className="w-7/10 border border-blue-200 bg-white p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[10px] shadow">
+                    <p className="text-blue-700 text-[22px] mb-[10px] font-medium">Event Convenors</p>
                     {/* Add new convenor section */}
                     <div className="w-8/10 flex flex-col justify-center items-center">
                         <input
@@ -533,13 +531,13 @@ const EditEvent = () => {
                             placeholder="Roll No"
                             value={newConvenorRoll}
                             onChange={(e) => setNewConvenorRoll(e.target.value)}
-                            className="w-45/100 p-2 rounded-[10px] bg-blue-50 text-black border border-gray-200"
+                            className="w-45/100 p-2 rounded-[10px] bg-blue-50 text-blue-900 border border-blue-200"
                             disabled={isAddingConvenor}
                         />
                         <button
                             onClick={handleAddConvenor}
                             disabled={isAddingConvenor}
-                            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer disabled:bg-gray-600"
+                            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer disabled:bg-blue-300"
                         >
                             {isAddingConvenor ? "Adding..." : "Add Convenor"}
                         </button>
@@ -548,12 +546,12 @@ const EditEvent = () => {
                     {/* Display existing convenors */}
                     {eventDetails.eventConvenors && eventDetails.eventConvenors.length > 0 && (
                         <div className="w-7/10 mt-4 flex flex-col">
-                            <h3 className="text-blue-600 text-[18px] mb-2">Added Convenors:</h3>
+                            <h3 className="text-blue-700 text-[18px] mb-2">Added Convenors:</h3>
                             <div className="mt-2">
                                 {eventDetails.eventConvenors.map((rollno, index) => (
-                                    <div key={index} className="flex justify-between items-center p-[10px] border border-gray-200 bg-blue-50 rounded-[10px] mb-[10px]">
+                                    <div key={index} className="flex justify-between items-center p-[10px] border border-blue-200 bg-blue-50 rounded-[10px] mb-[10px]">
                                         <div>
-                                            <span className="text-black">Roll No: {rollno}</span>
+                                            <span className="text-blue-900">Roll No: {rollno}</span>
                                         </div>
                                         <button
                                             className="text-red-600 hover:text-red-400 cursor-pointer"

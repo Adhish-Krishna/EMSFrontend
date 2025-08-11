@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Pointer from '../ui/Pointer';
 import { Calendar, MapPin, Users } from 'lucide-react';
-import { FollowerPointerCard } from '../ui/FollowingPointer';
 import { useNavigate } from 'react-router-dom';
 
-// Add your API_URL constant
 const API_URL = (import.meta.env.VITE_ENV === 'dev') ? "/api" : import.meta.env.VITE_BASE_API_URL;
 
 export interface Event {
@@ -41,21 +38,17 @@ const EventCard: React.FC<EventCardProps> = ({ event, event_type }) => {
 
     useEffect(() => {
         const fetchPoster = async () => {
-            // If event already has a poster URL, use it
             if (event.poster) {
                 setPosterUrl(event.poster);
                 return;
             }
-
             setIsLoadingPoster(true);
             setPosterError(false);
-
             try {
                 const posterResponse = await axios.get(`${API_URL}/event/eventposter?id=${event.id}`, {
                     withCredentials: true,
                     responseType: "blob"
                 });
-
                 if (posterResponse.status === 200) {
                     const blob = posterResponse.data;
                     const reader = new FileReader();
@@ -74,108 +67,74 @@ const EventCard: React.FC<EventCardProps> = ({ event, event_type }) => {
                     setIsLoadingPoster(false);
                 }
             } catch (error) {
-                console.error('Error fetching poster:', error);
                 setPosterError(true);
                 setIsLoadingPoster(false);
             }
         };
-
         fetchPoster();
     }, [event.id, event.poster]);
 
-    const renderPosterSection = () => {
-        if (isLoadingPoster) {
-            return (
-                <div className="flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-emerald-400"></div>
-                    <span className="ml-2 text-gray-400 text-sm">Loading poster...</span>
-                </div>
-            );
-        }
-
-        if (posterError || !posterUrl) {
-            return (
-                <>
-                    <div className="text-gray-200 text-sm">No Poster Available</div>
-                    <div className="absolute top-4 right-4">
-                        <span className="px-3 py-1 rounded-full text-xs bg-black/50 text-emerald-300 border border-emerald-500/30">
-                            {event.event_type}
-                        </span>
-                    </div>
-                </>
-            );
-        }
-
-        return (
-            <>
-                <div className='overflow-hidden rounded-2xl'>
-                    <img 
-                        src={posterUrl} 
-                        alt={event.name}
-                        className="w-full h-full rounded-2xl object-cover opacity-90 group-hover:opacity-80 transition-opacity duration-300"
-                        onError={() => setPosterError(true)}
-                    />
-                </div>
-                
-                <div className="absolute top-4 right-4">
-                    <span className="px-3 py-1 rounded-full text-xs bg-black/50 text-emerald-300 border border-emerald-500/30">
-                        {event.event_type}
-                    </span>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/80 to-transparent"></div>
-            </>
-        );
-    };
+    // Fallback image if poster is not available
+    const backgroundImage = posterUrl && !posterError
+        ? posterUrl
+        : "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/92352269270549.5bbd212db17df.gif";
 
     return (
-        <FollowerPointerCard title={<p>{event.name}</p>} className='max-h-[500px] mb-3'>
-            <div 
-                className="group relative rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl h-full"
-                onClick={() => navigate(`/club/events/${event.id}?type=${event_type}`)} 
-            >
-                <div className="relative h-[60%] bg-gray-800 flex items-center justify-center overflow-hidden">
-                    {renderPosterSection()}
-                </div>
-
-                {/* Event Details Section */}
-                <div className="relative z-10 p-6 flex flex-col h-[40%]">
-                    <div className="mb-2">
-                        <Pointer text={event.name} />
-                    </div>
-                    
-                    <p className="text-gray-300 mb-2 line-clamp-2">{event.about}</p>
-                    
-                    <div className="space-y-3 text-sm text-gray-400">
-                        <div className="flex items-center">
-                            <Calendar size={16} className="mr-2 text-emerald-400" />
-                            <span>{new Date(event.date).toLocaleDateString('en-US', { 
-                                year: 'numeric', 
-                                month: 'short', 
-                                day: 'numeric' 
-                            })}</span>
-                        </div>
-                        
-                        <div className="flex items-center">
-                            <MapPin size={16} className="mr-2 text-emerald-400" />
-                            <span>{event.venue}</span>
-                        </div>
-                        
-                        <div className="flex items-center mb-3">
-                            <Users size={16} className="mr-2 text-emerald-400" />
-                            <span>{event.min_no_member} - {event.max_no_member} members</span>
-                        </div>
-                    </div>
-                    
-                    {/* View Details button */}
-                    <div className="mt-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <button className="w-full py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 cursor-none rounded transition-colors duration-200">
-                            View Details
-                        </button>
-                    </div>
-                </div>
+        <div className="w-full max-w-sm mx-auto rounded-2xl shadow-xl bg-white border border-blue-100 hover:shadow-2xl transition-shadow duration-300 group flex flex-col overflow-hidden">
+            {/* Poster */}
+            <div className="relative h-48 w-full bg-blue-100 flex items-center justify-center overflow-hidden">
+                <img
+                    src={backgroundImage}
+                    alt={event.name}
+                    className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+                />
+                <span className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold shadow
+                    ${event_type === 'ongoing' ? 'bg-blue-600 text-white' : event_type === 'upcoming' ? 'bg-blue-400 text-white' : 'bg-blue-200 text-blue-900'}`}>
+                    {event.event_type.toUpperCase()}
+                </span>
             </div>
-        </FollowerPointerCard>
+            {/* Content */}
+            <div className="flex flex-col gap-2 p-5 flex-1">
+                <h2 className="font-bold text-xl text-blue-900 truncate">{event.name}</h2>
+                <p className="text-blue-700 text-sm line-clamp-2">{event.about}</p>
+                <div className="flex flex-wrap gap-3 mt-2">
+                    <div className="flex items-center gap-1 text-blue-500 text-xs bg-blue-50 px-2 py-1 rounded">
+                        <Calendar className="w-4 h-4" />
+                        {new Date(event.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                    </div>
+                    <div className="flex items-center gap-1 text-blue-500 text-xs bg-blue-50 px-2 py-1 rounded">
+                        <MapPin className="w-4 h-4" />
+                        {event.venue}
+                    </div>
+                    <div className="flex items-center gap-1 text-blue-500 text-xs bg-blue-50 px-2 py-1 rounded">
+                        <Users className="w-4 h-4" />
+                        {event.min_no_member} - {event.max_no_member} members
+                    </div>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                    <span className="text-xs text-blue-400 bg-blue-50 px-2 py-1 rounded">{event.event_category}</span>
+                    {event.chief_guest && (
+                        <span className="text-xs text-blue-400 bg-blue-50 px-2 py-1 rounded">Chief Guest: {event.chief_guest}</span>
+                    )}
+                </div>
+                {/* Optional: More details */}
+                <div className="flex flex-wrap gap-2 mt-2">
+                    {event.exp_expense !== undefined && (
+                        <span className="text-xs text-blue-400 bg-blue-50 px-2 py-1 rounded">Expected Expense: ₹{event.exp_expense}</span>
+                    )}
+                    {event.exp_no_aud !== undefined && (
+                        <span className="text-xs text-blue-400 bg-blue-50 px-2 py-1 rounded">Audience: {event.exp_no_aud}</span>
+                    )}
+                </div>
+                {/* Button */}
+                <button
+                    className="mt-4 w-full py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors"
+                    onClick={() => navigate(`/club/events/${event.id}?type=${event_type}`)}
+                >
+                    View Details
+                </button>
+            </div>
+        </div>
     );
 };
 

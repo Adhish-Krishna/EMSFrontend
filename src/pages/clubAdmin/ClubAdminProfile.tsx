@@ -86,8 +86,8 @@ export default function ClubAdminProfile() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen w-screen bg-black">
-        <div className="animate-spin h-12 w-12 border-4 border-emerald-400 border-t-transparent rounded-full"></div>
+      <div className="flex justify-center items-center h-screen w-screen bg-white">
+        <div className="animate-spin h-12 w-12 border-4 border-blue-400 border-t-transparent rounded-full"></div>
       </div>
     )
   }

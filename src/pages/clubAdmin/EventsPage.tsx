@@ -41,22 +41,22 @@ const EventsPage = () => {
 
 
 return (
-  <div style={{ marginTop: '100px' }} className="min-h-screen bg-slate-50 text-black content-container w-screen py-5 flex flex-col justify-start items-center gap-[20px] responsive-p-sm  md:p-8 ">
+  <div style={{ marginTop: '100px' }} className="min-h-screen bg-white text-blue-900 content-container w-screen py-5 flex flex-col justify-start items-center gap-[20px] responsive-p-sm md:p-8">
     <div className="container px-10">
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-transparent bg-clip-text">
-        {`${clubprofile?.club || 'Club Name'}`}
-        </h1> 
-        <p className="text-gray-400 max-w-md mx-auto">
-          Use The search field to search for a event
-        </p>
+        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text">
+          {`${clubprofile?.club || 'Club Name'}`}
+        </h1>
+        {/* <p className="text-blue-400 max-w-md mx-auto">
+            Use The search field to search for a event
+          </p> */}
       </div>
-      <EventSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      {/*<EventSearch searchTerm={searchTerm} setSearchTerm={setSearchTerm} /> */}
       <EventTabs activeTab={activeTab} onTabChange={handleTabChange} />
       <div className="mt-6">
-        {activeTab === 'past' && <PastEventsList/>}
-        {activeTab === 'upcoming' && <UpcomingEvents/>}
-        {activeTab === 'ongoing' && <OngoingEvents/>}
+        {activeTab === 'past' && <PastEventsList />}
+        {activeTab === 'upcoming' && <UpcomingEvents />}
+        {activeTab === 'ongoing' && <OngoingEvents />}
       </div>
     </div>
   </div>

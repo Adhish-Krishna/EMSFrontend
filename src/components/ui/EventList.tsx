@@ -30,9 +30,9 @@ interface EventListProps {
 const EventList: React.FC<EventListProps> = ({ events,event_type }) => {
   if (events.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center p-10 bg-black/30 rounded-lg text-center">
-        <p className="text-gray-400 text-lg mb-2">No events found</p>
-        <p className="text-gray-500">Try changing your search criteria</p>
+      <div className="flex flex-col items-center justify-center p-10 bg-blue-100 rounded-lg text-center">
+        <p className="text-blue-600 text-lg mb-2">No events found</p>
+        <p className="text-blue-400">Try changing your search criteria</p>
       </div>
     );
   }
