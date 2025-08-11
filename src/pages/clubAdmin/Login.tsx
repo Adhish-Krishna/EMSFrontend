@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import Logo from '../../assets/Logo.png';
+import CSEALogo from '../../assets/csea.png';
+import PSGLogo from '../../assets/psg.png';
 import { ClubData } from '../globalAdmin/AddClubAdmin';
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,7 +37,11 @@ const Login = () => {
                 {/* Left side with logo */}
                 <div className="md:w-1/2 w-full flex items-center justify-center p-8 mb-6 md:mb-0 bg-gradient-to-br from-primary/10 to-accent/5">
                     <div className="text-center">
-                        <img src={Logo} alt="EMS Logo" className="max-w-full max-h-48 md:max-h-64 mx-auto mb-4" />
+                        <div className="flex items-center justify-center gap-3 mb-4">
+                            <img src={PSGLogo} alt="PSG Logo" className="h-16 w-16 object-contain" />
+                            <img src={Logo} alt="EMS Logo" className="max-h-32 object-contain" />
+                            <img src={CSEALogo} alt="CSEA Logo" className="h-18 w-18 object-cover rounded-full border-2 border-gray-300" />
+                        </div>
                         <h2 className="text-2xl font-bold text-gradient">Event Management System</h2>
                         <p className="text-gray-400 mt-2">Club Administration Portal</p>
                     </div>
