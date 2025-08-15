@@ -160,7 +160,7 @@ const EventDetail = () => {
         rounded-lg bg-gradient-to-r from-emerald-500 to-green-600 text-white 
         font-medium shadow-md hover:shadow-lg hover:scale-105 hover:brightness-110 active:scale-95 transition-all duration-300">
             <ArrowLeft size={18} />
-            <span>Back</span>
+            
         </button>
 
         

@@ -6,7 +6,8 @@ import {
     Users,
     User2,
     LogOut,
-    ClipboardList
+    ClipboardList,
+    Menu // Import the Menu icon
 } from 'lucide-react';
 import { Sidebar, SidebarBody, SidebarLink,} from '../ui/sidebar';
 import {cn} from '../../utils'
@@ -38,12 +39,17 @@ export default function ClubSideBar({open,setOpen}:ClubSideBarProps) {
         {/* Top Logo/Header */}
         <div className="border-b border-club_dark-700 py-6 px-4 flex items-center justify-center">
           <div className={`flex items-center ${open ? "justify-start" : "justify-center"}`}>
-            <Calendar className="h-10 w-10 text-primary" />
-            {open === true && (
-              <h1 className="ml-2 text-xl font-bold text-white whitespace-nowrap transition-all duration-200">
-                Club Admin
-              </h1>
-            )}
+        
+            <button
+              onClick={() => setOpen && setOpen((prev) => !prev)}
+              className="w-full items-center justify-center"
+              aria-label="Toggle sidebar"
+              type="button"
+            >
+              <Menu className="h-7 w-7" />
+            </button>
+            
+            
           </div>
         </div>
 
@@ -87,7 +93,7 @@ export default function ClubSideBar({open,setOpen}:ClubSideBarProps) {
     </Sidebar>
   );
 }
-  
+
 
 
 

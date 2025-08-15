@@ -86,101 +86,105 @@ const ClubMembers: React.FC = () => {
   }
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      style={{ marginTop: '100px' }}
-      className="min-h-screen bg-black text-white px-4 sm:px-6 lg:px-8 py-8"
+    <div 
+      style={{ marginTop: '75px' }} 
+      className="w-full bg-black text-white py-8"
     >
-      {/* Header Section */}
-      <motion.div variants={itemVariants} className="text-center mb-8">
-        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-transparent bg-clip-text">
-          {clubProfile?.club || 'Club'} Members
-        </h1>
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          Manage your club members. You can view all members, search through them, and remove members when needed.
-        </p>
-      </motion.div>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
+        {/* Header Section */}
+        <motion.div variants={itemVariants} className="text-center mb-8">
+          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-transparent bg-clip-text">
+            {clubProfile?.club || 'Club'} Members
+          </h1>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Manage your club members. You can view all members, search through them, and remove members when needed.
+          </p>
+        </motion.div>
 
-      {/* Stats and Add Member Button */}
-      <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-3 bg-gradient-to-br from-black/40 to-neutral-900/50 px-6 py-3 rounded-2xl border border-emerald-900/30">
-            <Users className="w-6 h-6 text-emerald-400" />
-            <div>
-              <p className="text-2xl font-bold text-white">{members?.length || 0}</p>
-              <p className="text-emerald-400 text-sm">Total Members</p>
-            </div>
-          </div>
-          
-          {filteredMembers.length !== members?.length && (
+        {/* Stats and Add Member Button */}
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+          <div className="flex items-center gap-6">
             <div className="flex items-center gap-3 bg-gradient-to-br from-black/40 to-neutral-900/50 px-6 py-3 rounded-2xl border border-emerald-900/30">
+              <Users className="w-6 h-6 text-emerald-400" />
               <div>
-                <p className="text-2xl font-bold text-white">{filteredMembers.length}</p>
-                <p className="text-emerald-400 text-sm">Filtered Results</p>
+                <p className="text-2xl font-bold text-white">{members?.length || 0}</p>
+                <p className="text-emerald-400 text-sm">Total Members</p>
               </div>
             </div>
-          )}
-        </div>
-
-        <button
-          onClick={() => navigate('/club/member/add')}
-          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-medium rounded-xl shadow-lg hover:shadow-emerald-900/40 hover:scale-105 active:scale-95 transition-all duration-300"
-        >
-          <UserPlus className="w-5 h-5" />
-          Add Member
-        </button>
-      </motion.div>
-
-      {/* Search and Filters */}
-      <motion.div variants={itemVariants}>
-        <MembersSearch
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          roleFilter={roleFilter}
-          setRoleFilter={setRoleFilter}
-          yearFilter={yearFilter}
-          setYearFilter={setYearFilter}
-          availableRoles={availableRoles}
-          availableYears={availableYears}
-        />
-      </motion.div>
-
-      {/* Members Grid */}
-      <motion.div variants={itemVariants}>
-        {filteredMembers.length === 0 ? (
-          <div className="text-center py-12">
-            <Users className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-400 mb-2">
-              {searchTerm || roleFilter || yearFilter ? 'No members found' : 'No members yet'}
-            </h3>
-            <p className="text-gray-500 mb-6">
-              {searchTerm || roleFilter || yearFilter 
-                ? 'Try adjusting your search or filter criteria.' 
-                : 'Start by adding some members to your club.'
-              }
-            </p>
-            {!searchTerm && !roleFilter && !yearFilter && (
-              <button
-                onClick={() => navigate('/club/member/add')}
-                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition-colors"
-              >
-                Add First Member
-              </button>
+            
+            {filteredMembers.length !== members?.length && (
+              <div className="flex items-center gap-3 bg-gradient-to-br from-black/40 to-neutral-900/50 px-6 py-3 rounded-2xl border border-emerald-900/30">
+                <div>
+                  <p className="text-2xl font-bold text-white">{filteredMembers.length}</p>
+                  <p className="text-emerald-400 text-sm">Filtered Results</p>
+                </div>
+              </div>
             )}
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredMembers.map((member, index) => (
-              <MemberCard key={member.id} member={member} index={index} />
-            ))}
-          </div>
-        )}
-      </motion.div>
 
-      <ToastContainer theme="dark" />
-    </motion.div>
+          <button
+            onClick={() => navigate('/club/member/add')}
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 text-white font-medium rounded-xl shadow-lg hover:shadow-emerald-900/40 hover:scale-105 active:scale-95 transition-all duration-300"
+          >
+            <UserPlus className="w-5 h-5" />
+            Add Member
+          </button>
+        </motion.div>
+
+        {/* Search and Filters */}
+        <motion.div variants={itemVariants}>
+          <MembersSearch
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            roleFilter={roleFilter}
+            setRoleFilter={setRoleFilter}
+            yearFilter={yearFilter}
+            setYearFilter={setYearFilter}
+            availableRoles={availableRoles}
+            availableYears={availableYears}
+          />
+        </motion.div>
+
+        {/* Members Grid */}
+        <motion.div variants={itemVariants}>
+          {filteredMembers.length === 0 ? (
+            <div className="text-center py-12">
+              <Users className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-gray-400 mb-2">
+                {searchTerm || roleFilter || yearFilter ? 'No members found' : 'No members yet'}
+              </h3>
+              <p className="text-gray-500 mb-6">
+                {searchTerm || roleFilter || yearFilter 
+                  ? 'Try adjusting your search or filter criteria.' 
+                  : 'Start by adding some members to your club.'
+                }
+              </p>
+              {!searchTerm && !roleFilter && !yearFilter && (
+                <button
+                  onClick={() => navigate('/club/member/add')}
+                  className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition-colors"
+                >
+                  Add First Member
+                </button>
+              )}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredMembers.map((member, index) => (
+                <MemberCard key={member.id} member={member} index={index} />
+              ))}
+            </div>
+          )}
+        </motion.div>
+
+        <ToastContainer theme="dark" />
+      </motion.div>
+    </div>
   );
 };
 
