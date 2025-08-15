@@ -171,7 +171,7 @@ const CreateEvent = ()=>{
 
         <>
             <Header/>
-            <div className="w-screen pt-[100px] flex flex-col justify-center gap-[20px] items-center bg-black overflow-y-scroll mb-[20px]">
+            <div className="w-full max-w-7xl mx-auto pt-[100px] flex flex-col justify-center gap-[20px] items-center overflow-y-scroll mb-[20px]">
                 <RequiredEventDetails
                     eventDetails={eventDetails}
                     setEventDetails={setEventDetails}

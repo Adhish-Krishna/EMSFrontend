@@ -41,10 +41,10 @@ const EventsPage = () => {
 
 
   return (
-    <div style={{ marginTop: '100px' }} className="min-h-screen  text-white content-container w-screen py-5 flex flex-col justify-start items-center gap-[20px] responsive-p-sm  md:p-8 ">
+    <div style={{ marginTop: '100px' }}  className="w-full max-w-7xl mx-auto p-5 flex flex-col justify-start items-center gap-[20px] responsive-p-sm">
       <div className="container px-10">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-transparent bg-clip-text">
+          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r text-gradient bg-clip-text">
           {`${clubprofile?.club || 'Club Name'}`}
           </h1> 
           <p className="text-gray-400 max-w-md mx-auto">
