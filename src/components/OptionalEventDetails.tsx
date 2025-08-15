@@ -19,7 +19,7 @@ const OptionalEventDetails = ({eventDetails, setEventDetails, title}: EventDetai
                             placeholder = 'Expected Expense'
                             value={eventDetails.exp_expense}
                             onChange={(e)=>{setEventDetails({...eventDetails, exp_expense: parseInt(e.target.value)})}}
-                            className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                            className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border " 
 
                         />
                         <input
@@ -27,14 +27,6 @@ const OptionalEventDetails = ({eventDetails, setEventDetails, title}: EventDetai
                             placeholder = 'Total amount allotted by Students Union'
                             value={eventDetails.tot_amt_allot_su}
                             onChange={(e)=>{setEventDetails({...eventDetails, tot_amt_allot_su: parseInt(e.target.value)})}}
-                            className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
-
-                        />
-                        <input
-                            type="number"
-                            placeholder = 'Total amount spent on the date of request'
-                            value={eventDetails.tot_amt_spt_dor}
-                            onChange={(e)=>{setEventDetails({...eventDetails, tot_amt_spt_dor: parseInt(e.target.value)})}}
                             className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
 
                         />
