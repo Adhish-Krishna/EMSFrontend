@@ -8,7 +8,7 @@ const ClubDashBoard = ()=>{
 
     return(
         <div className="flex flex-col min-h-screen w-full">
-            <div style={{ marginTop: '100px' }} className="content-container w-screen p-5 flex flex-col justify-start items-center gap-[20px] responsive-p-sm">
+            <div style={{ marginTop: '75px' }}  className="w-full max-w-75xl mx-auto p-5 flex flex-col justify-start items-center gap-[20px] responsive-p-sm">
                 <ClubHero/>
                 <div className="w-7/10 flex flex-row justify-center items-center h-[170px] gap-[10%] responsive-container responsive-flex-col responsive-h-auto responsive-gap-sm responsive-mb-sm">
                     <SubHero title="Create Event" link="/club/event/create" icon={<Calendar className="w-5 h-5" />}/>

@@ -88,7 +88,7 @@ const ClubMembers: React.FC = () => {
   return (
     <div 
       style={{ marginTop: '75px' }} 
-      className="w-full bg-black text-white py-8"
+      className="max-w max-auto text-white py-8"
     >
       <motion.div
         initial="hidden"
@@ -98,7 +98,7 @@ const ClubMembers: React.FC = () => {
       >
         {/* Header Section */}
         <motion.div variants={itemVariants} className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-transparent bg-clip-text">
+          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-gradient bg-clip-text">
             {clubProfile?.club || 'Club'} Members
           </h1>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -178,6 +178,7 @@ const ClubMembers: React.FC = () => {
               {filteredMembers.map((member, index) => (
                 <MemberCard key={member.id} member={member} index={index} />
               ))}
+    
             </div>
           )}
         </motion.div>

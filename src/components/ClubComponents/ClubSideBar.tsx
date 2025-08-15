@@ -35,18 +35,18 @@ export default function ClubSideBar({open,setOpen}:ClubSideBarProps) {
  
   return (
     <Sidebar open={open} setOpen={setOpen}>
-      <SidebarBody className="bg-sidebar-primary mt-15 dark:bg-neutral-800 shadow-xl">
+      <SidebarBody className="bg-sidebar-primary mt-15">
         {/* Top Logo/Header */}
-        <div className="border-b border-club_dark-700 py-6 px-4 flex items-center justify-center">
-          <div className={`flex items-center ${open ? "justify-start" : "justify-center"}`}>
+        <div className="border-b border-club_dark-700 py-6 px-2 ">
+          <div className={` absolute${open ? "justify-start" : "justify-center"}`}>
         
             <button
               onClick={() => setOpen && setOpen((prev) => !prev)}
-              className="w-full items-center justify-center"
+              className="absolute w-full text-white"
               aria-label="Toggle sidebar"
               type="button"
             >
-              <Menu className="h-7 w-7" />
+              <Menu className="flex flex-col gap-2 " />
             </button>
             
             

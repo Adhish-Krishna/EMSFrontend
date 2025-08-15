@@ -111,7 +111,7 @@ export default function ClubAdminProfile() {
       <motion.div variants={itemVariants} className="bg-gradient-to-br from-black/40 to-neutral-900/50 p-8 rounded-2xl shadow-2xl border border-emerald-900/30">
         <div className="flex flex-col md:flex-row justify-between items-start gap-6">
           <div>
-            <h1 className="text-4xl font-bold text-emerald-300 mb-1">
+            <h1 className="text-4xl font-bold text-emerald-300 text-gradient mb-1">
               {clubProfile?.club || 'Club Name'}
             </h1>
             <p className="text-gray-300">

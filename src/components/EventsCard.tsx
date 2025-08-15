@@ -49,11 +49,13 @@ const EventCard = ({sectionType, eventTitle, date, type, category, venue, descri
                     <MapPin size={16} className="text-primary" />
                     <span>{venue}</span>
                 </p>
-                <p className="text-white text-[16px] flex items-start gap-2 responsive-text-sm">
+                <p className="text-white text-[16px] items-start gap-2 responsive-text-sm line-clamp-3">
                     <Info size={16} className="text-white mt-1" />
                     <span>{description}</span>
                 </p>
             </div>
+
+            
         </>
     )
 }
