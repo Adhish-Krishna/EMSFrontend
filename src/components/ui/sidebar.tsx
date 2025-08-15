@@ -86,7 +86,9 @@ export const DesktopSidebar = ({
 }: React.ComponentProps<typeof motion.div>) => {
   const { open, setOpen, animate } = useSidebar();
   return (
-    <div className="h-screen flex items-center ml-5 overflow-hidden rounded-2xl">
+    <div className="h-screen flex items-center ml-5 overflow-hidden rounded-2xl relative">
+      {/* Toggle button for desktop */}
+   
       <motion.div
         className={cn(
           "h-[90%] px-3 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 shrink-0 rounded-2xl",
@@ -95,8 +97,6 @@ export const DesktopSidebar = ({
         animate={{
           width: animate ? (open ? "280px" : "80px") : "280px",
         }}
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
         {...props}
       >
         {children}
