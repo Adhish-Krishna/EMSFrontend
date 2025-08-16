@@ -6,7 +6,7 @@ import { usePastEvents } from '../../hooks/useClub'
 import { useQueryClient } from '@tanstack/react-query'
 import { FiUsers, FiCalendar, FiStar, FiChevronDown, FiChevronUp } from 'react-icons/fi'
 import { clubProfile } from '../../layout/ClubAdminLayout'
-
+import LoadingScreen from '../../components/ClubComponents/loading.tsx';
 Chart.register(...registerables)
 
 const containerVariants = {
@@ -150,11 +150,7 @@ export default function ClubAdminProfile() {
   }
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen w-screen bg-black">
-        <div className="animate-spin h-12 w-12 border-4 border-emerald-500 border-t-transparent rounded-full"></div>
-      </div>
-    )
+    return <LoadingScreen />;
   }
 
   if (isError || !pastEvents) {

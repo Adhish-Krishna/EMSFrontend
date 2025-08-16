@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postData } from '../../utils/customFetch';
 import { toast, ToastContainer } from 'react-toastify';
 import * as XLSX from 'xlsx';
+
 import { Download, Search, List, Table, X, ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function EventRegistration({event_id, event_type}:

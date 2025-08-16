@@ -10,6 +10,7 @@ import MemberCard from '../../components/ClubComponents/MemberCard';
 import MembersSearch from '../../components/ClubComponents/MemberSearch';
 import { useClubContext } from '../../layout/ClubAdminLayout';
 import AddMemberSidebar from '../../components/ClubComponents/AddMemberSidebar';
+import LoadingScreen from '../../components/ClubComponents/loading.tsx';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -64,11 +65,7 @@ const ClubMembers: React.FC = () => {
   }, [members, searchTerm, roleFilter, yearFilter]);
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen w-full bg-black">
-        <div className="animate-spin h-12 w-12 border-4 border-emerald-400 border-t-transparent rounded-full"></div>
-      </div>
-    );
+    return <LoadingScreen/>
   }
 
   if (isError) {
@@ -100,7 +97,7 @@ const ClubMembers: React.FC = () => {
       >
         {/* Header Section */}
         <motion.div variants={itemVariants} className="text-center my-4">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-transparent bg-clip-text">
+          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-gradient text-transparent bg-clip-text">
             {clubProfile?.club || 'Club'} Members
           </h1>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -147,7 +144,7 @@ const ClubMembers: React.FC = () => {
             {/* Add this button where you want it to appear */}
             <button
               onClick={() => setIsSidebarOpen(true)}
-              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 rounded-lg flex items-center gap-2 text-white transition-colors"
+              className="px-4 py-2 bg-emerald-700 hover:bg-emerald-500 rounded-lg flex items-center gap-2 text-white transition-colors"
             >
               <Plus size={20} />
               Add Member
@@ -199,25 +196,7 @@ const ClubMembers: React.FC = () => {
                 <MemberCard key={member.id} member={member} index={index} />
               ))}
 
-               {filteredMembers.map((member, index) => (
-                <MemberCard key={member.id} member={member} index={index} />
-              ))}
-
-               {filteredMembers.map((member, index) => (
-                <MemberCard key={member.id} member={member} index={index} />
-              ))}
-
-               {filteredMembers.map((member, index) => (
-                <MemberCard key={member.id} member={member} index={index} />
-              ))}
-
-               {filteredMembers.map((member, index) => (
-                <MemberCard key={member.id} member={member} index={index} />
-              ))}
-
-               {filteredMembers.map((member, index) => (
-                <MemberCard key={member.id} member={member} index={index} />
-              ))}
+              
             </div>
           )}
         </motion.div>

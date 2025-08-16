@@ -14,6 +14,8 @@ function useQueryParams() {
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
+ 
+
 const EventDetail = () => {
   const [activeTab, setActiveTab] = useState<DetailTab>('overview');
   const { eventId } = useParams();

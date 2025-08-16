@@ -57,7 +57,7 @@ const RequiredEventDetails = ({eventDetails, setEventDetails, title}: EventDetai
                                     date: e.target.value // This automatically gives you YYYY-MM-DD format as string
                                 })
                             }}
-                            className="w-full p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
+                            className="w-full p-2 rounded-[10px] bg-tertiary  border-1 border-border"
                             required
                         />
                         <div className="w-full flex flex-row justify-between items-center gap-[20px]">

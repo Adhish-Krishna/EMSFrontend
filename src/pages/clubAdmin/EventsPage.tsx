@@ -3,6 +3,8 @@ import EventSearch from '../../components/ClubComponents/EventsSearch';
 import EventTabs from '../../components/ClubComponents/EventsTabs';
 import { useClubContext } from '../../layout/ClubAdminLayout';
 import {PastEventsList,OngoingEvents,UpcomingEvents} from '../../components/ClubComponents/TypeEventsList';
+import LoadingScreen from '../../components/ClubComponents/loading.tsx';
+
 
 export interface Event {
   id: number;
@@ -39,6 +41,7 @@ const EventsPage = () => {
     setActiveTab(tab);
   };
 
+  
 
   return (
     <div style={{ marginTop: '100px' }}  className="w-full max-w-7xl mx-auto p-5 flex flex-col justify-start items-center gap-[20px] responsive-p-sm">

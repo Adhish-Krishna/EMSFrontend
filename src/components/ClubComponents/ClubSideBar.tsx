@@ -20,7 +20,7 @@ const sidebarLinks = [
     { name: 'All Events', path: '/club/events', icon: <Calendar className='w-full items-center justify-center'/> },
     { name: 'Create Event', path: '/club/event/create', icon: <PlusCircle className='w-full items-center justify-center'/> },
     { name: 'Members', path: '/club/members', icon: <Users className='w-full items-center justify-center' /> },
-    { name: 'Add Member', path: '/club/member/add', icon: <ClipboardList className='w-full items-center justify-center' /> },
+   //{ name: 'Add Member', path: '/club/member/add', icon: <ClipboardList className='w-full items-center justify-center' /> },
     { name: 'Profile', path: '/club/profile', icon: <User2 className='w-full items-center justify-center' /> },
   ];
 
