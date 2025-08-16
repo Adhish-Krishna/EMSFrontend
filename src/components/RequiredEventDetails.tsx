@@ -11,7 +11,7 @@ const RequiredEventDetails = ({eventDetails, setEventDetails, title}: EventDetai
     return(
         <>
             <div className="w-7/10  border-border border-1 bg-secondary p-[20px] flex flex-col justify-center items-center gap-[10px] rounded-[20px]">
-                <p className="text-white text-[22px] mb-[10px] font-medium">{title}</p>
+                <p className="text-primary text-[24px] mb-[10px] font-medium">{title}</p>
                 <div className='w-8/10 flex flex-row justify-between items-center'>
                     <div className="w-45/100 flex flex-col gap-[20px]">
                         <input

@@ -46,7 +46,7 @@ export default function ClubSideBar({open,setOpen}:ClubSideBarProps) {
               aria-label="Toggle sidebar"
               type="button"
             >
-              <Menu className="flex flex-col gap-2 " />
+              <Menu className="flex flex-col  " />
             </button>
             
             

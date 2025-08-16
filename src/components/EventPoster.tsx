@@ -19,7 +19,7 @@ const EventPoster = ({eventDetails, setEventDetails, isLoading = false}: EventPo
     return(
         <>
             <div className="w-7/10 bg-secondary border-1 border-border rounded-[20px] flex justify-center items-center p-[20px] flex-col gap-[20px]">
-                <p className="text-white font-medium text-[22px]">Add Event Poster</p>
+                <p className="text-primary font-medium text-[24px]">Add Event Poster</p>
                 <label className="relative w-full max-w-md overflow-hidden cursor-pointer flex flex-col items-center justify-center h-32 rounded-lg border-2 border-dashed border-gray-400 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg bg-tertiary/60 hover:bg-tertiary/80">
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                         <svg className="w-8 h-8 mb-3 text-gray-400 group-hover:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

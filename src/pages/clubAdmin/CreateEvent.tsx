@@ -173,11 +173,12 @@ const CreateEvent = ()=>{
 
         <>
             <Header/>
-            <div className="w-screen pt-[100px] flex flex-col justify-center gap-[20px] items-center bg-black overflow-y-scroll mb-[20px]">
-                <RequiredEventDetails
+            <div className="w-full text-primary pt-[100px] flex flex-col justify-center gap-[20px] items-center  overflow-y-scroll mb-[20px]">
+                <RequiredEventDetails 
                     eventDetails={eventDetails}
                     setEventDetails={setEventDetails}
                     title='Create Event'
+                    
                 />
                 <OptionalEventDetails
                     eventDetails={eventDetails}
@@ -192,7 +193,7 @@ const CreateEvent = ()=>{
                     eventDetails={eventDetails}
                     setEventDetails={setEventDetails}
                 />
-                <button className="bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer flex justify-center items-center" onClick={handlePreview}>
+                <button className="bg-emerald-600 text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer flex justify-center items-center" onClick={handlePreview}>
                     Preview {/* Changed text from Publish to Preview */}
                 </button>
             </div>

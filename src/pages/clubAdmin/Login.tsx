@@ -32,7 +32,7 @@ const Login = () => {
 
     return (
         <>
-        <div className="flex items-center justify-center min-h-screen w-full p-6">
+        <div className="flex items-center justify-center max-h-screen w-full p-6">
             <div className="card max-w-4xl w-full flex flex-col md:flex-row overflow-hidden animate-scale-in">
                 {/* Left side with logo */}
                 <div className="md:w-1/2 w-full flex items-center justify-center p-8 mb-6 md:mb-0 bg-gradient-to-br from-primary/10 to-accent/5">
