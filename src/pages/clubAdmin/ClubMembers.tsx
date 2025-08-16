@@ -99,7 +99,7 @@ const ClubMembers: React.FC = () => {
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         {/* Header Section */}
-        <motion.div variants={itemVariants} className="text-center mb-8">
+        <motion.div variants={itemVariants} className="text-center my-4">
           <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-transparent bg-clip-text">
             {clubProfile?.club || 'Club'} Members
           </h1>
@@ -108,26 +108,40 @@ const ClubMembers: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Stats and Add Member Button */}
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-3 bg-gradient-to-br from-black/40 to-neutral-900/50 px-6 py-3 rounded-2xl border border-emerald-900/30">
-              <Users className="w-6 h-6 text-emerald-400" />
-              <div>
-                <p className="text-2xl font-bold text-white">{members?.length || 0}</p>
-                <p className="text-emerald-400 text-sm">Total Members</p>
-              </div>
-            </div>
-            
-            {filteredMembers.length !== members?.length && (
-              <div className="flex items-center gap-3 bg-gradient-to-br from-black/40 to-neutral-900/50 px-6 py-3 rounded-2xl border border-emerald-900/30">
+              <div
+                className="flex items-center gap-3 
+                           bg-gradient-to-br from-black-700/30 via-black-900/20 to-neutral-800/50 
+                           backdrop-blur-md
+                           px-6 py-3 rounded-2xl border border-emerald-900/40 shadow-lg 
+                           hover:shadow-emerald-500/30 hover:border-emerald-400/50 
+                           hover:-translate-y-1 hover:scale-105 transition-all duration-300"
+              >
+                <Users className="w-6 h-6 text-emerald-400 drop-shadow-[0_0_6px_rgba(16,185,129,0.6)]" />
                 <div>
-                  <p className="text-2xl font-bold text-white">{filteredMembers.length}</p>
-                  <p className="text-emerald-400 text-sm">Filtered Results</p>
+                  <p className="text-2xl font-bold text-white">{members?.length || 0}</p>
+                  <p className="text-emerald-400 text-sm">Total Members</p>
                 </div>
               </div>
-            )}
-          </div>
+
+              {/* Filtered Results Card */}
+              {filteredMembers.length !== members?.length && (
+                <div
+                  className="flex items-center gap-3 
+                             bg-gradient-to-br from-emerald-700/30 via-emerald-900/20 to-black/50 
+                             backdrop-blur-md
+                             px-6 py-3 rounded-2xl border border-emerald-900/40 shadow-lg 
+                             hover:shadow-emerald-500/30 hover:border-emerald-400/50 
+                             hover:-translate-y-1 hover:scale-105 transition-all duration-300"
+                >
+                  <div>
+                    <p className="text-2xl font-bold text-white">{filteredMembers.length}</p>
+                    <p className="text-emerald-400 text-sm">Filtered Results</p>
+                  </div>
+                </div>
+              )}
+            </div>
 
           <div className="flex justify-between items-center mb-6">
             {/* Add this button where you want it to appear */}
@@ -141,7 +155,7 @@ const ClubMembers: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Search and Filters */}
+       <div className='sticky  top-15 z-10  backdrop-blur-md px-3 py-2 rounded-lg shadow-lg mb-3'>
         <motion.div variants={itemVariants}>
           <MembersSearch
             searchTerm={searchTerm}
@@ -154,6 +168,7 @@ const ClubMembers: React.FC = () => {
             availableYears={availableYears}
           />
         </motion.div>
+      </div>
 
         {/* Members Grid */}
         <motion.div variants={itemVariants}>

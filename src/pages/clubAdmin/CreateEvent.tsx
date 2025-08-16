@@ -173,8 +173,8 @@ const CreateEvent = ()=>{
 
         <>
             <Header/>
-            <div className="w-full text-primary pt-[100px] flex flex-col justify-center gap-[20px] items-center  overflow-y-scroll mb-[20px]">
-                <RequiredEventDetails 
+            <div className="w-screen pt-[100px] flex flex-col justify-center gap-[20px] items-center overflow-y-scroll mb-[20px]">
+                <RequiredEventDetails
                     eventDetails={eventDetails}
                     setEventDetails={setEventDetails}
                     title='Create Event'

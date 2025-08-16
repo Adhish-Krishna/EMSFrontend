@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Calendar, MapPin, MessageCircle, Medal, UserCheck, Users } from 'lucide-react';
-import Pointer from '../../components/ui/Pointer';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSingleEvent } from '../../hooks/useEvents';
 import Feedback from '../../components/ClubComponents/EventFeedback';
@@ -35,68 +34,90 @@ const EventDetail = () => {
     switch (activeTab) {
       case 'overview':
         return (
-          <div className="space-y-6">
-            <div className="bg-gradient-to-br from-gray-900/50 to-black/40 rounded-2xl border border-gray-800 p-6">
-              <h3 className="text-xl font-semibold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent mb-4">
-                Event Details
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-4">
+          <div className="space-y-6 animate-fadeIn">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="backdrop-blur-md bg-gradient-to-br from-neutral-900/90 to-neutral-800/80 rounded-2xl border border-white/10 p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-white/20 transform hover:-translate-y-1">
+                <h3 className="text-xl font-semibold text-white mb-5 border-b border-white/10 pb-3 flex items-center gap-2">
+                  <div className="w-1 h-8 bg-gradient-to-b from-teal-400 to-teal-600 rounded-full"></div>
+                  Event Information
+                </h3>
+                <div className="space-y-5">
                   <div>
-                    <h4 className="text-gray-400 text-sm">About</h4>
-                    <p className="text-gray-200">{`${event?.about}`}</p>
+                    <h4 className="text-gray-300 text-sm font-medium mb-1">About</h4>
+                    <p className="text-gray-100 leading-relaxed">{`${event?.about}`}</p>
                   </div>
-                  <div>
-                    <h4 className="text-gray-400 text-sm">Venue</h4>
-                    <p className="text-gray-200">{`${event?.venue}`}</p>
-                  </div>
-                  <div>
-                    <h4 className="text-gray-400 text-sm">Category</h4>
-                    <p className="text-gray-200">{`${event?.event_category}`}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all">
+                      <h4 className="text-gray-300 text-sm font-medium mb-1">Venue</h4>
+                      <div className="flex items-center gap-2">
+                        <MapPin size={16} className="text-teal-400" />
+                        <p className="text-gray-100">{`${event?.venue}`}</p>
+                      </div>
+                    </div>
+                    <div className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all">
+                      <h4 className="text-gray-300 text-sm font-medium mb-1">Category</h4>
+                      <p className="text-gray-100">{`${event?.event_category}`}</p>
+                    </div>
                   </div>
                 </div>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-gray-400 text-sm">Team Size</h4>
-                    <p className="text-gray-200">{`${event?.min_no_member} - ${event?.max_no_member} members`}</p>
+              </div>
+
+              <div className="backdrop-blur-md bg-gradient-to-br from-neutral-900/90 to-neutral-800/80 rounded-2xl border border-white/10 p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-white/20 transform hover:-translate-y-1">
+                <h3 className="text-xl font-semibold text-white mb-5 border-b border-white/10 pb-3 flex items-center gap-2">
+                  <div className="w-1 h-8 bg-gradient-to-b from-teal-400 to-teal-600 rounded-full"></div>
+                  Team & Participants
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="group">
+                    <h4 className="text-gray-300 text-sm font-medium mb-1">Team Size</h4>
+                    <div className="backdrop-blur-sm bg-white/5 p-4 rounded-xl border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-300 group-hover:shadow-md">
+                      <p className="text-white text-lg">{`${event?.min_no_member} - ${event?.max_no_member} members`}</p>
+                    </div>
                   </div>
+                  
                   {event?.chief_guest && (
-                    <div>
-                      <h4 className="text-gray-400 text-sm">Chief Guest</h4>
-                      <p className="text-gray-200">{`${event?.chief_guest}`}</p>
-                    </div>
-                  )}
-                  {event?.faculty_obs_desig && (
-                    <div>
-                      <h4 className="text-gray-400 text-sm">Faculty Observer</h4>
-                      <p className="text-gray-200">{event.faculty_obs_desig} - {event.faculty_obs_dept}</p>
+                    <div className="group">
+                      <h4 className="text-gray-300 text-sm font-medium mb-1">Chief Guest</h4>
+                      <div className="backdrop-blur-sm bg-white/5 p-4 rounded-xl border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-300 group-hover:shadow-md">
+                        <p className="text-white">{`${event?.chief_guest}`}</p>
+                      </div>
                     </div>
                   )}
                 </div>
+                
+                {event?.faculty_obs_desig && (
+                  <div className="mt-5 group">
+                    <h4 className="text-gray-300 text-sm font-medium mb-1">Faculty Observer</h4>
+                    <div className="backdrop-blur-sm bg-white/5 p-4 rounded-xl border border-white/10 group-hover:bg-white/10 group-hover:border-white/20 transition-all duration-300 group-hover:shadow-md">
+                      <p className="text-white">{event.faculty_obs_desig} - {event.faculty_obs_dept}</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             
             {event?.exp_expense && (
-              <div className="bg-gradient-to-br from-gray-900/50 to-black/40 rounded-2xl border border-gray-800 p-6">
-                <h3 className="text-xl font-semibold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent mb-4">
+              <div className="backdrop-blur-md bg-gradient-to-br from-neutral-900/90 to-neutral-800/80 rounded-2xl border border-white/10 p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-white/20">
+                <h3 className="text-xl font-semibold text-white mb-5 border-b border-white/10 pb-3 flex items-center gap-2">
+                  <div className="w-1 h-8 bg-gradient-to-b from-teal-400 to-teal-600 rounded-full"></div>
                   Budget Information
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-gradient-to-br from-emerald-900/20 to-teal-900/10 p-4 rounded-xl border border-emerald-900/30">
-                    <h4 className="text-gray-400 text-sm mb-2">Expected Expense</h4>
-                    <p className="text-2xl bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  <div className="backdrop-blur-sm bg-white/5 p-5 rounded-xl border border-white/10 hover:bg-gradient-to-br hover:from-neutral-800/80 hover:to-neutral-700/60 transition-all hover:shadow-lg group">
+                    <h4 className="text-gray-300 text-sm mb-2 font-medium group-hover:text-teal-400 transition-colors">Expected Expense</h4>
+                    <p className="text-3xl font-bold text-white group-hover:scale-105 transition-transform origin-left">
                       ₹{event.exp_expense}
                     </p>
                   </div>
-                  <div className="bg-gradient-to-br from-emerald-900/20 to-teal-900/10 p-4 rounded-xl border border-emerald-900/30">
-                    <h4 className="text-gray-400 text-sm mb-2">SU Allocation</h4>
-                    <p className="text-2xl bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">
+                  <div className="backdrop-blur-sm bg-white/5 p-5 rounded-xl border border-white/10 hover:bg-gradient-to-br hover:from-neutral-800/80 hover:to-neutral-700/60 transition-all hover:shadow-lg group">
+                    <h4 className="text-gray-300 text-sm mb-2 font-medium group-hover:text-teal-400 transition-colors">SU Allocation</h4>
+                    <p className="text-3xl font-bold text-white group-hover:scale-105 transition-transform origin-left">
                       ₹{event.tot_amt_allot_su}
                     </p>
                   </div>
-                  <div className="bg-gradient-to-br from-emerald-900/20 to-teal-900/10 p-4 rounded-xl border border-emerald-900/30">
-                    <h4 className="text-gray-400 text-sm mb-2">DOR Support</h4>
-                    <p className="text-2xl bg-gradient-to-r from-emerald-300 to-teal-300 bg-clip-text text-transparent">
+                  <div className="backdrop-blur-sm bg-white/5 p-5 rounded-xl border border-white/10 hover:bg-gradient-to-br hover:from-neutral-800/80 hover:to-neutral-700/60 transition-all hover:shadow-lg group sm:col-span-2 md:col-span-1">
+                    <h4 className="text-gray-300 text-sm mb-2 font-medium group-hover:text-teal-400 transition-colors">DOR Support</h4>
+                    <p className="text-3xl font-bold text-white group-hover:scale-105 transition-transform origin-left">
                       ₹{event.tot_amt_spt_dor}
                     </p>
                   </div>
@@ -109,12 +130,12 @@ const EventDetail = () => {
       case 'feedback':
         if(event_type === 'upcoming') {
           return (
-            <div className="flex flex-col items-center justify-center py-16 text-center bg-gradient-to-br from-gray-900/50 to-black/40 rounded-2xl border border-gray-800">
-              <MessageCircle className="w-16 h-16 text-gray-600 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-300 mb-2">
+            <div className="flex flex-col items-center justify-center py-16 text-center backdrop-blur-md bg-gradient-to-br from-neutral-900/90 to-neutral-800/80 rounded-2xl border border-white/10 hover:border-white/20 transition-all animate-fadeIn">
+              <MessageCircle className="w-16 h-16 text-gray-400 mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">
                 Feedback Unavailable
               </h3>
-              <p className="text-gray-500 max-w-md">
+              <p className="text-gray-300 max-w-md">
                 Feedback will be available after the event has concluded
               </p>
             </div>
@@ -128,12 +149,12 @@ const EventDetail = () => {
       case 'attendance':
         if(event_type === 'upcoming') {
           return (
-            <div className="flex flex-col items-center justify-center py-16 text-center bg-gradient-to-br from-gray-900/50 to-black/40 rounded-2xl border border-gray-800">
-              <UserCheck className="w-16 h-16 text-gray-600 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-300 mb-2">
+            <div className="flex flex-col items-center justify-center py-16 text-center backdrop-blur-md bg-gradient-to-br from-neutral-900/90 to-neutral-800/80 rounded-2xl border border-white/10 hover:border-white/20 transition-all animate-fadeIn">
+              <UserCheck className="w-16 h-16 text-gray-400 mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">
                 Attendance Unavailable
               </h3>
-              <p className="text-gray-500 max-w-md">
+              <p className="text-gray-300 max-w-md">
                 Attendance tracking will be available during the event
               </p>
             </div>
@@ -144,12 +165,12 @@ const EventDetail = () => {
       case 'winners':
         if(event_type === 'upcoming') {
           return (
-            <div className="flex flex-col items-center justify-center py-16 text-center bg-gradient-to-br from-gray-900/50 to-black/40 rounded-2xl border border-gray-800">
-              <Medal className="w-16 h-16 text-gray-600 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-300 mb-2">
+            <div className="flex flex-col items-center justify-center py-16 text-center backdrop-blur-md bg-gradient-to-br from-neutral-900/90 to-neutral-800/80 rounded-2xl border border-white/10 hover:border-white/20 transition-all animate-fadeIn">
+              <Medal className="w-16 h-16 text-gray-400 mb-4" />
+              <h3 className="text-xl font-semibold text-white mb-2">
                 Winners Unavailable
               </h3>
-              <p className="text-gray-500 max-w-md">
+              <p className="text-gray-300 max-w-md">
                 Winners will be announced after the event has concluded
               </p>
             </div>
@@ -165,77 +186,49 @@ const EventDetail = () => {
   return (
     <div 
       style={{ marginTop: 80 }} 
-      className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-950 text-white overflow-hidden"
+      className="relative min-h-screen text-white overflow-hidden"
     >
-      {/* Event Header with Gradient Overlay */}
-      <div 
-        className="relative pt-16 px-4 pb-12"
-        style={{ 
-          backgroundImage: event?.poster 
-            ? `linear-gradient(to bottom, rgba(3, 15, 15, 0.85), rgba(4, 20, 20, 0.9)), url(${event.poster})`
-            : 'linear-gradient(to right, #064e3b, #022c22)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
-        {/* Gradient Decoration */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-gray-950 to-transparent"></div>
-        
-        {/* Back Button */}
-        <div className="container mx-auto relative z-10">
-          <button 
-            onClick={() => navigate('/club/events')}
-            className="flex items-center gap-2 px-4 py-2.5 max-h-10 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-medium shadow-lg hover:shadow-emerald-900/40 hover:scale-105 transition-all group"
-          >
-            <ArrowLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
-            Back to Events
-          </button>
-        </div>
-      </div>
-      
-      {/* Event Info Card */}
-      <div className="container mx-auto px-4 -mt-16 relative z-20">
-        <div className="bg-gradient-to-br from-gray-900/70 to-black/60 backdrop-blur-sm rounded-2xl border border-emerald-900/30 shadow-xl shadow-emerald-900/10 p-6">
-          <div className="flex flex-col md:flex-row justify-between gap-6">
-            <div className="flex-1">
-              <div className="mb-3">
-                <Pointer 
-                  text={`${event?.name}`} 
-                  className="inline-block text-2xl font-bold bg-gradient-to-r from-emerald-300 to-cyan-300 bg-clip-text text-transparent" 
-                />
-              </div>
-              <p className="text-gray-300 mt-2 max-w-2xl">{`${event?.about}`}</p>
-            </div>
-            
-            <div className="flex flex-col gap-3 min-w-[200px]">
-              <div className="flex items-center gap-2">
-                <div className="bg-emerald-900/20 p-2 rounded-lg">
-                  <Calendar size={18} className="text-emerald-400" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400">Date</p>
-                  <p className="text-gray-200">
-                    {new Date(`${event?.date}`).toLocaleDateString('en-US', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    })}
-                  </p>
+
+      <div className="relative">
+        <div className="backdrop-blur-xl bg-gradient-to-r from-neutral-950 via-black-100 to-neutral-800 border-b border-white/10 shadow-lg rounded-2xl">
+          <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 sm:gap-6">
+              <div className="w-full lg:w-auto">
+                <button 
+                  onClick={() => navigate('/club/events')}
+                  className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 mb-4 rounded-xl bg-gradient-to-r from-neutral-800 to-neutral-700 text-white font-medium hover:from-neutral-700 hover:to-neutral-600 transition-all duration-300 group shadow-md hover:shadow-lg"
+                >
+                  <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform duration-300" />
+                  Back to Events
+                </button>
+                
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 text-shadow">
+                  {`${event?.name}`}
+                </h1>
+                
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-gray-200 mt-3">
+                  <div className="flex items-center gap-1.5">
+                    <Calendar size={16} className="text-teal-400" />
+                    <span>
+                      {event?.date && new Date(`${event.date}`).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
+                    </span>
+                  </div>
+                  
+                  <div className="hidden sm:block w-1.5 h-1.5 bg-white/30 rounded-full"></div>
+                  
+                  <div className="flex items-center gap-1.5">
+                    <MapPin size={16} className="text-teal-400" />
+                    <span>{`${event?.venue}`}</span>
+                  </div>
                 </div>
               </div>
               
-              <div className="flex items-center gap-2">
-                <div className="bg-emerald-900/20 p-2 rounded-lg">
-                  <MapPin size={18} className="text-emerald-400" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400">Venue</p>
-                  <p className="text-gray-200">{`${event?.venue}`}</p>
-                </div>
-              </div>
-              
-              <div className="mt-2">
-                <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-gradient-to-r from-emerald-900/30 to-teal-900/20 text-emerald-300 border border-emerald-500/30">
+              <div className="flex-shrink-0 mt-2 lg:mt-0">
+                <span className="px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r to-neutral-800 from-neutral-700 text-white border border-white/20 shadow-md hover:shadow-lg transition-all hover:from-neutral-700 hover:to-neutral-600 hover:border-white/30">
                   {`${event?.event_type}`}
                 </span>
               </div>
@@ -244,34 +237,48 @@ const EventDetail = () => {
         </div>
       </div>
       
+      {/* Background Image with Overlay */}
+      <div className="fixed inset-0 -z-10">
+        {event?.poster && (
+          <div 
+            className="absolute inset-0 opacity-15"
+            style={{ 
+              backgroundImage: `url(${event.poster})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              filter: 'blur(8px)',
+            }}
+          ></div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-900 to-neutral-800"></div>
+      </div>
+      
       {/* Tabs Navigation */}
-      <div className="container mx-auto px-4 mt-8">
-        <div className="flex justify-center md:justify-start overflow-x-auto pb-2">
+      <div className="container mx-auto px-4 sm:px-6 mt-6 sm:mt-8">
+        <div className="flex justify-start overflow-x-auto pb-2 scrollbar-hide">
           {detailTabs.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key as DetailTab)}
-              className={`flex items-center gap-2 px-5 py-3 mx-1 rounded-xl transition-all duration-300 ${
+              className={`flex items-center gap-2 px-3 sm:px-5 py-2.5 sm:py-3 mx-0.5 sm:mx-1 rounded-xl transition-all duration-300 ${
                 activeTab === tab.key
-                  ? 'bg-gradient-to-r from-emerald-900/40 to-teal-900/30 text-emerald-300 shadow-lg shadow-emerald-900/20'
-                  : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
+                  ? 'bg-gradient-to-r from-neutral-800 to-neutral-700 text-white shadow-lg'
+                  : 'text-gray-400 hover:text-white hover:bg-white/10'
               }`}
             >
               {tab.icon}
-              <span className="font-medium">{tab.label}</span>
+              <span className="font-medium text-sm sm:text-base">{tab.label}</span>
             </button>
           ))}
         </div>
         
         {/* Tab Content */}
-        <div className="bg-gradient-to-br from-gray-900/50 to-black/40 rounded-2xl border border-gray-800 p-6 mt-5 shadow-lg shadow-black/30">
+        <div className="mt-5">
           {renderTabContent()}
         </div>
       </div>
       
-      {/* Floating Gradient Elements */}
-      <div className="absolute top-0 left-0 w-full h-72 bg-gradient-to-br from-emerald-900/10 to-teal-900/5 pointer-events-none"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.05)_0%,transparent_70%)] pointer-events-none"></div>
+      
     </div>
   );
 };

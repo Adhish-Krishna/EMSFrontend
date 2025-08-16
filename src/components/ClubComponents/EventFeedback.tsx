@@ -7,14 +7,17 @@ interface FeedBackProps {
 
 export default function Feedback({event_id}:FeedBackProps) {
 
-  const {data:feedbacks} = useGetFeedback({event_id})
-  
-  if(feedbacks == undefined) {
-    return <>
-      <div className="flex justify-center items-center h-screen w-screen bg-black">
-        <div className="animate-spin h-12 w-12 border-4 border-primary border-t-transparent rounded-full"></div>
+  const {data:feedbacks,isLoading} = useGetFeedback({event_id})
+
+  if(isLoading || feedbacks == undefined) {
+    return (
+      <div className="flex justify-center items-center py-16 backdrop-blur-md bg-black/20 rounded-2xl border border-neutral-800/50">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin h-12 w-12 border-4 border-neutral-600 border-t-emerald-400 rounded-full mb-4"></div>
+          <p className="text-neutral-400">Loading feedback...</p>
+        </div>
       </div>
-    </>
+    )
   }
 
 
