@@ -15,7 +15,6 @@ export interface clubProfile {
 }
 
 
-
 interface clubProfileResponse {
   message:string;
   data:clubProfile

@@ -106,11 +106,16 @@ export default function EventWinners({ event_id }: { event_id: string | undefine
   }
   })
 
-  if (!winners) return (
-    <div className="flex justify-center items-center h-screen w-screen bg-black">
-      <div className="animate-spin h-12 w-12 border-4 border-emerald-400 border-t-transparent rounded-full"></div>
-    </div>
-  );
+  if(!winners) {
+    return (
+      <div className="flex justify-center items-center py-16 backdrop-blur-md bg-black/20 rounded-2xl border border-neutral-800/50">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin h-12 w-12 border-4 border-neutral-600 border-t-emerald-400 rounded-full mb-4"></div>
+          <p className="text-neutral-400">Loading winners...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-2 w-full">
