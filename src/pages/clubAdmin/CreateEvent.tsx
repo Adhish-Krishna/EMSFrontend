@@ -72,10 +72,7 @@ const CreateEvent = ()=>{
                 formData.append('poster', eventDetails.poster);
             }
 
-            if(loading)
-            {
-                return <LoadingScreen/>
-            }
+            
             const response = await axios.post(`${API_URL}/admin/create-event`,
                 formData,
                 {
@@ -175,43 +172,51 @@ const CreateEvent = ()=>{
         setIsPreviewOpen(true);
     }
 
-    return(
-
+    return (
         <>
-            <Header/>
-            <div className="w-auto pt-[100px] flex flex-col justify-center gap-[20px] items-center overflow-y-scroll mb-[20px]">
-                <RequiredEventDetails
-                    eventDetails={eventDetails}
-                    setEventDetails={setEventDetails}
-                    title='Create Event'
-                    
-                />
-                <OptionalEventDetails
-                    eventDetails={eventDetails}
-                    setEventDetails={setEventDetails}
-                    title='Optional Details'
-                />
-                <EventPoster
-                    eventDetails={eventDetails}
-                    setEventDetails={setEventDetails}
-                />
-                <Convenors
-                    eventDetails={eventDetails}
-                    setEventDetails={setEventDetails}
-                />
-                <button className="bg-emerald-600 text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer flex justify-center items-center" onClick={handlePreview}>
-                    Preview {/* Changed text from Publish to Preview */}
-                </button>
-            </div>
-            {isPreviewOpen && (
-                <PreviewEvent
-                    eventDetails={eventDetails}
-                    onPublish={handlePublish}
-                    onClose={() => setIsPreviewOpen(false)}
-                    loading={loading}
-                />
+            {loading ? (
+                // 🔹 Show only the loading screen while publishing
+                <LoadingScreen />
+            ) : (
+                <>
+                    <Header/>
+                    <div className="w-auto pt-[100px] flex flex-col justify-center gap-[20px] items-center overflow-y-scroll mb-[20px]">
+                        <RequiredEventDetails
+                            eventDetails={eventDetails}
+                            setEventDetails={setEventDetails}
+                            title='Create Event'
+                        />
+                        <OptionalEventDetails
+                            eventDetails={eventDetails}
+                            setEventDetails={setEventDetails}
+                            title='Optional Details'
+                        />
+                        <EventPoster
+                            eventDetails={eventDetails}
+                            setEventDetails={setEventDetails}
+                        />
+                        <Convenors
+                            eventDetails={eventDetails}
+                            setEventDetails={setEventDetails}
+                        />
+                        <button
+                            className="bg-emerald-600 text-white px-4 py-2 rounded-[10px] hover:bg-opacity-80 cursor-pointer flex justify-center items-center"
+                            onClick={handlePreview}
+                        >
+                            Preview
+                        </button>
+                    </div>
+                    {isPreviewOpen && (
+                        <PreviewEvent
+                            eventDetails={eventDetails}
+                            onPublish={handlePublish}
+                            onClose={() => setIsPreviewOpen(false)}
+                            loading={loading}
+                        />
+                    )}
+                    <ToastContainer theme='dark'/>
+                </>
             )}
-            <ToastContainer theme='dark'/>
         </>
     )
 }
