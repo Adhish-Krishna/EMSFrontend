@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import { Plus } from "lucide-react";
 import { ReactNode } from "react";
@@ -24,6 +25,7 @@ const SubHero = ({title, link, icon}: SubHeroProps)=>{
                     {icon}
                     {title}
                 </p>
+        
                 <button
                     className="btn-primary text-white cursor-pointer flex flex-row items-center gap-2 font-semibold"
                     onClick={handleClick}

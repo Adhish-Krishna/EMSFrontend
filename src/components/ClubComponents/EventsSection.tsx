@@ -1,3 +1,5 @@
+{/*This the Events Section for the events in the dashboard*/ }
+
 import EventCard from "../EventsCard";
 import { useEffect, useState, ReactNode, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -105,9 +107,11 @@ const EventSection = ({sectionType, sectionTitle, icon}:EventsProps)=>{
 
     return(
         <>
+        
             <div className="w-7/10 rounded-[20px] border-1 border-border bg-secondary flex flex-col gap-[20px] p-[20px] transition-all duration-300 hover:border-primary relative responsive-container responsive-p-sm">
                 <h1 className="text-white text-[22px] flex items-center gap-2 mb-[10px] responsive-text-md">{icon} {sectionTitle}</h1>
                 <div className="flex flex-row w-full relative">
+        
                     {showLeftArrow && (
                         <button
                             onClick={scrollLeft}
@@ -133,7 +137,7 @@ const EventSection = ({sectionType, sectionTitle, icon}:EventsProps)=>{
                                 </>
                             ) : isError? (
                                 <div className="w-full flex justify-center items-center">
-                                    <p className="text-red-400 font-normal text-[20px]">{error}</p>
+                                    <p className="text-red-400 font-normal text-[20px]">Error{error}</p>
                                 </div>
                             ): isAvailable?
                             (

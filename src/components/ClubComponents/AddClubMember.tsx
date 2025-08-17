@@ -116,74 +116,79 @@ const AddClubMembers = ()=>{
 
     }
     return(
-        <>
-            <div className="w-screen  pt-[100px] pb-[20px] flex justify-center items-center flex-col gap-[20px]">
-                <div className="w-7/10  border-1 border-border rounded-[20px] p-[20px] flex flex-col justify-center items-center gap-[20px]">
-                    <p className="text-white font-medium text-[22px]">
-                        Add Club Members
-                    </p>
-                    <div className="w-7/10 flex flex-row justify-between items-center">
-                        <input
-                            type="text"
-                            placeholder='Roll No'
-                            value={rollno}
-                            onChange={(e)=>setRollNo(e.target.value)}
-                            className="w-4/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
-                            required
-                        />
-                        <input
-                            type="text"
-                            placeholder='Role (optional)'
-                            value={role || ''}
-                            onChange={(e)=>setRole(e.target.value)}
-                            className="w-4/10 p-2 rounded-[10px] bg-tertiary text-white border-1 border-border"
-                        />
-                    </div>
-                    <button className="bg-primary h-[40px] rounded-[10px] text-white cursor-pointer pl-[20px] pr-[20px]" onClick={handleAddMember}>
-                        Add Member
-                    </button>
-                    {
-                        clubMembers.length>0 && (
-                            <>
-                                <p className="text-white font-medium text-[22px]">Added Club Members</p>
-                                {
-                                    clubMembers.map((member, index)=>{
-                                        return (
-                                            <div key={index} className='bg-tertiary border-1 w-7/10 p-[20px] flex flex-row justify-between items-center rounded-[20px]'>
-                                                <div className="p-[10px] flex flex-col gap-[5px] text-white">
-                                                    <p>Roll No: {member.rollno}</p>
-                                                    {member.role && (
-                                                        <p>Role: {member.role}</p>
-                                                    )}
-                                                </div>
-                                                <button className="text-red-500 hover:text-red-300 cursor-pointer"
-                                                onClick={()=>setClubMembers(clubMembers.filter((_, i)=> i !== index))}
-                                                >
-                                                    Remove
-                                                </button>
-                                            </div>
-                                        )
-                                    })
-                                }
-
-                            </>
-                        )
-                    }
-
-                </div>
-                <button  className="bg-primary w-[100px] h-[40px] rounded-[10px] text-white cursor-pointer" onClick={handleSave}>
-                    {loading ? (
-                                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                            ) : (
-                                'Save'
-                            )}
+        <div className="flex flex-col gap-4 w-full">
+            {/* Input Section */}
+            <div className="flex flex-col gap-3 w-full">
+                <input
+                    type="text"
+                    placeholder='Roll No'
+                    value={rollno}
+                    onChange={(e)=>setRollNo(e.target.value)}
+                    className="w-full p-3 rounded-lg bg-tertiary text-white border border-border focus:ring-2 focus:ring-primary focus:outline-none"
+                    required
+                />
+                <input
+                    type="text"
+                    placeholder='Role (optional)'
+                    value={role || ''}
+                    onChange={(e)=>setRole(e.target.value)}
+                    className="w-full p-3 rounded-lg bg-tertiary text-white border border-border focus:ring-2 focus:ring-primary focus:outline-none"
+                />
+                <button 
+                    className="w-full bg-primary text-white p-3 rounded-lg hover:bg-primary/90 transition-colors" 
+                    onClick={handleAddMember}
+                >
+                    Add Member
                 </button>
             </div>
+
+            {/* Members List */}
+            {clubMembers.length > 0 && (
+                <div className="space-y-3">
+                    <p className="text-white font-medium text-lg">
+                        Added Club Members
+                    </p>
+                    {clubMembers.map((member, index) => (
+                        <div 
+                            key={index} 
+                            className='bg-tertiary border border-border p-4 flex justify-between items-center rounded-lg'
+                        >
+                            <div className="text-white">
+                                <p className="font-medium">Roll No: {member.rollno}</p>
+                                {member.role && (
+                                    <p className="text-sm text-gray-400">Role: {member.role}</p>
+                                )}
+                            </div>
+                            <button 
+                                className="text-red-500 hover:text-red-400 transition-colors"
+                                onClick={() => setClubMembers(clubMembers.filter((_, i) => i !== index))}
+                            >
+                                Remove
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            )}
+
+            {/* Save Button */}
+            {clubMembers.length > 0 && (
+                <button  
+                    className="w-full bg-emerald-600 p-3 rounded-lg text-white hover:bg-emerald-500 transition-colors flex justify-center items-center" 
+                    onClick={handleSave}
+                >
+                    {loading ? (
+                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    ) : (
+                        'Save All Members'
+                    )}
+                </button>
+            )}
+
             <ToastContainer theme='dark'/>
-        </>
+        </div>
     )
 }
 

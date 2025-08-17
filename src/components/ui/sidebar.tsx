@@ -86,12 +86,12 @@ export const DesktopSidebar = ({
 }: React.ComponentProps<typeof motion.div>) => {
   const { open, setOpen, animate } = useSidebar();
   return (
-    <div className="h-screen flex items-center ml-5 overflow-hidden rounded-2xl relative">
+    <div className="h-screen flex items-center overflow-hidden rounded-2xl relative">
       {/* Toggle button for desktop */}
    
       <motion.div
         className={cn(
-          "h-[90%] px-3 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 shrink-0 rounded-2xl",
+          "h-[90%] px-3 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 shrink-0 ",
           className
         )}
         animate={{
@@ -131,7 +131,7 @@ export const MobileSidebar = ({
               initial={{ x: "-100%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "-100%", opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
               className={cn(
                 "fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between",
                 className
@@ -176,7 +176,7 @@ export const SidebarLink = ({
           ? "bg-primary/10 text-primary border-l-4 border-primary font-semibold"
           : "text-gray-600 hover:bg-secondary/10 hover:text-primary dark:text-gray-300 dark:hover:bg-gray-800"}
         `,
-        open ? "justify-start" : "justify-center",
+        open ? "justify-start" : "justify-start",
         className
       )}
       title={!open ? link.label : undefined}
@@ -185,10 +185,7 @@ export const SidebarLink = ({
       <div className="flex items-center justify-center duration-300 min-w-10">
         <div className="flex items-center">
           {link.icon}
-          {/* Small dot indicator for minimized sidebar */}
-          {!open && isActive && (
-            <span className="absolute top-1/2 -right-1 w-2 h-2 bg-primary rounded-full transform -translate-y-1/2" />
-          )}
+          
         </div>
       </div>
       <motion.span

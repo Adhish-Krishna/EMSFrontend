@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Users, UserPlus, AlertCircle } from 'lucide-react';
+import { Users, UserPlus, AlertCircle, Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +9,8 @@ import { useClubMembers } from '../../hooks/useClubMembers';
 import MemberCard from '../../components/ClubComponents/MemberCard';
 import MembersSearch from '../../components/ClubComponents/MemberSearch';
 import { useClubContext } from '../../layout/ClubAdminLayout';
+import AddMemberSidebar from '../../components/ClubComponents/AddMemberSidebar';
+import LoadingScreen from '../../components/ClubComponents/loading.tsx';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -33,6 +35,7 @@ const ClubMembers: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
   const [yearFilter, setYearFilter] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Get available filter options
   const { availableRoles, availableYears } = useMemo(() => {
@@ -62,11 +65,7 @@ const ClubMembers: React.FC = () => {
   }, [members, searchTerm, roleFilter, yearFilter]);
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen w-full bg-black">
-        <div className="animate-spin h-12 w-12 border-4 border-emerald-400 border-t-transparent rounded-full"></div>
-      </div>
-    );
+    return <LoadingScreen/>
   }
 
   if (isError) {
@@ -98,7 +97,7 @@ const ClubMembers: React.FC = () => {
       >
         {/* Header Section */}
         <motion.div variants={itemVariants} className="text-center my-4">
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-transparent bg-clip-text">
+          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-emerald-400 to-teal-500 text-gradient text-transparent bg-clip-text">
             {clubProfile?.club || 'Club'} Members
           </h1>
           <p className="text-gray-400 max-w-2xl mx-auto">
@@ -141,16 +140,16 @@ const ClubMembers: React.FC = () => {
               )}
             </div>
 
-          <button
-            onClick={() => navigate('/club/member/add')}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 
-                       text-white font-medium rounded-xl shadow-lg 
-                       hover:shadow-emerald-600/50 hover:scale-110 active:scale-95 
-                       hover:-translate-y-0.5 transition-all duration-300"
-          >
-            <UserPlus className="w-5 h-5 drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]" />
-            Add Member
-          </button>
+          <div className="flex justify-between items-center mb-6">
+            {/* Add this button where you want it to appear */}
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className="px-4 py-2 bg-emerald-700 hover:bg-emerald-500 rounded-lg flex items-center gap-2 text-white transition-colors"
+            >
+              <Plus size={20} />
+              Add Member
+            </button>
+          </div>
         </motion.div>
 
        <div className='sticky  top-15 z-10  backdrop-blur-md px-3 py-2 rounded-lg shadow-lg mb-3'>
@@ -196,10 +195,16 @@ const ClubMembers: React.FC = () => {
               {filteredMembers.map((member, index) => (
                 <MemberCard key={member.id} member={member} index={index} />
               ))}
+
               
             </div>
           )}
         </motion.div>
+
+        <AddMemberSidebar 
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+        />
 
         <ToastContainer theme="dark" />
       </motion.div>
